@@ -8930,6 +8930,10 @@ vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
 
+vuescroll@^4.15.0:
+  version "4.15.0"
+  resolved "https://registry.npmjs.org/vuescroll/-/vuescroll-4.15.0.tgz#5f26f5cbc3d994771d89ce2be18f89f7391ab28b"
+
 vuex@^3.1.3:
   version "3.3.0"
   resolved "https://registry.npmjs.org/vuex/-/vuex-3.3.0.tgz#665b4630ea1347317139fcc5cb495aab3ec5e513"

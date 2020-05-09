@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import vuescroll from 'vuescroll';
+import 'vuescroll/dist/vuescroll.css';
 import 'normalize.css';
 import App from './App.vue';
 import router from '../../router';
@@ -26,6 +28,7 @@ const i18n = new VueI18n({
 });
 
 Vue.use(ElementUI);
+Vue.use(vuescroll);
 
 new Vue({
   router,
