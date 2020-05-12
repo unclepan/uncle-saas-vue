@@ -36,6 +36,10 @@ export default {
       account: 'Already have an account?',
       login: 'Login',
     },
+    system: {
+      default: 'System',
+      user: 'User',
+    },
     home: 'Home',
   },
 

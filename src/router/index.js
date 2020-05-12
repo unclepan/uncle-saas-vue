@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import Layout from 'layout/index.vue';
+
+import System from './modules/system';
 
 Vue.use(VueRouter);
 
@@ -34,6 +37,7 @@ export const constantRoutes = [
       },
     ],
   },
+  ...System,
 ];
 
 const router = new VueRouter({

@@ -12,6 +12,7 @@
 <script>
 import message from 'lib/message';
 import { mapState, mapMutations } from 'vuex';
+import { userInfo, logout } from 'wrapper/ajax/users';
 import sidebar from './components/sidebar/index.vue';
 import navbar from './components/navbar/index.vue';
 import menus from './components/sidebar/menus';
@@ -33,7 +34,6 @@ export default {
   },
   computed: {
     ...mapState('app', ['isCollapse']),
-    ...mapState('user', ['userInfo']),
   },
   created() {
     this.init();
@@ -46,23 +46,26 @@ export default {
       this.$refs.appMain.reload();
     },
     init() {
-      if (this.userInfo) {
+      userInfo().then((res) => {
+        this.setUser(res.data);
         this.isShow = true;
+        this.menuList = menus;
         setTimeout(() => {
           this.$nextTick(() => {
             window.yangpanLoading.hide();
           });
-        }, 1600);
-        this.menuList = menus;
-      } else {
+        }, 1000);
+      }).catch(() => {
         this.$router.push({ path: '/login' });
-      }
+      });
     },
     async logout() {
       const stl = await message.confirm(this, '确认登出？');
       if (stl) {
-        this.setUser(null);
-        this.$router.push({ path: '/login' });
+        logout().then(() => {
+          localStorage.removeItem('userToken');
+          this.$router.push({ path: '/login' });
+        });
       }
     },
   },

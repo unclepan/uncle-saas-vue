@@ -36,6 +36,10 @@ export default {
       account: '已经有帐户了？',
       login: '登陆',
     },
+    system: {
+      default: '系统设置',
+      user: '用户管理',
+    },
     home: '首页',
   },
 

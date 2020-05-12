@@ -11,7 +11,8 @@ module.exports = {
       .plugin('html')
       .tap((args) => {
         const a = args;
-        a[0].title = '你想设置的title名字';
+        a[0].title = '内容管理系统';
+        a[0].chunksSortMode = (c1) => (c1.names[0].indexOf('loading') > -1 ? -1 : 1);
         return a;
       });
   },

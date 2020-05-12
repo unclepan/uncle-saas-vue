@@ -53,8 +53,8 @@
 </template>
 
 <script>
+import { login } from 'wrapper/ajax/users';
 import in18 from 'components/in18/index.vue';
-import { mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -96,18 +96,14 @@ export default {
   created() {
     window.yangpanLoading.hide();
   },
-  mounted() {
-
-  },
   methods: {
-    ...mapMutations('user', [
-      'setUser',
-    ]),
     login() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.setUser(this.ruleForm);
-          this.$router.push({ path: '/' });
+          login(this.ruleForm).then(((res) => {
+            localStorage.setItem('userToken', res.data.token);
+            this.$router.push({ path: '/' });
+          }));
         }
       });
     },
