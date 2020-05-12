@@ -31,10 +31,13 @@ export default {
       rulesName: 'Enter one user name',
       rulesPassword: 'Please input a password',
       rulesEmail: 'Please enter email',
+      rulesCode: 'Please enter Code',
       conditions: 'I agree to all Terms & Conditions',
       sing: 'SING UP',
       account: 'Already have an account?',
       login: 'Login',
+      code: 'Code',
+      sendCode: 'Send Code',
     },
     system: {
       default: 'System',

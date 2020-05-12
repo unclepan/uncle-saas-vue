@@ -25,7 +25,16 @@
               :placeholder="$t('m.register.rulesEmail')"
               v-model="ruleForm.email"
               suffix-icon="el-icon-message" />
+            <el-button @click="sendCode" size="mini" type="primary" plain>{{$t('m.register.sendCode')}}</el-button>
+            <span :class="$style.status">{{ statusMsg }}</span>
           </el-form-item>
+
+          <el-form-item prop="code">
+              <el-input
+                :placeholder="$t('m.register.code')"
+                v-model="ruleForm.code"
+                maxlength="4" />
+            </el-form-item>
 
           <el-form-item prop="password">
             <el-input
@@ -57,7 +66,10 @@
 </template>
 
 <script>
+import CryptoJS from 'crypto-js';
+import { userVerify, create } from 'wrapper/ajax/users';
 import in18 from 'components/in18/index.vue';
+import message from 'lib/message';
 
 export default {
   components: {
@@ -70,7 +82,7 @@ export default {
           {
             required: true,
             message: this.$t('m.register.rulesName'),
-            trigger: 'change',
+            trigger: 'blur',
           },
           {
             min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'change',
@@ -79,15 +91,23 @@ export default {
         email: [
           {
             required: true,
+            type: 'email',
             message: this.$t('m.register.rulesEmail'),
-            trigger: 'change',
+            trigger: 'blur',
+          },
+        ],
+        code: [
+          {
+            required: true,
+            message: this.$t('m.register.rulesCode'),
+            trigger: 'blur',
           },
         ],
         password: [
           {
             required: true,
             message: this.$t('m.register.rulesPassword'),
-            trigger: 'change',
+            trigger: 'blur',
           },
         ],
       };
@@ -96,10 +116,13 @@ export default {
   },
   data() {
     return {
-      checked: '',
+      timerid: null,
+      statusMsg: '',
+      checked: false,
       ruleForm: {
         name: '',
         email: '',
+        code: '',
         password: '',
       },
     };
@@ -111,10 +134,44 @@ export default {
 
   },
   methods: {
+    sendCode() {
+      if (this.timerid) return;
+      this.$refs.ruleForm.validateField(['name', 'email']);
+      const { name, email } = this.ruleForm;
+      if (name && email) {
+        userVerify({ name, email }).then(({ data }) => {
+          if (data && data.code === 0) {
+            let count = 60;
+            this.statusMsg = `验证码已发送，请查看邮箱，剩余${count -= 1}秒`;
+            this.timerid = setInterval(() => {
+              this.statusMsg = `验证码已发送，请查看邮箱，剩余${count -= 1}秒`;
+              if (count === 0) {
+                clearInterval(this.timerid);
+                this.timerid = null;
+                this.statusMsg = '';
+              }
+            }, 1000);
+          } else {
+            this.statusMsg = data.msg;
+          }
+        });
+      }
+    },
     register() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.$router.push({ path: '/login' });
+          if (this.checked) {
+            const {
+              name, email, code, password,
+            } = this.ruleForm;
+            create({
+              name, email, code, password: CryptoJS.MD5(password).toString(),
+            }).then(() => {
+              this.$router.push({ path: '/login' });
+            });
+          } else {
+            message.error('请勾选同意条件');
+          }
         }
       });
     },
@@ -167,6 +224,11 @@ export default {
         .link{
           color: #409EFF;
         }
+      }
+      .status {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #e6a23c;
       }
     }
   }

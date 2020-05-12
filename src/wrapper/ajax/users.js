@@ -22,3 +22,19 @@ export function userInfo() {
     method: 'GET',
   });
 }
+
+export function userVerify(data) {
+  return request({
+    url: '/users/verify',
+    method: 'POST',
+    data,
+  });
+}
+
+export function create(data) {
+  return request({
+    url: '/users',
+    method: 'POST',
+    data,
+  });
+}

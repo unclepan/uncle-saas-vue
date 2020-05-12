@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import CryptoJS from 'crypto-js';
 import { login } from 'wrapper/ajax/users';
 import in18 from 'components/in18/index.vue';
 
@@ -67,7 +68,7 @@ export default {
           {
             required: true,
             message: this.$t('m.login.rulesName'),
-            trigger: 'change',
+            trigger: 'blur',
           },
           {
             min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'change',
@@ -77,7 +78,7 @@ export default {
           {
             required: true,
             message: this.$t('m.login.rulesPassword'),
-            trigger: 'change',
+            trigger: 'blur',
           },
         ],
       };
@@ -100,7 +101,11 @@ export default {
     login() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          login(this.ruleForm).then(((res) => {
+          const { name, password } = this.ruleForm;
+          login({
+            name,
+            password: CryptoJS.MD5(password).toString(),
+          }).then(((res) => {
             localStorage.setItem('userToken', res.data.token);
             this.$router.push({ path: '/' });
           }));
