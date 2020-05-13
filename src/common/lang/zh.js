@@ -1,7 +1,7 @@
 export default {
   m: {
+    error: '错误',
     guide: '系统指引',
-    personal: '个人中心',
     setUp: '设置',
     logout: '登出',
     languageSwitching: '确定切换语言吗？',
@@ -44,6 +44,7 @@ export default {
       user: '用户管理',
     },
     home: '首页',
+    personal: '个人中心',
   },
 
   guide: {

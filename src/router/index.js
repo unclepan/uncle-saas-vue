@@ -10,6 +10,12 @@ Vue.use(VueRouter);
 
 export const constantRoutes = [
   {
+    path: '/error',
+    component: () => import('@/views/error'),
+    name: 'error',
+    meta: { title: 'error' },
+  },
+  {
     path: '/login',
     // route level code-splitting
     // this generates a separate chunk (login.[hash].js) for this route
@@ -35,9 +41,16 @@ export const constantRoutes = [
         name: 'home',
         meta: { title: 'home', affix: true }, // title 用于国际化等，affix 固定钉
       },
+      {
+        path: 'personal',
+        component: () => import(/* webpackChunkName: "personal" */ '@/views/personal/index'),
+        name: 'personal',
+        meta: { title: 'personal', affix: true }, // title 用于国际化等，affix 固定钉
+      },
     ],
   },
   ...System,
+  { path: '*', redirect: '/error' },
 ];
 
 const router = new VueRouter({

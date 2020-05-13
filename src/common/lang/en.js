@@ -1,7 +1,7 @@
 export default {
   m: {
+    error: 'Error',
     guide: 'Guide',
-    personal: 'Personal',
     setUp: 'Set Up',
     logout: 'Logout',
     languageSwitching: 'Are you sure you want to switch languages?',
@@ -44,6 +44,7 @@ export default {
       user: 'User',
     },
     home: 'Home',
+    personal: 'Personal',
   },
 
   guide: {

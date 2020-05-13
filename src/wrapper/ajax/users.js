@@ -2,7 +2,7 @@ import request from './basic';
 
 export function login(data) {
   return request({
-    url: '/users/login',
+    url: '/api/users/login',
     method: 'POST',
     data,
   });
@@ -10,7 +10,7 @@ export function login(data) {
 
 export function logout(data = {}) {
   return request({
-    url: '/users/logout',
+    url: '/api/users/logout',
     method: 'POST',
     data,
   });
@@ -18,14 +18,14 @@ export function logout(data = {}) {
 
 export function userInfo() {
   return request({
-    url: '/users/info',
+    url: '/api/users/info',
     method: 'GET',
   });
 }
 
 export function userVerify(data) {
   return request({
-    url: '/users/verify',
+    url: '/api/users/verify',
     method: 'POST',
     data,
   });
@@ -33,7 +33,7 @@ export function userVerify(data) {
 
 export function create(data) {
   return request({
-    url: '/users',
+    url: '/api/users',
     method: 'POST',
     data,
   });
@@ -41,7 +41,7 @@ export function create(data) {
 
 export function usersWhetherName(params) {
   return request({
-    url: '/users/whether/name',
+    url: '/api/users/whether/name',
     method: 'GET',
     params,
   });

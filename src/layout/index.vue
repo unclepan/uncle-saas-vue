@@ -2,7 +2,7 @@
   <div :class="$style.layout">
     <sidebar :menuList='menuList'/>
     <div :class="$style['main-container']" :style="{paddingLeft: isCollapse ? '64px': '200px', minWidth: '960px'}">
-      <navbar @logout="logout"/>
+      <navbar @logout="logout" @personal="personal"/>
       <tags-view id="handler-tags-view" @refresh="reloadView"/>
       <app-main ref="appMain" v-if="isShow"/>
     </div>
@@ -67,6 +67,9 @@ export default {
           this.$router.push({ path: '/login' });
         });
       }
+    },
+    personal() {
+      this.$router.push({ path: '/personal' });
     },
   },
 };
