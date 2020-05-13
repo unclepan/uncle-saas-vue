@@ -67,7 +67,7 @@
 
 <script>
 import CryptoJS from 'crypto-js';
-import { userVerify, create } from 'wrapper/ajax/users';
+import { userVerify, create, usersWhetherName } from 'wrapper/ajax/users';
 import in18 from 'components/in18/index.vue';
 import message from 'lib/message';
 
@@ -85,7 +85,16 @@ export default {
             trigger: 'blur',
           },
           {
-            min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'change',
+            validator: async (rule, value, callback) => {
+              if (!value) {
+                callback(new Error('昵称不能为空'));
+              }
+              const isUser = await usersWhetherName({ name: value });
+              if (isUser.data) {
+                callback(new Error('昵称已经被占用'));
+              }
+            },
+            trigger: 'blur',
           },
         ],
         email: [

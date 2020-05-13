@@ -1,5 +1,5 @@
 import axios from 'axios';
-import qs from 'qs';
+import Qs from 'qs';
 import { Message } from 'element-ui';
 
 // 创建axios 实例
@@ -14,14 +14,14 @@ const service = axios.create({
 // request 拦截器
 service.interceptors.request.use(
   (config) => {
-    const t = config;
-    if (t.contentType) {
-      t.headers['Content-Type'] = t.contentType;
+    const tc = config;
+    if (tc.contentType) {
+      tc.headers['Content-Type'] = tc.contentType;
     }
     // 是一个负责 `params` 序列化的函数
-    t.paramsSerializer = (params) => { qs.stringify(params); };
-    t.headers.Authorization = localStorage.getItem('userToken');
-    return t;
+    tc.paramsSerializer = (params) => Qs.stringify(params);
+    tc.headers.Authorization = localStorage.getItem('userToken');
+    return tc;
   },
   (error) => {
     // 这里处理一些请求出错的情况

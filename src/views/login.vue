@@ -70,9 +70,6 @@ export default {
             message: this.$t('m.login.rulesName'),
             trigger: 'blur',
           },
-          {
-            min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'change',
-          },
         ],
         password: [
           {

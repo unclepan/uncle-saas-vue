@@ -38,3 +38,11 @@ export function create(data) {
     data,
   });
 }
+
+export function usersWhetherName(params) {
+  return request({
+    url: '/users/whether/name',
+    method: 'GET',
+    params,
+  });
+}
