@@ -1,11 +1,16 @@
 <template>
   <div :class="$style.personal">
-    <avatar :avatar="`${baseApi}${userInfo.avatar}`"/>
+    <avatar
+      v-if="loadingUserInfo"
+      @reset="resetUserInfo()"
+      :avatar="userInfo.avatar ? `${baseApi}${userInfo.avatar}`: ''"
+      :userId="userInfo._id"/>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
+import { userInfo } from 'wrapper/ajax/users';
 import avatar from './avatar.vue';
 
 export default {
@@ -17,14 +22,24 @@ export default {
   },
   data() {
     return {
-      imageUrl: '',
+      loadingUserInfo: true,
       baseApi: process.env.VUE_APP_BASE_API,
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      console.log(res, file);
-      this.imageUrl = URL.createObjectURL(file.raw);
+    ...mapMutations('user', [
+      'setUser',
+    ]),
+    resetUserInfo() {
+      this.loadingUserInfo = false;
+      userInfo().then((res) => {
+        this.setUser(res.data);
+        this.$nextTick(() => {
+          this.loadingUserInfo = true;
+        });
+      }).catch(() => {
+        this.$router.push({ path: '/login' });
+      });
     },
   },
 };

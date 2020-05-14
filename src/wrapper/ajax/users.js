@@ -39,10 +39,19 @@ export function create(data) {
   });
 }
 
+
 export function usersWhetherName(params) {
   return request({
     url: '/api/users/whether/name',
     method: 'GET',
     params,
+  });
+}
+
+export function fileCropAvatar(data, userId) {
+  return request({
+    url: `/api/users/${userId}/update/avatar`,
+    method: 'POST',
+    data,
   });
 }

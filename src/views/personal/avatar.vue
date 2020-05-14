@@ -4,9 +4,18 @@
       v-if="dialogVisible"
       title="头像编辑"
       :visible.sync="dialogVisible"
-      width="620">
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      width="620px">
       <div :class="$style['edit-bar']">
-        <el-button size="mini" type="primary" @click="crop">裁剪</el-button>
+        <el-button
+          :disabled="!beforeImg"
+          size="mini"
+          type="primary"
+          @click="crop">
+          裁剪
+        </el-button>
+
         <el-upload
           :class="$style.upload"
           :action="`${baseApi}/api/file/upload`"
@@ -26,7 +35,7 @@
 
       </div>
 
-      <el-row>
+      <el-row v-if="beforeImg">
         <el-col :span="16">
           <div :class="$style['img-container']">
             <img :src="beforeImg" ref="image" alt="">
@@ -43,6 +52,7 @@
           </div>
         </el-col>
       </el-row>
+
     </el-dialog>
     <el-avatar @click.native="handleEditAvatar" :size="50" :src="avatar"></el-avatar>
   </div>
@@ -56,28 +66,37 @@ import 'cropperjs/dist/cropper.css';
 import {
   getPropString,
 } from 'lib/vue-prop';
+import { fileCropAvatar } from 'wrapper/ajax/users';
 
 export default {
   props: {
     avatar: getPropString(),
+    userId: getPropString(),
   },
   data() {
     return {
-      cropperData: null,
-      changeAvatarRes: null,
-      beforeImg: this.avatar,
+      cropperData: null, // 裁剪位置数据
+      changeAvatarRes: null, // 如果新上传这个地方就会有值
+      beforeImg: '', // 裁剪的原图
       baseApi: process.env.VUE_APP_BASE_API,
-      myCropper: null,
-      afterImg: '',
+      myCropper: null, // 裁剪实例
+      afterImg: '', // 裁剪之后的图
       dialogVisible: false,
     };
   },
   methods: {
     handleEditAvatar() {
+      this.cropperData = null;
+      this.changeAvatarRes = null;
+      this.beforeImg = this.avatar;
+      this.myCropper = null;
+      this.afterImg = '';
       this.dialogVisible = true;
-      setTimeout(() => {
-        this.initCrop();
-      }, 0);
+      this.$nextTick(() => {
+        if (this.avatar) {
+          this.initCrop();
+        }
+      });
     },
     initCrop() {
       this.myCropper = new Cropper(this.$refs.image, {
@@ -102,11 +121,16 @@ export default {
       return isJPG && isLt2M;
     },
     handleAvatarSuccess(res, file) {
-      this.changeAvatarRes = res;
+      this.cropperData = null;
       this.afterImg = '';
+      this.changeAvatarRes = res;
       this.beforeImg = URL.createObjectURL(file.raw);
       if (this.myCropper) {
         this.myCropper.replace(this.beforeImg);
+      } else {
+        this.$nextTick(() => {
+          this.initCrop();
+        });
       }
     },
     crop() {
@@ -117,11 +141,16 @@ export default {
     },
     confirm() {
       let basename = { basename: path.basename(this.avatar) };
+      let newPic = false;
       if (this.changeAvatarRes) {
         basename = JSON.parse(JSON.stringify(this.changeAvatarRes));
+        newPic = true;
       }
-      const { cropperData } = this;
-      console.log({ basename, cropperData });
+      const { cropperData, userId } = this;
+      fileCropAvatar({ ...basename, cropperData, newPic }, userId).then(() => {
+        this.dialogVisible = false;
+        this.$emit('reset');
+      });
     },
   },
 };
@@ -137,7 +166,7 @@ export default {
     }
   }
   .img-container{
-    height: 400px;
+    height: 360px;
     overflow: hidden;
   }
   .cropper-img{
