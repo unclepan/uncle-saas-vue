@@ -55,3 +55,11 @@ export function fileCropAvatar(data, userId) {
     data,
   });
 }
+
+export function patch(data, userId) {
+  return request({
+    url: `/api/users/${userId}`,
+    method: 'PATCH',
+    data,
+  });
+}

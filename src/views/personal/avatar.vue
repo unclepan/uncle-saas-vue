@@ -52,9 +52,15 @@
           </div>
         </el-col>
       </el-row>
-
     </el-dialog>
-    <el-avatar @click.native="handleEditAvatar" :size="50" :src="avatar"></el-avatar>
+
+    <el-avatar
+      @click.native="handleEditAvatar"
+      shape="square"
+      :size="100"
+      fit="fill"
+      :src="avatar">
+    </el-avatar>
   </div>
 
 </template>

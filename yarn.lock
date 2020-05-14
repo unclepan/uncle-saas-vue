@@ -9193,6 +9193,10 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
+wolfy87-eventemitter@^5.2.9:
+  version "5.2.9"
+  resolved "https://registry.npmjs.org/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.9.tgz#e879f770b30fbb6512a8afbb330c388591099c2a"
+
 word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
