@@ -23,7 +23,7 @@
       <span :class="$style['user-name']" v-if="userInfo">{{ userInfo.name }}</span>
 
       <el-dropdown @command="handleCommand" trigger="click">
-        <el-avatar id="handler-personal-center" size="medium" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+        <el-avatar id="handler-personal-center" size="medium" :src="`${baseApi}${userInfo.avatar}`"></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="personal" icon="el-icon-user">{{$t('m.personal')}}</el-dropdown-item>
           <el-dropdown-item command="logout" icon="el-icon-switch-button">{{$t('m.logout')}}</el-dropdown-item>
@@ -53,6 +53,7 @@ export default {
   },
   data() {
     return {
+      baseApi: process.env.VUE_APP_BASE_API,
       badgeValue: 12,
       items: [
         {
