@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.personal" v-loading="!loadingUserInfo">
     <x-title>个人资料编辑</x-title>
+
     <div :class="$style.header">
       <avatar
         v-if="loadingUserInfo"
@@ -21,6 +22,7 @@
         :card='2' />
       <el-button type="primary" @click="onSubmit()">确认更新资料</el-button>
     </div>
+
   </div>
 </template>
 
