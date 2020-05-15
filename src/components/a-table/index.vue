@@ -55,7 +55,7 @@
             </div>
             <template v-else>
               <!-- 没传入组件默认渲染 -->
-              <template v-if="item.format">{{item.format(scope.row)}}</template>
+              <template v-if="item.formatter">{{item.formatter(scope.row)}}</template>
               <template v-else>{{scope.row[item.prop] || '--'}}</template>
             </template>
           </template>
@@ -102,6 +102,7 @@ import Sortable from 'sortablejs';
 import edit from './components/edit.vue';
 import tooltip from './components/tooltip.vue';
 import aswitch from './components/switch.vue';
+import state from './components/state.vue';
 
 export default {
   props: {
@@ -112,6 +113,7 @@ export default {
     edit,
     aswitch,
     tooltip,
+    state,
   },
   data() {
     return {

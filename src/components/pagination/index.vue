@@ -38,7 +38,6 @@ export default {
 </script>
 <style lang="scss" module>
 .pagination{
-  margin-top: 18px;
-  text-align: center;
+  margin-top: 30px;
 }
 </style>

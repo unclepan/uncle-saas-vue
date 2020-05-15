@@ -10,6 +10,7 @@ import router from '../../router';
 import store from '../../store';
 import '../../registerServiceWorker';
 import '@/assets/styles/main.scss';
+import 'filter/index'; // 过滤器
 
 import zh from '../../common/lang/zh';
 import en from '../../common/lang/en';
