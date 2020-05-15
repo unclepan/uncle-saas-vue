@@ -71,7 +71,7 @@ export default {
   methods: {
     getKey(data) {
       const origin = data.toUpperCase();
-      return `X-${origin}`;
+      return `A-${origin}`;
     },
     submitForm(formName, cb) {
       this.$refs[formName].validate((valid) => {

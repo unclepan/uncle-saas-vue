@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.personal" v-loading="!loadingUserInfo">
-    <x-title>个人资料编辑</x-title>
+    <a-title>个人资料编辑</a-title>
 
     <div :class="$style.header">
       <avatar
@@ -30,7 +30,7 @@
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import xForm from 'components/dynamic-form-fields/form/index.vue';
-import xTitle from 'components/x-title.vue';
+import aTitle from 'components/a-title.vue';
 import { mapState, mapMutations } from 'vuex';
 import { userInfo, patch, logout } from 'wrapper/ajax/users';
 import avatar from './avatar.vue';
@@ -39,7 +39,7 @@ export default {
   name: 'personal',
   components: {
     xForm,
-    xTitle,
+    aTitle,
     avatar,
   },
   computed: {

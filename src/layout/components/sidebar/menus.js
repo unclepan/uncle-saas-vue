@@ -18,6 +18,12 @@ export default [
         invokeUrl: '/system/user',
         subMenus: [],
       },
+      {
+        id: '4',
+        menuName: 'system.role',
+        invokeUrl: '/system/role',
+        subMenus: [],
+      },
     ],
   },
 ];

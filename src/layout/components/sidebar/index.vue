@@ -49,7 +49,7 @@ export default {
   computed: {
     ...mapState('app', ['isCollapse']),
     defaultActive() {
-      return this.$route.fullPath.split('?')[0];
+      return this.$route.fullPath;
     },
   },
   mounted() {

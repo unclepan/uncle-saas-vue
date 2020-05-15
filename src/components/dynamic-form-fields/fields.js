@@ -24,6 +24,6 @@ export default class Fields {
   }
 
   static getKey(origin) {
-    return `X-${origin}`;
+    return `A-${origin}`;
   }
 }
