@@ -49,10 +49,10 @@ export default {
   methods: {
     reset() {
       this.form = _.cloneDeep(this.cloneDeepForm);
-      this.$emit('search', this.form);
+      this.$emit('search');
     },
     search() {
-      this.$emit('search', this.form);
+      this.$emit('search');
     },
   },
 };

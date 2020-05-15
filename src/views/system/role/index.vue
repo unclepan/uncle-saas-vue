@@ -1,7 +1,8 @@
 <template>
   <div>
     <condition
-      @search="init"
+      ref="condition"
+      @search="search"
       :condList="condList"/>
     <div :class="$style.role">
       <a-table
@@ -23,7 +24,7 @@ import pagination from 'components/pagination/index.vue';
 import condition from 'components/condition/index.vue';
 
 export default {
-  name: 'role',
+  name: 'system.role',
   components: {
     aTable,
     pagination,
@@ -80,6 +81,7 @@ export default {
           {
             prop: 'description',
             label: '描述',
+            'min-width': '180',
           },
           {
             prop: 'state',
@@ -92,12 +94,14 @@ export default {
           {
             prop: 'createdAt',
             label: '创建时间',
-            formatter: (row, column, cellValue) => moment(cellValue).format('YYYY-MM-DD HH:mm:ss'),
+            formatter: (row) => moment(row.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+            'min-width': '180',
           },
           {
             prop: 'updatedAt',
             label: '更新时间',
-            formatter: (row, column, cellValue) => moment(cellValue).format('YYYY-MM-DD HH:mm:ss'),
+            formatter: (row) => moment(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+            'min-width': '180',
           },
         ],
         row: [],
@@ -105,21 +109,29 @@ export default {
       },
     };
   },
-  created() {
+  mounted() {
     this.init();
   },
   methods: {
-    init(q = {}) {
+    search() {
+      this.pagina.current = 1;
+      this.init();
+    },
+    init() {
       this.loading = true;
-      const params = { ...q, size: this.pagina.size, current: this.pagina.current };
+      const { form } = this.$refs.condition;
+      const params = { ...form, size: this.pagina.size, current: this.pagina.current };
       role(params).then((res) => {
         const {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
-        this.pagina.current = current;
-        this.pagina.size = size;
-        this.pagina.total = count;
+        const pagina = {
+          current,
+          size,
+          total: count,
+        };
+        this.pagina = pagina;
         this.loading = false;
       });
     },

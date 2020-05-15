@@ -6,7 +6,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="pagina.current"
-      :page-sizes="[10, 50, 100, 300]"
+      :page-sizes="[10, 20, 50, 300]"
       :page-size="pagina.size"
       layout="total, sizes, prev, pager, next, jumper"
       :total="pagina.total">
@@ -22,9 +22,6 @@ export default {
     pagina: getPropObject(),
     sizeChange: getPropFunction(),
     currentChange: getPropFunction(),
-  },
-  data() {
-    return {};
   },
   methods: {
     handleSizeChange(val) {
