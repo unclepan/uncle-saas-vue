@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import xForm from 'components/dynamic-form-fields/form/index.vue';
 import xTitle from 'components/x-title.vue';
@@ -88,6 +89,16 @@ export default {
           },
         },
         {
+          name: 'birth',
+          value: '',
+          label: '出生日期',
+          type: 'DATETIME',
+          rules: [],
+          meta: {
+            placeholder: '请填写内容',
+          },
+        },
+        {
           name: 'introduce',
           value: '',
           label: '简介',
@@ -133,6 +144,11 @@ export default {
           data.password = CryptoJS.MD5(data.password).toString();
         } else {
           delete data.password;
+        }
+        if (data.birth) {
+          data.birth = moment(data.birth).format('YYYY-MM-DD HH:mm:ss');
+        } else {
+          delete data.birth;
         }
         const { _id: userId } = this.userInfo;
         patch(data, userId).then(() => {
