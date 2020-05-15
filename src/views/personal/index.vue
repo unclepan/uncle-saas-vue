@@ -36,6 +36,7 @@ import { userInfo, patch, logout } from 'wrapper/ajax/users';
 import avatar from './avatar.vue';
 
 export default {
+  name: 'personal',
   components: {
     xForm,
     xTitle,

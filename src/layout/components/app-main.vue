@@ -1,7 +1,7 @@
 <template>
   <section :class="$style['app-main']">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive :exclude="excludeViews" >
+      <keep-alive :exclude="exclude" >
         <router-view :reload="reload" :key="key" v-if="isRouterAlive"/>
       </keep-alive>
     </transition>
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       isRouterAlive: true,
-      excludeViews: '',
+      exclude: '',
     };
   },
   watch: {
@@ -33,12 +33,12 @@ export default {
   },
   methods: {
     reload(cname) {
-      const curView = this.$route;
-      this.excludeViews = cname || curView.name; // 有参数传入使用参数
+      const { name } = this.$route;
+      this.exclude = cname || name; // 有参数传入使用参数( exclude：要求视图组件必须有name )
       this.isRouterAlive = false;
       this.$nextTick(() => {
         this.isRouterAlive = true;
-        this.excludeViews = '';
+        this.exclude = '';
       });
     },
   },

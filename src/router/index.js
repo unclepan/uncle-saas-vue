@@ -45,7 +45,7 @@ export const constantRoutes = [
         path: 'personal',
         component: () => import(/* webpackChunkName: "personal" */ '@/views/personal/index'),
         name: 'personal',
-        meta: { title: 'personal', affix: true }, // title 用于国际化等，affix 固定钉
+        meta: { title: 'personal' }, // title 用于国际化等，affix 固定钉
       },
     ],
   },

@@ -52,11 +52,11 @@ export default {
     this.addTags();
   },
   methods: {
-    isActive(route) {
-      return route.path === this.$route.path;
-    },
     test() {
       // this.$refs.vs.scrollIntoView('.tag-34', 500);
+    },
+    isActive(route) {
+      return route.path === this.$route.path;
     },
     filterAffixTags(routes, basePath = '/') {
       let tags = [];
@@ -89,12 +89,7 @@ export default {
       });
     },
     addTags() {
-      let { name } = this.$route;
-      const { meta } = this.$route;
-      if (meta && meta.ignore) {
-        // fix:代码不通用，用于外链标识
-        name = this.fix();
-      }
+      const { name } = this.$route;
       if (name) {
         if (this.tags.some((v) => v.path === this.$route.path)) return;
         this.tags.push({
@@ -124,19 +119,10 @@ export default {
     toLastView(visitedViews) {
       const latestView = visitedViews.slice(-1)[0]; // 找到最后一个元素
       if (latestView) {
-        const { meta } = latestView;
-        if (meta.ignore) { // 外部视图标识
-          this.$router.push({ path: latestView.path, query: latestView.query, fullPath: latestView.fullPath });
-        } else {
-          this.$router.push(latestView);
-        }
+        this.$router.push(latestView);
       } else {
         this.$router.push('/');
       }
-    },
-    fix() { // 外链视窗才用
-      const { routerAliasName } = this.$route.query;
-      return `${routerAliasName}`;
     },
   },
 };
