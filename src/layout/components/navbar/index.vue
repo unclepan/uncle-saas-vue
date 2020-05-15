@@ -13,8 +13,7 @@
       </guide>
 
       <el-badge
-        :value="badgeValue"
-        :hidden="badgeValue===0"
+        :is-dot="!!badgeValue"
         :class="$style.badge"
         @click.native="openBadge()">
         <i class="el-icon-message-solid"></i>
@@ -136,7 +135,7 @@ export default {
       margin: 0 5px;
     }
     .user-name{
-      margin: 0 5px 0 20px;
+      margin: 0 5px;
     }
     .problem {
       cursor: pointer;

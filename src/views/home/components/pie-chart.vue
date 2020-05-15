@@ -2,7 +2,6 @@
   <div :class="$style['echarts-wrap']">
     <pan-chart :options="data"  autoresize/>
   </div>
-
 </template>
 
 <script>
