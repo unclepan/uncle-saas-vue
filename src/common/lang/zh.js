@@ -42,11 +42,11 @@ export default {
     system: {
       default: '系统设置',
       user: '用户管理',
+      role: '角色管理',
     },
     home: '首页',
     personal: '个人中心',
   },
-
   guide: {
     sidebarTitle: '侧边栏操作',
     sidebarDescription: '打开或者关闭侧边栏',

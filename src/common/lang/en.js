@@ -42,11 +42,11 @@ export default {
     system: {
       default: 'System',
       user: 'User',
+      role: 'Role',
     },
     home: 'Home',
     personal: 'Personal',
   },
-
   guide: {
     sidebarTitle: 'Sidebar operation',
     sidebarDescription: 'Open && Close sidebar',

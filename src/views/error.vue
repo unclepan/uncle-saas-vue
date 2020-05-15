@@ -2,10 +2,10 @@
   <div :class="$style['wscn-http404-container']">
     <div :class="$style['wscn-http404']">
       <div :class="$style['pic-404']">
-        <img :class="$style['pic-404__parent']" src="@/assets/images/404_images/404.png" alt="404">
-        <img :class="[$style['pic-404__child'], $style.left]" src="@/assets/images/404_images/404_cloud.png" alt="404">
-        <img :class="[$style['pic-404__child'], $style.mid]" src="@/assets/images/404_images/404_cloud.png" alt="404">
-        <img :class="[$style['pic-404__child'], $style.right]" src="@/assets/images/404_images/404_cloud.png" alt="404">
+        <img :class="$style['pic-404__parent']" src="@/assets/images/404-images/404.png" alt="404">
+        <img :class="[$style['pic-404__child'], $style.left]" src="@/assets/images/404-images/404-cloud.png" alt="404">
+        <img :class="[$style['pic-404__child'], $style.mid]" src="@/assets/images/404-images/404-cloud.png" alt="404">
+        <img :class="[$style['pic-404__child'], $style.right]" src="@/assets/images/404-images/404-cloud.png" alt="404">
       </div>
       <div :class="$style['bullshit']">
         <div :class="$style['bullshit__oops']">OOPS!</div>

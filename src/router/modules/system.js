@@ -7,6 +7,12 @@ const system = [
     component: () => import('../../views/system/user.vue'),
     meta: { title: 'system.user' },
   },
+  {
+    path: 'role',
+    name: 'system.role',
+    component: () => import('../../views/system/role/index.vue'),
+    meta: { title: 'system.role' },
+  },
 ];
 
 export default [

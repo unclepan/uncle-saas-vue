@@ -13,7 +13,6 @@ import '@/assets/styles/main.scss';
 
 import zh from '../../common/lang/zh';
 import en from '../../common/lang/en';
-import '@/assets/iconfont/iconfont.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n); // 通过插件的形式挂载

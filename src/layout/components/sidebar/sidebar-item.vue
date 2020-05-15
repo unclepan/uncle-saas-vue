@@ -4,7 +4,7 @@
     :popper-append-to-body="false"
     :index="resolvePath(item)">
     <template slot="title">
-        <i v-if="item.iconStr" :class="['icon', 'iconfont', item.iconStr, $style['item-icon']]"></i>&nbsp;
+        <i v-if="item.iconStr" :class="[item.iconStr, $style['item-icon']]"></i>&nbsp;
         <span :class="$style['item-name']">{{$t(`m.${item.menuName}`)}}</span>
     </template>
     <sidebar-item v-for="(subItem) in item.subMenus" :item="subItem" :key="subItem.id"/>
@@ -13,7 +13,7 @@
   <el-menu-item
     v-else
     :index="resolvePath(item)">
-    <i v-if="item.iconStr" :class="['icon', 'iconfont', item.iconStr, $style['item-icon']]"></i>&nbsp;
+    <i v-if="item.iconStr" :class="[item.iconStr, $style['item-icon']]"></i>&nbsp;
     <span slot="title">
       <span :class="$style['item-name']">{{$t(`m.${item.menuName}`)}}</span>
     </span>
@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" module>
 .item-icon{
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 .item-name{
   display: inline-block;

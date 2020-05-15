@@ -85,6 +85,7 @@ export default {
           label: '密码',
           type: 'TEXT',
           rules: [],
+          describe: '注意：您如需更改密码，请填写，否则请勿填写，如果你改了，请您牢记您改了什么。',
           meta: {
             placeholder: '请填写内容',
           },
