@@ -27,8 +27,11 @@ export default {
 <style lang="scss" module>
 .container{
   :global(.el-form-item__label){
-    padding: 0;
-    line-height: 30px;
+    padding: 0 6px;
+    line-height: 12px;
+    border-left: 2px solid #DCDFE6;
+    margin: 10px 0;
+
   }
 }
 </style>

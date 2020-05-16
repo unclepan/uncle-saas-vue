@@ -64,6 +64,7 @@ export default {
           label: '姓名',
           type: 'TEXT',
           rules: [],
+          describe: '姓名不支持重名',
           meta: {
             placeholder: '请填写内容',
           },
@@ -74,6 +75,7 @@ export default {
           label: '邮箱',
           type: 'TEXT',
           rules: [],
+          describe: '邮箱不支持更改，如果您坚持，建议请您放弃此账号，重新注册。',
           meta: {
             placeholder: '请填写内容',
             disabled: true,
@@ -85,7 +87,7 @@ export default {
           label: '密码',
           type: 'TEXT',
           rules: [],
-          describe: '注意：您如需更改密码，请填写，否则请勿填写，如果你改了，请您牢记您改了什么。',
+          describe: '注意：您如需更改密码，请填写，否则请勿填写，如果您改了，那么请您牢记您改了什么。',
           meta: {
             placeholder: '请填写内容',
           },

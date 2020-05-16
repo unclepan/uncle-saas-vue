@@ -5,7 +5,7 @@
       v-if="editingStatus"
       :style="{width:'100%'}"
       v-model="value"
-      v-bind="param.meta">
+      v-bind="fixParam">
         <el-option
           v-for="(item, index) in options"
           :key="index"
@@ -27,16 +27,18 @@ export default {
   mixins: [
     fieldMixin,
   ],
-  props: {
+  computed: {
+    fixParam() {
+      if (this.param.type === 'SELECTMULTIPLE') {
+        return { ...this.param.meta, multiple: true, 'collapse-tags': true };
+      }
+      return { ...this.param.meta };
+    },
   },
   data() {
     return {
       options: [],
     };
-  },
-  components: {
-  },
-  created() {
   },
   mounted() {
     this.init();

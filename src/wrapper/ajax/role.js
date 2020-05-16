@@ -14,3 +14,18 @@ export function del(id) {
     method: 'DELETE',
   });
 }
+
+export function get(id) {
+  return request({
+    url: `/api/role/${id}`,
+    method: 'GET',
+  });
+}
+
+export function patch(data, id) {
+  return request({
+    url: `/api/role/${id}`,
+    method: 'PATCH',
+    data,
+  });
+}

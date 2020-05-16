@@ -27,9 +27,9 @@ import condition from 'components/condition/index.vue';
 export default {
   name: 'system.role.default',
   components: {
+    condition,
     aTable,
     pagination,
-    condition,
   },
   data() {
     return {
@@ -123,14 +123,6 @@ export default {
           func: (data) => {
             console.log(data, '分配用户');
           },
-        },
-        {
-          label: '分配功能',
-          func: 123,
-        },
-        {
-          label: '更改状态',
-          func: [1, 2, 3],
         },
       ],
     };

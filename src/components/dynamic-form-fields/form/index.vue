@@ -7,10 +7,10 @@
       label-position="top">
 
       <!-- 有布局 -->
-      <el-row :gutter="10" v-if="card==1">
+      <el-row :gutter="16" v-if="card==1">
         <template v-for="(item, index) in formRender" >
           <el-col :class="$style.col" :xs="12" :sm="8" :lg="6" :key="index" v-if="!item.hide">
-            <el-card :class="$style.card" shadow="hover" :body-style="{ padding: '8px',paddingBottom:'0', minHeight: '100px'}">
+            <el-card :class="$style.card" shadow="hover" :body-style="{ padding: '12px',paddingBottom:'0', minHeight: '130px'}">
               <component
                 :key="item.name"
                 :class="$style.block"
@@ -93,10 +93,10 @@ export default {
 <style lang="scss" module>
 .form{
   .col{
-    padding: 5px;
+    padding: 8px 0;
     .card{
-      border: 1px solid #fafafa;
-      background: #fcfcfc;
+      border: 1px dashed #f0f0f0;
+      background: #fefefe;
     }
   }
   .block{

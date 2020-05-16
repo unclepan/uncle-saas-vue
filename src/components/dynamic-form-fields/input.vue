@@ -16,14 +16,13 @@ import fieldMixin from './basic/field-mixin';
 
 export default {
   INDEX: ['TEXT', 'TEXTAREA', 'PHONE', 'URL', 'EMAIL'],
-  TYPEINDEX: ['TEXT', 'TEXTAREA'],
   mixins: [
     fieldMixin,
   ],
   computed: {
     fixParam() {
-      if (this.$options.TYPEINDEX.indexOf(this.param.type) > -1) {
-        return { ...this.param.meta, type: this.param.type.toLowerCase() };
+      if (this.param.type === 'TEXTAREA') {
+        return { ...this.param.meta, type: 'textarea' };
       }
       return { ...this.param.meta };
     },
