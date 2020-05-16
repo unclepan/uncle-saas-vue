@@ -3,8 +3,10 @@
     <a-title>
       筛选条件
       <template slot="button">
+        <span :class="$style['query-time']">距上次查询已过去：{{ past }}分钟</span>
         <el-button size="mini" @click="reset()">重置</el-button>
         <el-button @click="search()" type="primary" icon="el-icon-search" size="mini">搜索</el-button>
+        <el-button size="mini" type="primary">新增</el-button>
       </template>
     </a-title>
 
@@ -40,19 +42,39 @@ export default {
     return {
       form,
       cloneDeepForm,
+      timer: null,
+      time: Date.now(),
+      past: 0,
     };
   },
   components: {
     aTitle,
     ...condition,
   },
+  mounted() {
+    this.init();
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
   methods: {
+    init() {
+      this.timer = setInterval(() => {
+        this.past = Math.round((Date.now() - this.time) / 1000 / 60);
+      }, 1000 * 60);
+    },
+    rTime() {
+      this.time = Date.now();
+      this.past = Math.round((Date.now() - this.time) / 1000 / 60);
+    },
     reset() {
       this.form = _.cloneDeep(this.cloneDeepForm);
       this.$emit('search');
+      this.rTime();
     },
     search() {
       this.$emit('search');
+      this.rTime();
     },
   },
 };
@@ -62,5 +84,10 @@ export default {
     padding: 20px;
     background: white;
     margin-bottom: 10px;
+    .query-time {
+      font-size: 12px;
+      padding-right: 20px;
+      color: #999999;
+    }
   }
 </style>

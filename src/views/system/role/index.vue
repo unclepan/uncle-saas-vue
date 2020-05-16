@@ -18,6 +18,7 @@
 
 <script>
 import moment from 'moment';
+import middlewares from 'lib/middlewares';
 import { role } from 'wrapper/ajax/role';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
@@ -107,6 +108,31 @@ export default {
         row: [],
         operation: [],
       },
+      operation: [
+        {
+          label: '编辑',
+          func: { name: 'edit', value: '编辑参数' },
+        },
+        {
+          label: '删除',
+          type: 'danger',
+          func: { name: 'del', value: '删除参数' },
+        },
+        {
+          label: '分配用户',
+          func: (data) => {
+            console.log(data, '分配用户');
+          },
+        },
+        {
+          label: '分配功能',
+          func: 123,
+        },
+        {
+          label: '更改状态',
+          func: [1, 2, 3],
+        },
+      ],
     };
   },
   mounted() {
@@ -126,6 +152,7 @@ export default {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
+        this.tableData.operation = middlewares.init(this.operation);
         const pagina = {
           current,
           size,

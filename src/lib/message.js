@@ -1,4 +1,4 @@
-import { Message } from 'element-ui';
+import { Message, MessageBox } from 'element-ui';
 
 export default {
   error(text) {
@@ -14,7 +14,7 @@ export default {
     Message.closeAll();
     Message.success(text);
   },
-  confirm(component, content, title = '提示', option = {
+  confirm(content, title = '提示', option = {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
@@ -22,18 +22,18 @@ export default {
     closeOnPressEscape: false,
   }) {
     return new Promise((resolve) => {
-      component.$confirm(content, title, option).then(() => {
+      MessageBox.confirm(content, title, option).then(() => {
         resolve(true);
       }).catch(() => {
         resolve(false);
       });
     });
   },
-  alert(component, content, title = '提示', option = {
+  alert(content, title = '提示', option = {
     confirmButtonText: '确定',
     type: 'warning',
     closeOnClickModal: false,
   }) {
-    return component.$alert(content, title, option);
+    return MessageBox.alert(content, title, option);
   },
 };
