@@ -42,7 +42,10 @@ export default {
     system: {
       default: 'System',
       user: 'User',
-      role: 'Role',
+      role: {
+        default: 'Role',
+        edit: 'Role Edit',
+      },
     },
     home: 'Home',
     personal: 'Personal',

@@ -42,7 +42,10 @@ export default {
     system: {
       default: '系统设置',
       user: '用户管理',
-      role: '角色管理',
+      role: {
+        default: '角色管理',
+        edit: '角色编辑',
+      },
     },
     home: '首页',
     personal: '个人中心',

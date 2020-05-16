@@ -60,6 +60,7 @@ export default {
   methods: {
     init() {
       this.timer = setInterval(() => {
+        console.log(`定时器${this.timer}：请时刻测试，直至上线删除，并修改成分钟模式`);
         this.past = Math.round((Date.now() - this.time) / 1000 / 60);
       }, 1000 * 60);
     },

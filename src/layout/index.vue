@@ -60,7 +60,7 @@ export default {
       });
     },
     async logout() {
-      const stl = await message.confirm(this, '确认登出？');
+      const stl = await message.confirm('确认登出？');
       if (stl) {
         logout().then(() => {
           localStorage.removeItem('userToken');

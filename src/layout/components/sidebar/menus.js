@@ -20,7 +20,7 @@ export default [
       },
       {
         id: '4',
-        menuName: 'system.role',
+        menuName: 'system.role.default',
         invokeUrl: '/system/role',
         subMenus: [],
       },

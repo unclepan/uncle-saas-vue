@@ -32,3 +32,10 @@ yarn run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## 开发备忘
+
+```
+定时器时刻测试，直至上线删除，修改成分钟模式
+```

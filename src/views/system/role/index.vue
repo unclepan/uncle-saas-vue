@@ -25,7 +25,7 @@ import pagination from 'components/pagination/index.vue';
 import condition from 'components/condition/index.vue';
 
 export default {
-  name: 'system.role',
+  name: 'system.role.default',
   components: {
     aTable,
     pagination,
@@ -111,12 +111,12 @@ export default {
       operation: [
         {
           label: '编辑',
-          func: { name: 'edit', value: '编辑参数' },
+          func: { name: 'edit', value: { pathName: 'system.role.edit' } },
         },
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: '删除参数' },
+          func: { name: 'del', value: { apiName: '/api/role', method: 'DELETE' } },
         },
         {
           label: '分配用户',
@@ -152,7 +152,7 @@ export default {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
-        this.tableData.operation = middlewares.init(this.operation);
+        this.tableData.operation = middlewares.init(this.operation, this);
         const pagina = {
           current,
           size,

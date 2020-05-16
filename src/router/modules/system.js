@@ -9,9 +9,15 @@ const system = [
   },
   {
     path: 'role',
-    name: 'system.role',
+    name: 'system.role.default',
     component: () => import('../../views/system/role/index.vue'),
-    meta: { title: 'system.role' },
+    meta: { title: 'system.role.default' },
+  },
+  {
+    path: 'role/edit/:id',
+    name: 'system.role.edit',
+    component: () => import('../../views/system/role/edit.vue'),
+    meta: { title: 'system.role.edit' },
   },
 ];
 
