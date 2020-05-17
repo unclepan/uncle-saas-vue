@@ -17,13 +17,25 @@ const system = [
     path: 'role/add',
     name: 'system.role.add',
     component: () => import('../../views/system/role/add.vue'),
-    meta: { title: 'system.role.add' },
+    meta: { title: 'system.role.add', noRefresh: true },
   },
   {
     path: 'role/edit/:id',
     name: 'system.role.edit',
     component: () => import('../../views/system/role/edit.vue'),
     meta: { title: 'system.role.edit' },
+  },
+  {
+    path: 'option/index',
+    name: 'system.option.default',
+    component: () => import('../../views/system/option/index.vue'),
+    meta: { title: 'system.option.default' },
+  },
+  {
+    path: 'option/value/:id',
+    name: 'system.option.value',
+    component: () => import('../../views/system/option/value/index.vue'),
+    meta: { title: 'system.option.value' },
   },
 ];
 

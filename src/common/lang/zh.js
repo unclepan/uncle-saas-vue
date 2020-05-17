@@ -47,6 +47,10 @@ export default {
         edit: '角色编辑',
         add: '新增角色',
       },
+      option: {
+        default: '选项管理',
+        value: '选项值管理',
+      },
     },
     home: '首页',
     personal: '个人中心',

@@ -79,7 +79,7 @@ export default {
           cb(this.ruleForm);
           return true;
         }
-        message.error('提交错误');
+        message.error('提交错误，请检查验证规则');
         return false;
       });
     },

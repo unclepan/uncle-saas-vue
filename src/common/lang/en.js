@@ -47,6 +47,10 @@ export default {
         edit: 'Role Edit',
         add: 'Role Add',
       },
+      option: {
+        default: 'Option System',
+        value: 'Option Value System',
+      },
     },
     home: 'Home',
     personal: 'Personal',

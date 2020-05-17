@@ -56,6 +56,16 @@ export default {
           type: 'TEXT',
           rules: [
             { required: true, message: '请填写英文名称', trigger: 'blur' },
+            {
+              validator: (rule, value, callback) => {
+                if (/[\u4e00-\u9fa5]/.test(value)) {
+                  callback(new Error('不能包含中文，请正确填写'));
+                } else {
+                  callback();
+                }
+              },
+              trigger: 'blur',
+            },
           ],
           meta: {
             placeholder: '请填写名称',

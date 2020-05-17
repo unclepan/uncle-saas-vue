@@ -42,6 +42,11 @@ const middle = {
       }
     };
   },
+  dialogEdit(val) {
+    return (data) => {
+      val.components.$refs.dataDialog.open({ type: 'edit', title: '编辑', data });
+    };
+  },
   test(val) {
     return (data) => {
       console.log(data, val, '测试');

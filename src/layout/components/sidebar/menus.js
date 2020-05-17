@@ -24,6 +24,12 @@ export default [
         invokeUrl: '/system/role',
         subMenus: [],
       },
+      {
+        id: '5',
+        menuName: 'system.option.default',
+        invokeUrl: '/system/option/index',
+        subMenus: [],
+      },
     ],
   },
 ];
