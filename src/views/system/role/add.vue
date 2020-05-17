@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.edit">
     <a-title>
-      角色编辑
+      新增角色
       <template slot="button">
         <el-button size="mini" @click="cancel">返回角色列表</el-button>
         <el-button size="mini" type="primary" @click="onSubmit">确定</el-button>
@@ -18,10 +18,10 @@
 import message from 'lib/message';
 import aTitle from 'components/a-title.vue';
 import xForm from 'components/dynamic-form-fields/form/index.vue';
-import { get, patch } from 'wrapper/ajax/role';
+import { post } from 'wrapper/ajax/role';
 
 export default {
-  name: 'system.role.edit',
+  name: 'system.role.add',
   components: {
     aTitle,
     xForm,
@@ -103,19 +103,15 @@ export default {
 
 
       ];
-      const { id } = this.$route.params;
-      get(id).then((res) => {
-        this.formRender = formRender.map((item) => ({ ...item, value: res.data[item.name] }));
-      });
+      this.formRender = formRender;
     },
     cancel() {
       this.$router.push({ name: 'system.role.default' });
     },
     onSubmit() {
       this.$refs.xForm.submitForm('ruleForm', (val) => {
-        const { id } = this.$route.params;
-        patch(val, id).then(() => {
-          message.success('编辑成功，请切换到列表页面查看。');
+        post(val).then(() => {
+          message.success('角色新增成功，请切换到列表页面查看。');
         });
       });
     },

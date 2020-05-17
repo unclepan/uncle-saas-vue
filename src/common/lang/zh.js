@@ -45,6 +45,7 @@ export default {
       role: {
         default: '角色管理',
         edit: '角色编辑',
+        add: '新增角色',
       },
     },
     home: '首页',

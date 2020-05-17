@@ -3,7 +3,7 @@ import router from 'router';
 import request from 'wrapper/ajax/basic';
 
 const middle = {
-  init(oper, components) {
+  tableOperationInit(oper, components) {
     return oper.map((i) => {
       const item = i;
       let func;

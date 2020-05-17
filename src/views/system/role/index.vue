@@ -2,6 +2,7 @@
   <div>
     <condition
       ref="condition"
+      @add="add"
       @search="search"
       :condList="condList"/>
     <div :class="$style.role">
@@ -116,7 +117,7 @@ export default {
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/role', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/role/delete', method: 'DELETE' } },
         },
         {
           label: '分配用户',
@@ -135,6 +136,9 @@ export default {
       this.pagina.current = 1;
       this.init();
     },
+    add() {
+      this.$router.push({ name: 'system.role.add' });
+    },
     init() {
       this.loading = true;
       const { form } = this.$refs.condition;
@@ -144,7 +148,7 @@ export default {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
-        this.tableData.operation = middlewares.init(this.operation, this);
+        this.tableData.operation = middlewares.tableOperationInit(this.operation, this);
         const pagina = {
           current,
           size,

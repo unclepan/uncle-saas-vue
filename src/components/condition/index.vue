@@ -6,7 +6,7 @@
         <span :class="$style['query-time']">距上次查询已过去：{{ past }}分钟</span>
         <el-button size="mini" @click="reset()">重置</el-button>
         <el-button @click="search()" type="primary" icon="el-icon-search" size="mini">搜索</el-button>
-        <el-button size="mini" type="primary">新增</el-button>
+        <el-button @click="add()" size="mini" type="primary">新增</el-button>
       </template>
     </a-title>
 
@@ -76,6 +76,9 @@ export default {
     search() {
       this.$emit('search');
       this.rTime();
+    },
+    add() {
+      this.$emit('add');
     },
   },
 };

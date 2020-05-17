@@ -38,4 +38,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ```
 定时器时刻测试，直至上线删除，修改成分钟模式
+
+（角色）新增编辑下的SELECT options 也需要改造成中间件模式
 ```

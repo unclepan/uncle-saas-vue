@@ -45,6 +45,7 @@ export default {
       role: {
         default: 'Role',
         edit: 'Role Edit',
+        add: 'Role Add',
       },
     },
     home: 'Home',
