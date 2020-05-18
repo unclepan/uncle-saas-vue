@@ -26,7 +26,7 @@ const system = [
     meta: { title: 'system.role.edit' },
   },
   {
-    path: 'option/index',
+    path: 'option',
     name: 'system.option.default',
     component: () => import('../../views/system/option/index.vue'),
     meta: { title: 'system.option.default' },
@@ -36,6 +36,12 @@ const system = [
     name: 'system.option.value',
     component: () => import('../../views/system/option/value/index.vue'),
     meta: { title: 'system.option.value' },
+  },
+  {
+    path: 'functive',
+    name: 'system.functive.default',
+    component: () => import('../../views/system/functive/index.vue'),
+    meta: { title: 'system.functive.default' },
   },
 ];
 

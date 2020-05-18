@@ -51,6 +51,9 @@ export default {
         default: '选项管理',
         value: '选项值管理',
       },
+      functive: {
+        default: '功能项管理',
+      },
     },
     home: '首页',
     personal: '个人中心',

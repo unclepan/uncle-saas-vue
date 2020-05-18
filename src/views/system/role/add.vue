@@ -100,8 +100,6 @@ export default {
             placeholder: '请填写备注',
           },
         },
-
-
       ];
       this.formRender = formRender;
     },

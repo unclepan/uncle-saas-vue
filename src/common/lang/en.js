@@ -51,6 +51,9 @@ export default {
         default: 'Option',
         value: 'Option Value',
       },
+      functive: {
+        default: 'Functive',
+      },
     },
     home: 'Home',
     personal: 'Personal',

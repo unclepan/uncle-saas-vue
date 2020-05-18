@@ -27,7 +27,13 @@ export default [
       {
         id: '5',
         menuName: 'system.option.default',
-        invokeUrl: '/system/option/index',
+        invokeUrl: '/system/option',
+        subMenus: [],
+      },
+      {
+        id: '6',
+        menuName: 'system.functive.default',
+        invokeUrl: '/system/functive',
         subMenus: [],
       },
     ],
