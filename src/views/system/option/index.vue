@@ -92,12 +92,13 @@ export default {
           type: 'danger',
           func: { name: 'del', value: { apiName: '/api/option/delete', method: 'DELETE' } },
         },
-        // {
-        //   label: '选项值',
-        //   func: (data) => {
-        //     this.$router.push({ path: `/system/option/value/${data.id}` });
-        //   },
-        // },
+        {
+          label: '选项值管理',
+          func: (data) => {
+            const { _id: id } = data;
+            this.$router.push({ name: 'system.option.value', params: { id } });
+          },
+        },
       ],
     };
   },
@@ -112,7 +113,7 @@ export default {
   },
   methods: {
     add() {
-      this.$refs.dataDialog.open({ type: 'add', title: '新增选项' });
+      this.$refs.dataDialog.open({ type: 'add', title: '新增' });
     },
     init() {
       this.loading = true;

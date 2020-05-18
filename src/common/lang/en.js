@@ -48,8 +48,8 @@ export default {
         add: 'Role Add',
       },
       option: {
-        default: 'Option System',
-        value: 'Option Value System',
+        default: 'Option',
+        value: 'Option Value',
       },
     },
     home: 'Home',

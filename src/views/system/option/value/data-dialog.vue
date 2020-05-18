@@ -1,58 +1,47 @@
 <template>
-  <x-dialog
+  <a-dialog
     :title="title"
     ref="dialog"
     @determine="($refs.xForm.submitForm('ruleForm', opera))"
     width="520px">
-    <x-form
+    <a-form
       v-if="formRender"
       ref="xForm"
       :formRender="formRender"
       :card="2" />
-  </x-dialog>
+  </a-dialog>
 </template>
 
 <script>
+import message from 'lib/message';
 import dialog from 'components/dialog/index.vue';
-import xForm from 'components/dynamic-form-fields/form/index.vue';
-// import {
-//   optionValueAdd,
-//   optionValueEdit,
-// } from 'wrapper/ajax/system/option';
+import aForm from 'components/dynamic-form-fields/form/index.vue';
+import {
+  postValue,
+  patchValue,
+} from 'wrapper/ajax/option';
 
 export default {
   data() {
     return {
       title: '提示',
-      type: 'add',
+      type: '',
       editPrivateData: {},
       formRender: null,
     };
   },
   components: {
-    'x-dialog': dialog,
-    xForm,
+    'a-dialog': dialog,
+    aForm,
   },
   methods: {
     open(val) {
       this.title = val.title;
       this.type = val.type;
-      let cName = '';
-      let cEname = '';
-      let cValue = '';
-      let cSortRank = '';
-
-      if (val.type === 'edit') {
-        cName = val.data.name;
-        cEname = val.data.ename;
-        cValue = val.data.value;
-        cSortRank = val.data.sortRank;
-        this.editPrivateData = val.data;
-      }
-      this.formRender = [
+      const formRender = [
         {
           name: 'name',
-          value: cName,
+          value: '',
           label: '选项值名称',
           type: 'TEXT',
           rules: [
@@ -60,12 +49,11 @@ export default {
           ],
           meta: {
             placeholder: '请填写内容',
-            size: 'small',
           },
         },
         {
           name: 'ename',
-          value: cEname,
+          value: '',
           label: '选项英文名称',
           type: 'TEXT',
           rules: [
@@ -83,26 +71,11 @@ export default {
           ],
           meta: {
             placeholder: '请填写内容',
-            size: 'small',
-          },
-        },
-        {
-          name: 'sortRank',
-          value: cSortRank,
-          label: '排序号',
-          type: 'NUMBER',
-          rules: [
-            { required: true, message: '请填写排序号', trigger: 'blur' },
-            { type: 'number', message: '排序号必须为数字值' },
-          ],
-          meta: {
-            placeholder: '请填写内容',
-            size: 'small',
           },
         },
         {
           name: 'value',
-          value: cValue,
+          value: '',
           label: '选项值',
           type: 'TEXT',
           rules: [
@@ -110,34 +83,43 @@ export default {
           ],
           meta: {
             placeholder: '请填写内容',
-            size: 'small',
+          },
+        },
+        {
+          name: 'description',
+          value: '',
+          label: '描述',
+          type: 'TEXTAREA',
+          rules: [
+            { required: true, message: '请填写描述', trigger: 'blur' },
+          ],
+          meta: {
+            placeholder: '请填写内容',
           },
         },
       ];
+      if (val.type === 'edit') {
+        this.formRender = formRender.map((item) => ({ ...item, value: val.data[item.name] }));
+        this.editPrivateData = val.data;
+      } else {
+        this.formRender = formRender.map((item) => ({ ...item, value: '' }));
+      }
       this.$refs.dialog.dialogVisible = true;
     },
-    opera() {
+    async opera(val) {
+      const { id } = this.$route.params;
+      const { _id: vid } = this.editPrivateData;
       if (this.type === 'add') {
-        this.$refs.xForm.submitForm('ruleForm', this.add);
+        await postValue(val, id).then(() => {
+          message.success('选项值新增成功');
+        });
       } else if (this.type === 'edit') {
-        this.$refs.xForm.submitForm('ruleForm', this.edit);
+        await patchValue(val, id, vid).then(() => {
+          message.success('选项值编辑成功');
+        });
       }
-    },
-    add() {
-      // const { id } = this.$route.params;
-      // optionValueAdd({ ...data, oid: id }).then((res) => {
-      //   message.success(res.message);
-      //   this.$refs.dialog.dialogVisible = false;
-      //   this.$emit('success');
-      // });
-    },
-    edit() {
-      // const { id } = this.editPrivateData;
-      // optionValueEdit({ id, ...data }).then((res) => {
-      //   message.success(res.message);
-      //   this.$refs.dialog.dialogVisible = false;
-      //   this.$emit('success');
-      // });
+      this.$refs.dialog.dialogVisible = false;
+      this.$emit('success');
     },
   },
 };

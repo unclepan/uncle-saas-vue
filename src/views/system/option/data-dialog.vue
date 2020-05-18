@@ -1,21 +1,21 @@
 <template>
-  <x-dialog
+  <a-dialog
     :title="title"
     ref="dialog"
     @determine="($refs.xForm.submitForm('ruleForm', opera))"
     width="520px">
-    <x-form
+    <a-form
       v-if="formRender"
       ref="xForm"
       :formRender="formRender"
       :card="2" />
-  </x-dialog>
+  </a-dialog>
 </template>
 
 <script>
 import message from 'lib/message';
 import dialog from 'components/dialog/index.vue';
-import xForm from 'components/dynamic-form-fields/form/index.vue';
+import aForm from 'components/dynamic-form-fields/form/index.vue';
 import {
   post,
   patch,
@@ -25,14 +25,14 @@ export default {
   data() {
     return {
       title: '提示',
-      type: 'add',
+      type: '',
       editPrivateData: {},
       formRender: null,
     };
   },
   components: {
-    'x-dialog': dialog,
-    xForm,
+    'a-dialog': dialog,
+    aForm,
   },
   methods: {
     open(val) {
@@ -60,8 +60,8 @@ export default {
             { required: true, message: '请填写选项英文名称', trigger: 'blur' },
             {
               validator: (rule, value, callback) => {
-                if (/[\u4e00-\u9fa5]/.test(value)) {
-                  callback(new Error('不能包含中文，请正确填写'));
+                if (!(/^[a-z]+$/i).test(value)) {
+                  callback(new Error('非英文，请正确填写'));
                 } else {
                   callback();
                 }
@@ -78,10 +78,11 @@ export default {
           value: '',
           label: '描述',
           type: 'TEXTAREA',
-          rules: [],
+          rules: [
+            { required: true, message: '请填写描述', trigger: 'blur' },
+          ],
           meta: {
             placeholder: '请填写内容',
-            type: 'textarea',
           },
         },
       ];
@@ -93,36 +94,19 @@ export default {
       }
       this.$refs.dialog.dialogVisible = true;
     },
-    opera(val) {
+    async opera(val) {
       if (this.type === 'add') {
-        post(val).then(() => {
+        await post(val).then(() => {
           message.success('选项新增成功');
-          this.$refs.dialog.dialogVisible = false;
-          this.$emit('success');
         });
       } else if (this.type === 'edit') {
         const { _id: id } = this.editPrivateData;
-        patch(val, id).then(() => {
+        await patch(val, id).then(() => {
           message.success('选项编辑成功');
-          this.$refs.dialog.dialogVisible = false;
-          this.$emit('success');
         });
       }
-    },
-    add() {
-      // optionAdd(data).then((res) => {
-      //   message.success(res.message);
-      //   this.$refs.dialog.dialogVisible = false;
-      //   this.$emit('success');
-      // });
-    },
-    edit() {
-      // const { id } = this.editPrivateData;
-      // optionEdit({ id, ...data }).then((res) => {
-      //   message.success(res.message);
-      //   this.$refs.dialog.dialogVisible = false;
-      //   this.$emit('success');
-      // });
+      this.$refs.dialog.dialogVisible = false;
+      this.$emit('success');
     },
   },
 };
