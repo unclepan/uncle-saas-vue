@@ -41,7 +41,9 @@ export default {
     },
     system: {
       default: 'System',
-      user: 'User',
+      user: {
+        default: 'User',
+      },
       role: {
         default: 'Role',
         edit: 'Role Edit',

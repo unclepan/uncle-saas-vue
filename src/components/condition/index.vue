@@ -4,9 +4,9 @@
       筛选条件
       <template slot="button">
         <span :class="$style['query-time']">距上次查询已过去：{{ past }}分钟</span>
-        <el-button size="mini" @click="reset()">重置</el-button>
-        <el-button @click="search()" type="primary" icon="el-icon-search" size="mini">搜索</el-button>
-        <el-button @click="add()" size="mini" type="primary">新增</el-button>
+        <el-button v-if="btnShow.reset" size="mini" @click="reset()">重置</el-button>
+        <el-button v-if="btnShow.search" @click="search()" type="primary" icon="el-icon-search" size="mini">搜索</el-button>
+        <el-button v-if="btnShow.add" @click="add()" size="mini" type="primary">新增</el-button>
       </template>
     </a-title>
 
@@ -26,12 +26,13 @@
 <script>
 import _ from 'lodash';
 import aTitle from 'components/a-title.vue';
-import { getPropArray } from 'lib/vue-prop';
+import { getPropArray, getPropObject } from 'lib/vue-prop';
 import condition from './index';
 
 export default {
   props: {
     condList: getPropArray(),
+    btn: getPropObject(),
   },
   data() {
     const form = {};
@@ -46,6 +47,13 @@ export default {
       time: Date.now(),
       past: 0,
     };
+  },
+  computed: {
+    btnShow() {
+      const b = { reset: true, search: true, add: true };
+      _.merge(b, this.btn);
+      return b;
+    },
   },
   components: {
     aTitle,

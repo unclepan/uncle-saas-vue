@@ -2,7 +2,7 @@
   <div>
     <condition
       ref="condition"
-      @add="add"
+      :btn="{ add: false }"
       @search="search"
       :condList="condList"/>
     <div :class="$style.role">
@@ -20,13 +20,13 @@
 <script>
 import moment from 'moment';
 import middlewares from 'lib/middlewares';
-import { role } from 'wrapper/ajax/role';
+import { users } from 'wrapper/ajax/users';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import condition from 'components/condition/index.vue';
 
 export default {
-  name: 'system.role.default',
+  name: 'system.user.default',
   components: {
     condition,
     aTable,
@@ -41,25 +41,15 @@ export default {
           key: 'a-input',
           value: '',
           meta: {
-            label: '角色名称',
+            label: '用户名称',
           },
         },
         {
-          name: 'state',
-          key: 'a-single',
+          name: 'email',
+          key: 'a-input',
           value: '',
           meta: {
-            label: '启用状态',
-            optionsFun: () => [
-              {
-                name: '未启用',
-                value: false,
-              },
-              {
-                name: '启用',
-                value: true,
-              },
-            ],
+            label: '用户邮箱',
           },
         },
       ],
@@ -72,27 +62,19 @@ export default {
         column: [
           {
             prop: 'name',
-            label: '角色名称',
+            label: '用户名称',
             width: '180',
             fixed: 'left',
           },
           {
-            prop: 'ename',
-            label: '英文名',
-            'min-width': '180',
+            prop: 'email',
+            label: '邮箱',
+            width: '180',
           },
           {
-            prop: 'description',
-            label: '描述',
+            prop: 'introduce',
+            label: '简介',
             'min-width': '180',
-          },
-          {
-            prop: 'state',
-            label: '启用状态',
-            align: 'center',
-            components: {
-              key: 'state',
-            },
           },
           {
             prop: 'createdAt',
@@ -112,20 +94,16 @@ export default {
       },
       operation: [
         {
-          label: '编辑',
-          func: { name: 'edit', value: { pathName: 'system.role.edit' } },
-        },
-        {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/role/delete', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/users/delete', method: 'DELETE' } },
         },
-        {
-          label: '分配用户',
-          func: (data) => {
-            console.log(data, '分配用户');
-          },
-        },
+        // {
+        //   label: '分配用户',
+        //   func: (data) => {
+        //     console.log(data, '分配用户');
+        //   },
+        // },
       ],
     };
   },
@@ -137,14 +115,11 @@ export default {
       this.pagina.current = 1;
       this.init();
     },
-    add() {
-      this.$router.push({ name: 'system.role.add' });
-    },
     init() {
       this.loading = true;
       const { form } = this.$refs.condition;
       const params = { ...form, size: this.pagina.size, current: this.pagina.current };
-      role(params).then((res) => {
+      users(params).then((res) => {
         const {
           count, current, data, size,
         } = res.data;

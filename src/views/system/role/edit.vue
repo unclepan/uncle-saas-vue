@@ -84,7 +84,7 @@ export default {
         {
           name: 'functive',
           value: '',
-          label: '分配功能项',
+          label: '功能项',
           type: 'SELECTMULTIPLE',
           rules: [],
           describe: '功能项涵盖自定义的和动态模块的，动态模块不需要配置，详情请参考功能项管理。',

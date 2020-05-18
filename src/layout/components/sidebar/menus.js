@@ -14,7 +14,7 @@ export default [
     subMenus: [
       {
         id: '3',
-        menuName: 'system.user',
+        menuName: 'system.user.default',
         invokeUrl: '/system/user',
         subMenus: [],
       },

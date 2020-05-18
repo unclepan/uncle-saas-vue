@@ -39,7 +39,6 @@ export function create(data) {
   });
 }
 
-
 export function usersWhetherName(params) {
   return request({
     url: '/api/users/whether/name',
@@ -61,5 +60,13 @@ export function patch(data, userId) {
     url: `/api/users/${userId}`,
     method: 'PATCH',
     data,
+  });
+}
+
+export function users(params) {
+  return request({
+    url: '/api/users',
+    method: 'GET',
+    params,
   });
 }

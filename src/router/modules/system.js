@@ -3,9 +3,9 @@ import Layout from 'layout/index.vue';
 const system = [
   {
     path: 'user',
-    name: 'system.user',
-    component: () => import('../../views/system/user.vue'),
-    meta: { title: 'system.user' },
+    name: 'system.user.default',
+    component: () => import('../../views/system/user/index.vue'),
+    meta: { title: 'system.user.default' },
   },
   {
     path: 'role',
