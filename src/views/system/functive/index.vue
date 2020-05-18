@@ -22,7 +22,6 @@
       v-loading="loading"
       :class="$style.tree"
       :data="data"
-      show-checkbox
       node-key="id"
       :props="defaultProps"
       default-expand-all

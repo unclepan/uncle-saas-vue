@@ -94,16 +94,6 @@ export default {
           },
         },
         {
-          name: 'description',
-          value: '',
-          label: '描述',
-          type: 'TEXTAREA',
-          rules: [],
-          meta: {
-            placeholder: '请填写内容',
-          },
-        },
-        {
           name: 'sort',
           value: '',
           label: '排序',
@@ -144,6 +134,16 @@ export default {
           meta: {
           },
           options: [{ name: '启用', value: true }, { name: '关闭启用', value: false }],
+        },
+        {
+          name: 'description',
+          value: '',
+          label: '描述',
+          type: 'TEXTAREA',
+          rules: [],
+          meta: {
+            placeholder: '请填写内容',
+          },
         },
       ];
       if (val.type === 'edit') {
