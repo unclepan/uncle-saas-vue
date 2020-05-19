@@ -1,5 +1,6 @@
 <template>
   <div>
+    <bind-user-dialog ref="bindUserDialog"/>
     <condition
       ref="condition"
       @add="add"
@@ -24,6 +25,7 @@ import { role } from 'wrapper/ajax/role';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import condition from 'components/condition/index.vue';
+import bindUserDialog from './bind-user-dialog.vue';
 
 export default {
   name: 'system.role.default',
@@ -31,6 +33,7 @@ export default {
     condition,
     aTable,
     pagination,
+    bindUserDialog,
   },
   data() {
     return {
@@ -123,7 +126,7 @@ export default {
         {
           label: '分配用户',
           func: (data) => {
-            console.log(data, '分配用户');
+            this.$refs.bindUserDialog.open(data);
           },
         },
       ],
@@ -149,7 +152,7 @@ export default {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
-        this.tableData.operation = middlewares.tableOperationInit(this.operation, this);
+        this.tableData.operation = middlewares.init(this.operation, this);
         const pagina = {
           current,
           size,

@@ -1,5 +1,14 @@
 import request from './basic';
 
+// 公共选项接口
+export function optionSelect(ename, params) {
+  return request({
+    url: `/api/option/select/${ename}`,
+    method: 'GET',
+    params,
+  });
+}
+
 export function option(params) {
   return request({
     url: '/api/option',

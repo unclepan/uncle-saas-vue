@@ -3,22 +3,25 @@ import router from 'router';
 import request from 'wrapper/ajax/basic';
 
 const middle = {
-  tableOperationInit(oper, components) {
+  init(oper, components, funName = 'func') {
     return oper.map((i) => {
+      // if (funName === 'options' && !i.options) {
+      //   return { ...i };
+      // }
       const item = i;
       let func;
-      if (item.func instanceof Function) {
-        func = item.func;
-      } else if (item.func instanceof Object && item.func.name && item.func.value && middle[item.func.name](item.func.value)) {
+      if (item[funName] instanceof Function) {
+        func = item[funName];
+      } else if (item[funName] instanceof Object && item[funName].name && item[funName].value && middle[item[funName].name](item[funName].value)) {
         // 对象类型，有name和value属性，并且能在middle对象中找到
-        item.func.value.components = components;
-        func = middle[item.func.name](item.func.value);
+        item[funName].value.components = components;
+        func = middle[item[funName].name](item[funName].value);
       } else {
         func = () => {
-          throw Error('参数传入类型不正确，未执行任何方法，请检查func传入的类型');
+          throw Error('参数传入类型不正确，未执行任何方法，请检查方法传入的类型');
         };
       }
-      return { ...item, func };
+      return { ...item, [funName]: func };
     });
   },
   edit(val) {
@@ -47,9 +50,30 @@ const middle = {
       val.components.$refs.dataDialog.open({ type: 'edit', title: '编辑', data });
     };
   },
+
+  // 公共选项值
+  option(val) {
+    return async (cb) => {
+      const res = await request({
+        url: val.apiName,
+        method: val.method,
+      });
+      cb(res);
+    };
+  },
+
   test(val) {
     return (data) => {
       console.log(data, val, '测试');
+    };
+  },
+  optionstest(val) {
+    console.log(val, 12);
+    return (cb) => {
+      const res = {
+        data: [{ name: '1111', value: 1111 }, { name: '2222', value: 2222 }, { name: '3333', value: 3333 }],
+      };
+      cb(res);
     };
   },
 };

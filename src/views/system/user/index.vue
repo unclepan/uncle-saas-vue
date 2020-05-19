@@ -124,7 +124,7 @@ export default {
           count, current, data, size,
         } = res.data;
         this.tableData.row = data;
-        this.tableData.operation = middlewares.tableOperationInit(this.operation, this);
+        this.tableData.operation = middlewares.init(this.operation, this);
         const pagina = {
           current,
           size,
