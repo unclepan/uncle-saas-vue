@@ -5,12 +5,12 @@ import request from 'wrapper/ajax/basic';
 const middle = {
   init(oper, components, funName = 'func') {
     return oper.map((i) => {
-      // if (funName === 'options' && !i.options) {
-      //   return { ...i };
-      // }
+      if (funName === 'options' && !i.options) {
+        return { ...i };
+      }
       const item = i;
       let func;
-      if (item[funName] instanceof Function) {
+      if (item[funName] instanceof Function || (item[funName] instanceof Array && funName === 'options')) {
         func = item[funName];
       } else if (item[funName] instanceof Object && item[funName].name && item[funName].value && middle[item[funName].name](item[funName].value)) {
         // 对象类型，有name和value属性，并且能在middle对象中找到

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import middlewares from 'lib/middlewares';
 import message from 'lib/message';
 import aTitle from 'components/a-title.vue';
 import xForm from 'components/dynamic-form-fields/form/index.vue';
@@ -36,7 +37,7 @@ export default {
   },
   methods: {
     init() {
-      const formRender = [
+      let formRender = [
         {
           name: 'name',
           value: '',
@@ -91,12 +92,7 @@ export default {
           meta: {
             placeholder: '请选择功能项',
           },
-          options: (cb) => {
-            const res = {
-              data: [{ name: '111', value: 111 }, { name: '222', value: 222 }, { name: '333', value: 333 }],
-            };
-            cb(res);
-          },
+          options: { name: 'option', value: { apiName: '/api/option/select/functive', method: 'GET' } },
         },
         {
           name: 'description',
@@ -110,9 +106,8 @@ export default {
             placeholder: '请填写备注',
           },
         },
-
-
       ];
+      formRender = middlewares.init(formRender, this, 'options');
       const { id } = this.$route.params;
       get(id).then((res) => {
         this.formRender = formRender.map((item) => ({ ...item, value: res.data[item.name] }));
