@@ -8,7 +8,7 @@
         v-model="value"
         :data="data"
         filterable
-        :titles="['未分配角色','已分配用户角色']"
+        :titles="['未分配角色','已分配角色']"
         @change="handleChange"
         :props="{
           key: 'value',
