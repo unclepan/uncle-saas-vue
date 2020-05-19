@@ -56,6 +56,7 @@ export default {
           value: '',
           label: '选项英文名称',
           type: 'TEXT',
+          describe: '选项英文名称不能重复',
           rules: [
             { required: true, message: '请填写选项英文名称', trigger: 'blur' },
             {
