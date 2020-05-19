@@ -1,11 +1,10 @@
 <template>
   <div :class="$style.functive">
-
     <data-dialog
       ref="dataDialog"
       @success="init"/>
 
-     <a-title>
+    <a-title>
       功能项管理
       <template slot="button">
         <el-button
@@ -58,6 +57,7 @@
             编辑
           </el-button>
           <el-button
+            v-if="!node.childNodes.length"
             size="mini"
             type="danger"
             plain
@@ -113,6 +113,7 @@ export default {
       this.$refs.dataDialog.open({ type: 'edit', title: '编辑', data });
     },
     async remove(node, data) {
+      console.log(node);
       const stl = await message.confirm('确认删除？');
       if (stl) {
         const { _id: id } = data;
