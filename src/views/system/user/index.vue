@@ -1,5 +1,6 @@
 <template>
   <div>
+    <bind-role-dialog ref="bindRoleDialog"/>
     <condition
       ref="condition"
       :btn="{ add: false }"
@@ -24,13 +25,16 @@ import { users } from 'wrapper/ajax/users';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import condition from 'components/condition/index.vue';
+import bindRoleDialog from './bind-role-dialog.vue';
 
 export default {
   name: 'system.user.default',
   components: {
+    bindRoleDialog,
     condition,
     aTable,
     pagination,
+
   },
   data() {
     return {
@@ -98,12 +102,12 @@ export default {
           type: 'danger',
           func: { name: 'del', value: { apiName: '/api/users/delete', method: 'DELETE' } },
         },
-        // {
-        //   label: '分配用户',
-        //   func: (data) => {
-        //     console.log(data, '分配用户');
-        //   },
-        // },
+        {
+          label: '分配角色',
+          func: (data) => {
+            this.$refs.bindRoleDialog.open(data);
+          },
+        },
       ],
     };
   },

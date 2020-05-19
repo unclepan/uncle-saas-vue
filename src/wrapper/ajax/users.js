@@ -70,3 +70,27 @@ export function users(params) {
     params,
   });
 }
+
+
+export function getUserBindRole(id) {
+  return request({
+    url: `/api/users/${id}/bind/role`,
+    method: 'GET',
+  });
+}
+
+export function addUserBindRole(id, data) {
+  return request({
+    url: `/api/users/${id}/bind/role`,
+    method: 'POST',
+    data,
+  });
+}
+
+export function removeUserBindRole(id, data) {
+  return request({
+    url: `/api/users/${id}/remove/bind/role`,
+    method: 'POST',
+    data,
+  });
+}
