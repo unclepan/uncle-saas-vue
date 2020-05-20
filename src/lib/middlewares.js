@@ -53,10 +53,11 @@ const middle = {
 
   // 公共选项值
   option(val) {
-    return async (cb) => {
+    return async (cb, search = '') => {
       const res = await request({
         url: val.apiName,
-        method: val.method,
+        method: 'GET',
+        params: { search },
       });
       cb(res);
     };

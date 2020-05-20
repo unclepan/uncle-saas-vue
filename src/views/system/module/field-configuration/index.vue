@@ -22,14 +22,15 @@
           </div>
 
           <draggable
-            :list="list1"
+            :list="fields"
             :group="{ name: 'people', pull: 'clone', put: false}"
-            :sort="false">
+            :sort="false"
+            :clone="cloneHandle">
             <div
+              v-for="element in fields"
               :class="$style['field-item']"
-              v-for="(element,index) in list1"
-              :key="`${element.name}${index}`">
-              {{ element.name }}
+              :key="element.name">
+              {{ element.label }}
             </div>
           </draggable>
 
@@ -48,22 +49,26 @@
               <el-button size="mini" icon="el-icon-arrow-down"></el-button>
               <el-button size="mini" icon="el-icon-edit"></el-button>
               <el-button size="mini" type="danger" icon="el-icon-remove-outline"></el-button>
-              <el-button size="mini" type="primary" icon="el-icon-circle-plus-outline" @click="add()"></el-button>
-              <!-- el-icon-turn-off -->
+              <el-button size="mini" type="primary" icon="el-icon-circle-plus-outline" @click="addModule()"></el-button>
             </div>
           </div>
 
           <draggable
             :class="$style.edit"
-            :style="{border: item.list.length ? 'none' : '1px dashed #f0f0f0'}"
+            :style="{ border: item.list.length ? 'none' : '1px dashed #f0f0f0'}"
             :list="item.list"
             group="people">
             <div
-              :class="$style['field-item']"
               v-for="(element, i) in item.list"
+              :class="$style['field-item']"
+              :style="{ border: element.set ? '1px dashed #409eff' : '1px dashed #e0e0e0'}"
               :key="`${element.name}${i}`">
-              {{ element.name }}{{i}}
-              <p @click="del(item.list, i)">X</p>
+              <div>
+                <i @click="delField(item.list, i)" class="el-icon-delete"></i>
+                &nbsp;
+                <i @click="setField(index, i)" class="el-icon-setting"></i>
+              </div>
+              <p>{{ element.label || '--' }}</p>
             </div>
           </draggable>
 
@@ -82,7 +87,24 @@
           </div>
 
           <div :class="$style['edit-field']">
-            <div :class="$style.tip"><i class="el-icon-info"></i> 请选择一个字段</div>
+            <template v-if="editField">
+              <el-form :model="editField" label-position="top" size="mini" :rules="rules">
+                <el-form-item label="name" prop="name">
+                  <el-input v-model="editField.name"></el-input>
+                </el-form-item>
+                <el-form-item label="label" prop="label">
+                  <el-input v-model="editField.label"></el-input>
+                </el-form-item>
+                <el-form-item label="describe" prop="describe">
+                  <el-input v-model="editField.describe"></el-input>
+                </el-form-item>
+              </el-form>
+
+              <el-button size="mini" icon="el-icon-circle-plus-outline">高级功能</el-button>
+
+
+            </template>
+            <div v-else :class="$style.tip"><i class="el-icon-info"></i> 请选择一个字段</div>
           </div>
         </div>
       </el-col>
@@ -94,47 +116,73 @@
 <script>
 import aTitle from 'components/a-title.vue';
 import draggable from 'vuedraggable';
+import fields from './fields';
 
 export default {
   name: 'system.module.field',
   data() {
     return {
-      list1: [
-        { name: 'John', id: 1 },
-        { name: 'Joao', id: 2 },
-        { name: 'Jean', id: 3 },
-        { name: 'Gerard', id: 4 },
-      ],
+      editMeta: {},
+      editField: null,
+      fields,
       moduleList: [{
-        name: '模块区域1',
-        list: [],
-      }, {
-        name: '模块区域2',
+        name: '新模块区域（请改名）',
         list: [],
       }],
+      rules: {
+        name: [
+          { required: true, message: '必填项', trigger: 'blur' },
+          {
+            validator: (rule, value, callback) => {
+              if (!(/^[a-z]+$/i).test(value)) {
+                callback(new Error('非英文，请正确填写'));
+              } else {
+                callback();
+              }
+            },
+            trigger: 'blur',
+          },
+        ],
+        label: [
+          { required: true, message: '必填项', trigger: 'blur' },
+        ],
+      },
     };
   },
   components: {
     aTitle,
     draggable,
   },
-  mounted() {
-  },
   methods: {
-    del(element, index) {
-      element.splice(index, 1);
-    },
-    add() {
-      this.moduleList.splice(0, 0, {
-        name: '新模块区域（请改名）',
-        list: [],
-      });
-    },
     cancel() {
       this.$router.push({ name: 'system.module.default' });
     },
     onSubmit() {
       console.log('确定');
+    },
+    delField(element, index) {
+      element.splice(index, 1);
+    },
+    setField(i1, i2) {
+      this.moduleList = this.moduleList.map((item, index1) => {
+        const list = item.list.map((i, index2) => {
+          if (index1 === i1 && index2 === i2) {
+            return { ...i, set: true };
+          }
+          return { ...i, set: false };
+        });
+        return { ...item, list };
+      });
+      this.editField = this.moduleList[i1].list[i2];
+    },
+    addModule() {
+      this.moduleList.splice(0, 0, {
+        name: '新模块区域（请改名）',
+        list: [],
+      });
+    },
+    cloneHandle(field) {
+      return { ...field };
     },
   },
 };
@@ -172,6 +220,7 @@ export default {
       background: #fefefe;
       padding: 10px;
       margin-bottom: 10px;
+      cursor: pointer;
     }
     .edit{
       display: grid;

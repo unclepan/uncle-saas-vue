@@ -92,7 +92,7 @@ export default {
           meta: {
             placeholder: '请选择功能项',
           },
-          options: { name: 'option', value: { apiName: '/api/option/select/functive', method: 'GET' } },
+          options: { name: 'option', value: { apiName: '/api/option/select/functive' } },
         },
         {
           name: 'description',

@@ -52,8 +52,8 @@ export default {
       }
 
       if (this.param.type === 'SELECTREMOTE') {
-        this.param.meta['remote-method'] = (query) => {
-          this.param.options(this.cbOptions, query);
+        this.param.meta['remote-method'] = (search) => {
+          this.param.options(this.cbOptions, search);
         };
       }
     },

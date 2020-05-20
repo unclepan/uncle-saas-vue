@@ -7,6 +7,7 @@
       v-model.number.trim="value"
       v-bind="param.meta">
       <template slot="append" v-if="param.type === 'CURRENCY'">元</template>
+      <template slot="append" v-else-if="param.type === 'PERCENT'">%</template>
     </el-input>
     <span v-else>{{value || '字段无值'}}</span>
   </container>
