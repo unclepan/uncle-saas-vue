@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" module>
 .title-box{
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

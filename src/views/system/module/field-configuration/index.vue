@@ -141,19 +141,20 @@ export default {
 <style lang="scss" module>
 .field-configuration{
   padding: 20px;
+  padding-bottom: 0;
   background: white;
 }
 .main{
   padding: 10px 0;
   .col{
     border: 1px solid #f0f0f0;
-    padding: 10px 20px;
+    padding: 10px;
     padding-bottom: 0;
     margin-bottom: 10px;
     background: white;
     .title{
-      padding: 5px 0;
-      margin-bottom: 18px;
+      padding-bottom: 5px;
+      margin-bottom: 12px;
       color: #052644;
       border-bottom: 1px solid #f0f0f0;
       display: flex;
@@ -168,18 +169,14 @@ export default {
       border: 1px dashed #e0e0e0;
       border-radius: 5px;
       background: #fefefe;
-      padding: 12px;
-      margin-bottom: 18px;
-      min-height: 52px;
+      padding: 10px;
+      margin-bottom: 10px;
     }
     .edit{
       display: grid;
       grid-template-columns: 48% 48%;
       grid-column-gap: 4%;
-      min-height: 52px;
-      .field-item{
-        margin-bottom: 18px;
-      }
+      min-height: 42px;
     }
     .edit-field{
       margin: 18px 0;
