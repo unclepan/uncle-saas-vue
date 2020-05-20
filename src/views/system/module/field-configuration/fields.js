@@ -80,7 +80,7 @@ export default [
   {
     name: 'select',
     value: '',
-    label: '单选',
+    label: '下拉选择',
     type: 'SELECT',
     rules: [],
     describe: '选择组件，是个强大的组件',
@@ -114,7 +114,7 @@ export default [
   {
     name: 'radio',
     value: '',
-    label: '单选',
+    label: 'RADIO单选',
     type: 'RADIO',
     rules: [],
     describe: '',
