@@ -11,7 +11,7 @@
   </div>
 
   <div :class="$style.main">
-    <el-row :gutter="20">
+    <el-row :gutter="10">
       <el-col :span="6">
         <div :class="$style.col">
           <div :class="$style.title">
@@ -144,12 +144,12 @@ export default {
   background: white;
 }
 .main{
-  padding: 20px 0;
+  padding: 10px 0;
   .col{
     border: 1px solid #f0f0f0;
     padding: 10px 20px;
     padding-bottom: 0;
-    margin-bottom:20px;
+    margin-bottom: 10px;
     background: white;
     .title{
       padding: 5px 0;
