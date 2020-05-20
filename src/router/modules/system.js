@@ -52,7 +52,7 @@ const system = [
   {
     path: 'module/field/configuration/:id',
     name: 'system.module.field',
-    component: () => import('../../views/system/module/field-configuration.vue'),
+    component: () => import('../../views/system/module/field-configuration/index.vue'),
     meta: { title: 'system.module.field' },
   },
 ];
