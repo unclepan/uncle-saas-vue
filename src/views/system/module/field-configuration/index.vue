@@ -1,11 +1,12 @@
 <template>
 <div>
   <div :class="$style['field-configuration']">
+    <module-dialog ref="moduleDialog" @success="editModule"/>
     <a-title>
       模块编辑器
       <template slot="button">
         <el-button size="mini" @click="cancel">返回模块列表</el-button>
-        <el-button size="mini" type="primary" @click="onSubmit">确定</el-button>
+        <el-button size="mini" type="primary" @click="onSubmit('ruleForm')">确定</el-button>
       </template>
     </a-title>
   </div>
@@ -38,42 +39,53 @@
       </el-col>
 
       <el-col :span="13">
-        <div :class="$style.col" v-for="(item, index) in moduleList" :key="index">
-          <div :class="$style.title">
-            <h4>
-              <i class="el-icon-open"></i>
-              <span> {{item.name}}</span>
-            </h4>
-            <div>
-              <el-button size="mini" icon="el-icon-arrow-up"></el-button>
-              <el-button size="mini" icon="el-icon-arrow-down"></el-button>
-              <el-button size="mini" icon="el-icon-edit"></el-button>
-              <el-button size="mini" type="danger" icon="el-icon-remove-outline"></el-button>
-              <el-button size="mini" type="primary" icon="el-icon-circle-plus-outline" @click="addModule()"></el-button>
-            </div>
-          </div>
-
-          <draggable
-            :class="$style.edit"
-            :style="{ border: item.list.length ? 'none' : '1px dashed #f0f0f0'}"
-            :list="item.list"
-            group="people">
-            <div
-              v-for="(element, i) in item.list"
-              :class="$style['field-item']"
-              :style="{ border: element.set ? '1px dashed #409eff' : '1px dashed #e0e0e0'}"
-              :key="`${element.name}${i}`">
+        <draggable
+          :list="moduleList"
+          group="module"
+          handle=".module-handle">
+          <div :class="$style.col" v-for="(item, index) in moduleList" :key="index">
+            <div :class="$style.title">
+              <h4>
+                <i class="el-icon-receiving"></i>
+                <span> {{item.name}}</span>
+              </h4>
               <div>
-                <i @click="delField(item.list, i)" class="el-icon-delete"></i>
-                &nbsp;
-                <i @click="setField(index, i)" class="el-icon-setting"></i>
+                <el-button class="module-handle" size="mini" icon="el-icon-thumb"></el-button>
+                <el-button size="mini" icon="el-icon-edit" @click="openModuleDialog(item.name, index)"></el-button>
+                <el-button
+                  v-if="moduleList.length > 1"
+                  size="mini"
+                  type="danger"
+                  icon="el-icon-remove-outline"
+                  @click="removeModule(index)">
+                </el-button>
+                <el-button size="mini" type="primary" icon="el-icon-circle-plus-outline" @click="addModule(index)"></el-button>
               </div>
-              <p>{{ element.label || '--' }}</p>
             </div>
-          </draggable>
 
-          <div v-show="!item.list.length" :class="$style.tip"><i class="el-icon-info"></i> 请添加字段</div>
-        </div>
+            <draggable
+              :class="$style.edit"
+              :style="{ border: item.list.length ? 'none' : '1px dashed #f0f0f0'}"
+              :list="item.list"
+              group="people">
+              <div
+                v-for="(element, i) in item.list"
+                :class="$style['field-item']"
+                :style="{ border: element.set ? '1px dashed #409eff' : '1px dashed #e0e0e0'}"
+                :key="`${element.name}${i}`">
+                <div>
+                  <i @click="delField(item.list, i)" class="el-icon-delete"></i>
+                  &nbsp;
+                  <i v-if="!element.set" @click="setField(index, i)" class="el-icon-setting"></i>
+                  <i v-else @click="unSetField(index, i)" class="el-icon-s-tools"></i>
+                </div>
+                <p>{{ element.label || '--' }}</p>
+              </div>
+            </draggable>
+
+            <div v-show="!item.list.length" :class="$style.tip"><i class="el-icon-info"></i> 请添加字段</div>
+          </div>
+        </draggable>
       </el-col>
 
       <el-col :span="6">
@@ -88,20 +100,32 @@
 
           <div :class="$style['edit-field']">
             <template v-if="editField">
-              <el-form :model="editField" label-position="top" size="mini" :rules="rules">
-                <el-form-item label="name" prop="name">
+              <el-form ref="ruleForm" :model="editField" label-position="top" size="mini" :rules="rules">
+                <el-form-item label="字段名" prop="name">
                   <el-input v-model="editField.name"></el-input>
                 </el-form-item>
-                <el-form-item label="label" prop="label">
+                <el-form-item label="字段标签" prop="label">
                   <el-input v-model="editField.label"></el-input>
                 </el-form-item>
-                <el-form-item label="describe" prop="describe">
+                <el-form-item label="描述" prop="describe">
                   <el-input v-model="editField.describe"></el-input>
                 </el-form-item>
               </el-form>
 
-              <el-button size="mini" icon="el-icon-circle-plus-outline">高级功能</el-button>
-
+              <el-form label-position="top" size="mini">
+                <el-form-item>
+                  <span slot="label">
+                    组件属性
+                    <i class="el-icon-circle-plus-outline" @click="addFieldMeta()"></i>
+                    &nbsp;
+                    <i class="el-icon-remove-outline" @click="removeFieldMeta()"></i>
+                  </span>
+                  <el-row :class="$style['meta-row']" :gutter="10" v-for="(item, index) in editMeta" :key="index">
+                    <el-col :span="12"><el-input v-model="item.key"></el-input></el-col>
+                    <el-col :span="12"><el-input v-model="item.value"></el-input></el-col>
+                  </el-row>
+                </el-form-item>
+              </el-form>
 
             </template>
             <div v-else :class="$style.tip"><i class="el-icon-info"></i> 请选择一个字段</div>
@@ -117,12 +141,13 @@
 import aTitle from 'components/a-title.vue';
 import draggable from 'vuedraggable';
 import fields from './fields';
+import moduleDialog from './module-dialog.vue';
 
 export default {
   name: 'system.module.field',
   data() {
     return {
-      editMeta: {},
+      editMeta: [], // ele 原生属性
       editField: null,
       fields,
       moduleList: [{
@@ -142,9 +167,15 @@ export default {
             },
             trigger: 'blur',
           },
+          {
+            min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur',
+          },
         ],
         label: [
           { required: true, message: '必填项', trigger: 'blur' },
+          {
+            min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur',
+          },
         ],
       },
     };
@@ -152,13 +183,39 @@ export default {
   components: {
     aTitle,
     draggable,
+    moduleDialog,
+  },
+  watch: {
+    editMeta: {
+      handler(val) {
+        const meta = val.reduce((obj, item) => {
+          const o = obj;
+          if (item.key && item.value) {
+            o[item.key] = item.value;
+          }
+          return o;
+        }, {});
+
+        if (this.editField) {
+          this.editField.meta = meta;
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     cancel() {
       this.$router.push({ name: 'system.module.default' });
     },
     onSubmit() {
-      console.log('确定');
+      console.log(this.moduleList);
+      // this.$refs[formName].validate((valid) => {
+      //   if (valid) {
+      //     console.log(this.moduleList);
+      //   } else {
+      //     console.log('error submit!!');
+      //   }
+      // });
     },
     delField(element, index) {
       element.splice(index, 1);
@@ -174,12 +231,40 @@ export default {
         return { ...item, list };
       });
       this.editField = this.moduleList[i1].list[i2];
+      const { meta } = this.editField;
+      this.editMeta = [].concat(Object.keys(meta).map((key) => ({ key, value: meta[key] })));
     },
-    addModule() {
-      this.moduleList.splice(0, 0, {
+    unSetField() {
+      this.moduleList = this.moduleList.map((item) => {
+        const list = item.list.map((i) => ({ ...i, set: false }));
+        return { ...item, list };
+      });
+      this.editField = null;
+      this.editMeta = [];
+    },
+    addModule(index) {
+      this.moduleList.splice(index, 0, {
         name: '新模块区域（请改名）',
         list: [],
       });
+    },
+    removeModule(index) {
+      this.moduleList.splice(index, 1);
+    },
+    editModule(data) {
+      this.moduleList[data.moduleIndex].name = data.name;
+    },
+    addFieldMeta() {
+      this.editMeta.push({
+        key: '',
+        value: '',
+      });
+    },
+    removeFieldMeta() {
+      this.editMeta.splice(-1, 1);
+    },
+    openModuleDialog(val, index) {
+      this.$refs.moduleDialog.open(val, index);
     },
     cloneHandle(field) {
       return { ...field };
@@ -201,6 +286,9 @@ export default {
     padding-bottom: 0;
     margin-bottom: 10px;
     background: white;
+    :global(.el-button--mini){
+      padding: 7px;
+    }
     .title{
       padding-bottom: 5px;
       margin-bottom: 12px;
@@ -221,6 +309,7 @@ export default {
       padding: 10px;
       margin-bottom: 10px;
       cursor: pointer;
+      overflow: hidden;
     }
     .edit{
       display: grid;
@@ -230,6 +319,15 @@ export default {
     }
     .edit-field{
       margin: 18px 0;
+      :global(.el-form-item__label){
+        padding: 0;
+      }
+      :global(.el-input__inner){
+        padding: 0 8px;
+      }
+      .meta-row{
+        margin-top: 10px;
+      }
     }
   }
 }
