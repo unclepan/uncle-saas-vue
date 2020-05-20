@@ -36,6 +36,12 @@ export default [
         invokeUrl: '/system/functive',
         subMenus: [],
       },
+      {
+        id: '7',
+        menuName: 'system.module.default',
+        invokeUrl: '/system/module',
+        subMenus: [],
+      },
     ],
   },
 ];

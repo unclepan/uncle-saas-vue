@@ -19,7 +19,7 @@ import aForm from 'components/dynamic-form-fields/form/index.vue';
 import {
   post,
   patch,
-} from 'wrapper/ajax/functive';
+} from 'wrapper/ajax/module';
 
 export default {
   data() {
@@ -42,7 +42,7 @@ export default {
         {
           name: 'name',
           value: '',
-          label: '选项名称',
+          label: '模块名称',
           type: 'TEXT',
           rules: [
             { required: true, message: '请填写选项名称', trigger: 'blur' },
@@ -54,8 +54,9 @@ export default {
         {
           name: 'ename',
           value: '',
-          label: '选项英文名称',
+          label: '模块英文名称',
           type: 'TEXT',
+          describe: '选项英文名称不能重复',
           rules: [
             { required: true, message: '请填写选项英文名称', trigger: 'blur' },
             {
@@ -74,56 +75,6 @@ export default {
           },
         },
         {
-          name: 'link',
-          value: '',
-          label: '链接地址',
-          type: 'TEXT',
-          rules: [],
-          meta: {
-            placeholder: '请填写内容',
-          },
-        },
-        {
-          name: 'icon',
-          value: '',
-          label: '图标',
-          type: 'TEXT',
-          rules: [],
-          meta: {
-            placeholder: '请填写内容',
-          },
-        },
-        {
-          name: 'sort',
-          value: '',
-          label: '排序',
-          type: 'NUMBER',
-          rules: [
-            { type: 'number', message: '排序号必须为数字值' },
-          ],
-          meta: {
-            placeholder: '请填写内容',
-          },
-        },
-        {
-          name: 'type',
-          value: '',
-          label: '功能类型',
-          type: 'SELECT',
-          rules: [
-            { required: true, message: '请填写选项英文名称', trigger: 'blur' },
-          ],
-          meta: {
-            placeholder: '请选择类型',
-          },
-          options: (cb) => {
-            const res = {
-              data: [{ name: '菜单', value: 'menu' }, { name: '操作', value: 'handle' }],
-            };
-            cb(res);
-          },
-        },
-        {
           name: 'state',
           value: false,
           label: '状态',
@@ -136,9 +87,11 @@ export default {
         {
           name: 'description',
           value: '',
-          label: '描述',
+          label: '模块描述',
           type: 'TEXTAREA',
-          rules: [],
+          rules: [
+            { required: true, message: '请填写描述', trigger: 'blur' },
+          ],
           meta: {
             placeholder: '请填写内容',
           },
@@ -146,22 +99,21 @@ export default {
       ];
       if (val.type === 'edit') {
         this.formRender = formRender.map((item) => ({ ...item, value: val.data[item.name] }));
+        this.editPrivateData = val.data;
       } else {
         this.formRender = formRender.map((item) => ({ ...item, value: '' }));
       }
-      this.editPrivateData = val.data;
       this.$refs.dialog.dialogVisible = true;
     },
     async opera(val) {
       if (this.type === 'add') {
-        const { _id: id } = this.editPrivateData;
-        await post({ ...val, parent: id }).then(() => {
-          message.success('选项新增成功');
+        await post(val).then(() => {
+          message.success('模块新增成功');
         });
       } else if (this.type === 'edit') {
         const { _id: id } = this.editPrivateData;
         await patch(val, id).then(() => {
-          message.success('选项编辑成功');
+          message.success('模块编辑成功');
         });
       }
       this.$refs.dialog.dialogVisible = false;

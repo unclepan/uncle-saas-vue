@@ -56,6 +56,10 @@ export default {
       functive: {
         default: 'Functive',
       },
+      module: {
+        default: 'Module',
+        field: 'Field',
+      },
     },
     home: 'Home',
     personal: 'Personal',

@@ -4,6 +4,7 @@
     v-el-drag-dialog
     :title="title"
     :destroy-on-close="true"
+    :close-on-click-modal="false"
     :visible.sync="dialogVisible"
     :width="width">
     <slot></slot>

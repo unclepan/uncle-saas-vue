@@ -64,7 +64,7 @@ export default {
         },
         {
           name: 'state',
-          value: '',
+          value: false,
           label: '状态',
           type: 'RADIO',
           rules: [],

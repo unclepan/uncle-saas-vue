@@ -50,11 +50,15 @@ export default {
         add: '新增角色',
       },
       option: {
-        default: '选项管理',
+        default: '选项配置管理',
         value: '选项值管理',
       },
       functive: {
         default: '功能项管理',
+      },
+      module: {
+        default: '模块管理',
+        field: '字段配置',
       },
     },
     home: '首页',

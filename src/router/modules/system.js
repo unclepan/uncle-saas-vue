@@ -43,6 +43,18 @@ const system = [
     component: () => import('../../views/system/functive/index.vue'),
     meta: { title: 'system.functive.default' },
   },
+  {
+    path: 'module',
+    name: 'system.module.default',
+    component: () => import('../../views/system/module/index.vue'),
+    meta: { title: 'system.module.default' },
+  },
+  {
+    path: 'module/field/configuration/:id',
+    name: 'system.module.field',
+    component: () => import('../../views/system/module/field-configuration.vue'),
+    meta: { title: 'system.module.field' },
+  },
 ];
 
 export default [
