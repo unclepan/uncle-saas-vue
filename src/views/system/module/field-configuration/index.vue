@@ -12,7 +12,7 @@
 
   <div :class="$style.main">
     <el-row :gutter="10">
-      <el-col :span="6">
+      <el-col :span="5">
         <div :class="$style.col">
           <div :class="$style.title">
             <h4>
@@ -36,11 +36,11 @@
         </div>
       </el-col>
 
-      <el-col :span="12">
+      <el-col :span="13">
         <div :class="$style.col" v-for="(item, index) in moduleList" :key="index">
           <div :class="$style.title">
             <h4>
-              <i class="el-icon-document-checked"></i>
+              <i class="el-icon-open"></i>
               <span> {{item.name}}</span>
             </h4>
             <div>
@@ -49,6 +49,7 @@
               <el-button size="mini" icon="el-icon-edit"></el-button>
               <el-button size="mini" type="danger" icon="el-icon-remove-outline"></el-button>
               <el-button size="mini" type="primary" icon="el-icon-circle-plus-outline" @click="add()"></el-button>
+              <!-- el-icon-turn-off -->
             </div>
           </div>
 
@@ -174,8 +175,8 @@ export default {
     }
     .edit{
       display: grid;
-      grid-template-columns: 48% 48%;
-      grid-column-gap: 4%;
+      grid-template-columns: 32% 32% 32%;
+      grid-column-gap: 2%;
       min-height: 42px;
     }
     .edit-field{
