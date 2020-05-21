@@ -30,10 +30,13 @@
 <script>
 import moment from 'moment';
 import middlewares from 'lib/middlewares';
+import message from 'lib/message';
 import aTitle from 'components/a-title.vue';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
-import { get } from 'wrapper/ajax/module';
+import { getModuleFunctive } from 'wrapper/ajax/module';
+
+import { post as postFunctive } from 'wrapper/ajax/functive';
 import dataDialog from './data-dialog.vue';
 
 
@@ -107,6 +110,26 @@ export default {
             this.$router.push({ name: 'system.module.field', params: { id } });
           },
         },
+        {
+          label: '推送功能',
+          func: async (data) => {
+            const stl = await message.confirm('确认推送此模块到功能项？');
+            if (stl) {
+              const { name, ename, _id: moduleId } = data;
+              postFunctive({
+                name,
+                ename,
+                type: 'module',
+                state: true,
+                parent: 'parent',
+                moduleId,
+              }).then(() => {
+                message.success('推送成功，请到功能项管理模块查看');
+              });
+            }
+          },
+          showBtn: (data) => !data.state || data.functive,
+        },
       ],
     };
   },
@@ -126,7 +149,7 @@ export default {
     init() {
       this.loading = true;
       const params = { size: this.pagina.size, current: this.pagina.current };
-      get(params).then((res) => {
+      getModuleFunctive(params).then((res) => {
         const {
           count, current, data, size,
         } = res.data;

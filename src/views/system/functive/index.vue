@@ -42,14 +42,15 @@
         </div>
         <div>
           <el-button
-            v-if="node.level < 5"
+            v-if="node.level < 5 && data.type !== 'module'"
             size="mini"
             type="primary"
             plain
             @click="() => append(data)">
-            新增子项
+            新增
           </el-button>
           <el-button
+            v-if="data.type !== 'module'"
             size="mini"
             type="primary"
             plain

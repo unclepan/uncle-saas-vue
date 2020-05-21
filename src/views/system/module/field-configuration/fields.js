@@ -34,38 +34,4 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
     set: false,
   };
 });
-console.log(itemEnum);
 export default itemEnum;
-
-// {
-//   name: 'test1',
-//   value: '',
-//   label: '通信测试字段一',
-//   type: 'TEXT',
-//   rules: [],
-//   describe: '',
-//   meta: {
-//     placeholder: '请填写内容',
-//   },
-//   event: {
-//     emit: "[{'name':'transactionAmountCnCreate'}]",
-//     on: '',
-//   },
-//   set: false,
-// },
-// {
-//   name: 'test2',
-//   value: '',
-//   label: '通信测试字段二',
-//   type: 'TEXT',
-//   rules: [],
-//   describe: '',
-//   meta: {
-//     placeholder: '请填写内容',
-//   },
-//   event: {
-//     emit: 'null',
-//     on: "{'name':'transactionAmountCnCreate','listener': 'function listener(toComponent) {return function (fromComponent) {var to = toComponent;console.log(fromComponent, to);};}' }",
-//   },
-//   set: false,
-// },

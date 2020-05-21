@@ -93,7 +93,7 @@ export default {
           func: { name: 'del', value: { apiName: '/api/option/delete', params: {} } },
         },
         {
-          label: '选项值管理',
+          label: '选项值',
           func: (data) => {
             const { _id: id } = data;
             this.$router.push({ name: 'system.option.value', params: { id } });

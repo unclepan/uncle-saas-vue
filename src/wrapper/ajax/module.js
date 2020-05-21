@@ -7,6 +7,13 @@ export function get(params) {
     params,
   });
 }
+export function getModuleFunctive(params) {
+  return request({
+    url: '/api/module/functive/state',
+    method: 'GET',
+    params,
+  });
+}
 
 export function getById(id) {
   return request({
@@ -30,7 +37,6 @@ export function patch(data, id) {
     data,
   });
 }
-
 
 export function del(id) {
   return request({
