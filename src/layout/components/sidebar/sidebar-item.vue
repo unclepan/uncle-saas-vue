@@ -54,7 +54,7 @@ export default {
   display: inline-block;
   width: 130px;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 </style>

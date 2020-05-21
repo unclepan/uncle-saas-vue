@@ -34,7 +34,7 @@ export default {
         bar: {
           background: '#aaaaaa',
           onlyShowBarOnScroll: true,
-          opacity: 0.5,
+          opacity: 0.2,
         },
       },
     };
