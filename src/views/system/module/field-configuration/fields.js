@@ -9,6 +9,10 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -20,6 +24,10 @@ export default [
     describe: '',
     meta: {
       placeholder: '请填写内容',
+    },
+    event: {
+      emit: '',
+      on: '',
     },
     set: false,
   },
@@ -35,6 +43,10 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -49,6 +61,10 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -57,11 +73,15 @@ export default [
     label: '百分比',
     type: 'PERCENT',
     rules: [
-      { type: 'number', message: '货币必须为数字', trigger: 'blur' },
+      { type: 'number', message: '百分比必须为数字', trigger: 'blur' },
     ],
     describe: '',
     meta: {
       placeholder: '请填写内容',
+    },
+    event: {
+      emit: '',
+      on: '',
     },
     set: false,
   },
@@ -74,6 +94,10 @@ export default [
     describe: '这是时间字段',
     meta: {
       placeholder: '请选择日期',
+    },
+    event: {
+      emit: '',
+      on: '',
     },
     set: false,
   },
@@ -88,6 +112,10 @@ export default [
       placeholder: '请选择内容',
     },
     options: [],
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -97,6 +125,10 @@ export default [
     type: 'SWITCH',
     rules: [],
     meta: {},
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -109,6 +141,10 @@ export default [
     meta: {
       action: '/api/file/upload',
     },
+    event: {
+      emit: '',
+      on: '',
+    },
     set: false,
   },
   {
@@ -120,6 +156,43 @@ export default [
     describe: '',
     meta: {},
     options: [{ name: '男', value: 'male' }, { name: '女', value: 'female' }],
+    event: {
+      emit: '',
+      on: '',
+    },
+    set: false,
+  },
+
+  {
+    name: 'test1',
+    value: '',
+    label: '通信测试字段一',
+    type: 'TEXT',
+    rules: [],
+    describe: '',
+    meta: {
+      placeholder: '请填写内容',
+    },
+    event: {
+      emit: "[{'name':'transactionAmountCnCreate'}]",
+      on: '',
+    },
+    set: false,
+  },
+  {
+    name: 'test2',
+    value: '',
+    label: '通信测试字段二',
+    type: 'TEXT',
+    rules: [],
+    describe: '',
+    meta: {
+      placeholder: '请填写内容',
+    },
+    event: {
+      emit: 'null',
+      on: "{'name':'transactionAmountCnCreate','listener': 'function listener(toComponent) {return function (fromComponent) {var to = toComponent;console.log(fromComponent, to);};}' }",
+    },
     set: false,
   },
 ];

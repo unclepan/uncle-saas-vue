@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default {
   data() {
     return {
@@ -10,6 +12,11 @@ export default {
         },
         {
           name: '新区域二（请改名）',
+          open: true,
+          list: [],
+        },
+        {
+          name: '新区域三（请改名）',
           open: true,
           list: [],
         },
@@ -42,6 +49,8 @@ export default {
         this.editField = this.moduleList[i1].list[i2];
         const { meta } = this.editField;
         this.editMeta = [].concat(Object.keys(meta).map((key) => ({ key, value: meta[key] })));
+        // 每次选新的字段编辑时，必填重置是否必填
+        this.requiredState = this.editField.rules.some((item) => !!item.required);
       }
     },
     async unSetField() {
@@ -75,11 +84,11 @@ export default {
       }
       this.moduleList.splice(index, 1);
     },
-    editModule(data) {
-      this.moduleList[data.moduleIndex].name = data.name;
-    },
     openModuleDialog(val, index) {
       this.$refs.moduleDialog.open(val, index);
+    },
+    editModule(data) {
+      this.moduleList[data.moduleIndex].name = data.name;
     },
     expandCollapseModule(item) {
       const i = item;
@@ -87,7 +96,7 @@ export default {
     },
     cloneHandle(field) {
       this.key += 1;
-      return { ...field, key: this.key };
+      return _.cloneDeep({ ...field, key: this.key });
     },
   },
 };

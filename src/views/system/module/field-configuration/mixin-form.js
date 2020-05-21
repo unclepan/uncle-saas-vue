@@ -1,6 +1,9 @@
+import script from 'lib/script';
+
 export default {
   data() {
     return {
+      requiredState: false,
       rules: {
         name: [
           { required: true, message: '必填项', trigger: 'blur' },
@@ -15,13 +18,13 @@ export default {
             trigger: 'blur',
           },
           {
-            min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur',
+            min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur',
           },
         ],
         label: [
           { required: true, message: '必填项', trigger: 'blur' },
           {
-            min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur',
+            min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur',
           },
         ],
       },
@@ -45,6 +48,17 @@ export default {
     },
   },
   methods: {
+    fieldValidate() {
+      return new Promise((resolve) => {
+        this.$refs.ruleForm.validate((valid) => {
+          if (valid) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
+      });
+    },
     addFieldMeta() {
       this.editMeta.push({
         key: '',
@@ -53,6 +67,20 @@ export default {
     },
     removeFieldMeta() {
       this.editMeta.splice(-1, 1);
+    },
+    handleRequiredState() {
+      if (this.requiredState) {
+        this.editField.rules = this.editField.rules.concat({ required: true, message: '这是必填字段', trigger: 'blur' });
+      } else {
+        this.editField.rules = this.editField.rules.filter((item) => !item.required);
+      }
+    },
+    openFormEventDialog(val) {
+      this.$refs.formEventDialog.open(val);
+    },
+    editFormEvent(val) {
+      console.log(script(val.on));
+      this.editField.event = val;
     },
   },
 };

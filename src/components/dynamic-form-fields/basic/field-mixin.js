@@ -37,7 +37,7 @@ export default {
         this.param.event.on.forEach((item) => {
           this.fieldEmitter.addListener(item.name, item.listener(this));
         });
-      } else { // 一对一广播
+      } else if (this.param.event.on instanceof Object) { // 一对一广播
         this.fieldEmitter.addListener(this.param.event.on.name, this.param.event.on.listener(this));
       }
     }
@@ -60,7 +60,7 @@ export default {
           this.param.event.emit.forEach((item) => {
             this.fieldEmitter.emitEvent(item.name, [this]);
           });
-        } else {
+        } else if (this.param.event.emit instanceof Object) {
           this.fieldEmitter.emitEvent(this.param.event.emit.name, [this]);
         }
       }

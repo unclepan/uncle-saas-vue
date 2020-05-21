@@ -2,6 +2,7 @@
 <div>
   <div :class="$style['header']">
     <module-dialog ref="moduleDialog" @success="editModule"/>
+    <form-event-dialog ref="formEventDialog" @success="editFormEvent"/>
     <a-title>
       模块字段编辑器
       <template slot="button">
@@ -124,14 +125,14 @@
                 v-if="editField"
                 size="mini"
                 type="primary"
-                icon="el-icon-place">
-                高级
+                icon="el-icon-place"
+                @click="openFormEventDialog(editField.event)">
               </el-button>
             </div>
           </div>
           <div :class="$style['edit-field']">
             <template v-if="editField">
-              <el-form ref="ruleForm" :model="editField" label-position="top" size="medium" :rules="rules">
+              <el-form ref="ruleForm" :model="editField" label-position="top" size="small" :rules="rules">
                 <el-form-item label="字段名" prop="name">
                   <el-input v-model="editField.name"></el-input>
                 </el-form-item>
@@ -141,9 +142,16 @@
                 <el-form-item label="描述" prop="describe">
                   <el-input v-model="editField.describe"></el-input>
                 </el-form-item>
-              </el-form>
 
-              <el-form label-position="top" size="medium">
+                <el-form-item label="是否必填">
+                  <el-radio-group
+                    v-model="requiredState"
+                    @change="handleRequiredState">
+                    <el-radio :label="true">必填</el-radio>
+                    <el-radio :label="false">非必填</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+
                 <el-form-item>
                   <span slot="label">
                     组件属性
@@ -156,6 +164,7 @@
                     <el-col :span="12"><el-input v-model="item.value"></el-input></el-col>
                   </el-row>
                 </el-form-item>
+
               </el-form>
             </template>
             <div v-else :class="$style.tip"><i class="el-icon-info"></i> 请选择一个字段</div>
@@ -172,6 +181,7 @@ import aTitle from 'components/a-title.vue';
 import draggable from 'vuedraggable';
 import fields from './fields';
 import moduleDialog from './module-dialog.vue';
+import formEventDialog from './form-event-dialog.vue';
 import mixinForm from './mixin-form';
 import mixinModule from './mixin-module';
 
@@ -192,30 +202,24 @@ export default {
     aTitle,
     draggable,
     moduleDialog,
+    formEventDialog,
   },
   methods: {
     cancel() {
       this.$router.push({ name: 'system.module.default' });
     },
     onSubmit() {
-      this.$refs.ruleForm.validate((valid) => {
-        if (valid) {
-          console.log(this.moduleList);
-        } else {
-          console.log('error submit!!');
-        }
-      });
-    },
-    fieldValidate() {
-      return new Promise((resolve) => {
+      if (this.editField) {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
-            resolve(true);
+            console.log(this.moduleList);
           } else {
-            resolve(false);
+            console.log('error submit!!');
           }
         });
-      });
+      } else {
+        console.log(this.moduleList);
+      }
     },
   },
 };
