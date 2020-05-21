@@ -132,6 +132,7 @@ export default {
 .tags-view-container {
   height: 36px;
   width: 100%;
+  padding: 0 10px;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(99, 99, 99, .08), 0 0 3px 0 rgba(99, 99, 99, .04);
@@ -140,7 +141,10 @@ export default {
   .tags-view-item {
     cursor: pointer;
     display: inline-block;
-    margin-left: 8px;
+    margin-right: 6px;
+  }
+  .tags-view-item:last-of-type{
+    margin: 0;
   }
 }
 </style>

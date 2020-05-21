@@ -48,7 +48,7 @@ export default {
 <style lang="scss" module>
 .app-main{
   position: relative;
-  padding: 8px;
+  padding: 10px;
   min-height: calc(100vh - 86px);
 }
 </style>

@@ -44,7 +44,7 @@ export default {
           type: 'TEXTAREA',
           rules: [],
           meta: {
-            placeholder: '请填写事件监听方法',
+            placeholder: '请填写脚本',
             rows: 4,
           },
         },
@@ -55,7 +55,7 @@ export default {
           type: 'TEXTAREA',
           rules: [],
           meta: {
-            placeholder: '请填写事件监听方法',
+            placeholder: '请填写脚本',
             rows: 4,
           },
         },
