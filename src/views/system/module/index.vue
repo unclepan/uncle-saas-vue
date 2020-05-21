@@ -98,7 +98,7 @@ export default {
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/module/delete', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/module/delete', params: {} } },
         },
         {
           label: '字段配置',

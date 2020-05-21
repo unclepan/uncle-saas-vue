@@ -90,7 +90,7 @@ export default {
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/option/delete', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/option/delete', params: {} } },
         },
         {
           label: '选项值管理',

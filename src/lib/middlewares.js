@@ -37,7 +37,8 @@ const middle = {
         const { _id: id } = data;
         request({
           url: `${val.apiName}/${id}`,
-          method: val.method,
+          method: 'DELETE',
+          params: val.params,
         }).then(() => {
           message.success('删除成功');
           val.components.init();

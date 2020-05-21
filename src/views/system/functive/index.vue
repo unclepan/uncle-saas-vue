@@ -113,7 +113,6 @@ export default {
       this.$refs.dataDialog.open({ type: 'edit', title: '编辑', data });
     },
     async remove(node, data) {
-      console.log(node);
       const stl = await message.confirm('确认删除？');
       if (stl) {
         const { _id: id } = data;

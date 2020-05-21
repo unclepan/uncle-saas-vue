@@ -119,10 +119,19 @@
               <i class="el-icon-edit-outline"></i>
               <span> 字段属性</span>
             </h4>
+            <div>
+              <el-button
+                v-if="editField"
+                size="mini"
+                type="primary"
+                icon="el-icon-place">
+                高级
+              </el-button>
+            </div>
           </div>
           <div :class="$style['edit-field']">
             <template v-if="editField">
-              <el-form ref="ruleForm" :model="editField" label-position="top" size="mini" :rules="rules">
+              <el-form ref="ruleForm" :model="editField" label-position="top" size="medium" :rules="rules">
                 <el-form-item label="字段名" prop="name">
                   <el-input v-model="editField.name"></el-input>
                 </el-form-item>
@@ -134,7 +143,7 @@
                 </el-form-item>
               </el-form>
 
-              <el-form label-position="top" size="mini">
+              <el-form label-position="top" size="medium">
                 <el-form-item>
                   <span slot="label">
                     组件属性
@@ -221,7 +230,7 @@ export default {
   padding: 10px 0;
   .col{
     border: 1px solid #f0f0f0;
-    padding: 10px;
+    padding: 20px;
     padding-bottom: 0;
     margin-bottom: 10px;
     background: white;

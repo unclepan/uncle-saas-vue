@@ -121,7 +121,7 @@ export default {
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/role/delete', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/role/delete', params: {} } },
         },
         {
           label: '分配用户',

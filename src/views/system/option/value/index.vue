@@ -95,7 +95,7 @@ export default {
         {
           label: '删除',
           type: 'danger',
-          func: { name: 'del', value: { apiName: '/api/option/value/delete', method: 'DELETE' } },
+          func: { name: 'del', value: { apiName: '/api/option/value/delete', params: {} } },
         },
       ],
     };
