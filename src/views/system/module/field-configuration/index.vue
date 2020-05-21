@@ -3,7 +3,7 @@
   <div :class="$style['header']">
     <module-dialog ref="moduleDialog" @success="editModule"/>
     <a-title>
-      模块编辑器
+      模块字段编辑器
       <template slot="button">
         <el-button size="mini" @click="cancel">返回模块列表</el-button>
         <el-button size="mini" type="primary" @click="onSubmit()">确定</el-button>
@@ -30,7 +30,7 @@
               v-for="element in fields"
               :class="$style['field-item']"
               :key="element.name">
-              {{ element.label }}
+              <p :class="$style.label">{{ element.label }}</p>
             </div>
           </draggable>
         </div>
@@ -103,7 +103,7 @@
                   <i v-if="!element.set" @click="setField(index, i)" class="el-icon-setting"></i>
                   <i v-else @click="unSetField(index, i)" class="el-icon-s-tools"></i>
                 </div>
-                <p>{{ element.label || '--' }}</p>
+                <p :class="$style.label">{{ element.label || '--' }}</p>
               </div>
             </draggable>
             <div v-show="!item.list.length" :class="$style.tip"><i class="el-icon-info"></i> 请添加字段</div>
@@ -248,7 +248,9 @@ export default {
       padding: 10px;
       margin-bottom: 10px;
       cursor: pointer;
-      overflow: hidden;
+      .label{
+        overflow: hidden;
+      }
     }
     .edit{
       display: grid;
