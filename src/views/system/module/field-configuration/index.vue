@@ -79,7 +79,7 @@
                 <el-button
                   v-if="item.list.length"
                   size="mini"
-                  :icon="item.open?'el-icon-arrow-right' : 'el-icon-arrow-down'"
+                  :icon="item.open ? 'el-icon-arrow-down' : 'el-icon-arrow-left'"
                   @click="expandCollapseModule(item, index)">
                 </el-button>
               </div>
@@ -125,7 +125,7 @@
                 v-if="editField"
                 size="mini"
                 type="primary"
-                icon="el-icon-place"
+                icon="el-icon-magic-stick"
                 @click="openFormEventDialog(editField.event)">
               </el-button>
             </div>
@@ -141,6 +141,10 @@
                 </el-form-item>
                 <el-form-item label="描述" prop="describe">
                   <el-input v-model="editField.describe"></el-input>
+                </el-form-item>
+
+                <el-form-item v-if="showOptionFormItem" label="选项接口" prop="options">
+                  <el-input v-model="editField.options"></el-input>
                 </el-form-item>
 
                 <el-form-item label="是否必填">
@@ -177,8 +181,11 @@
 </template>
 
 <script>
+import message from 'lib/message';
+import _ from 'lodash';
 import aTitle from 'components/a-title.vue';
 import draggable from 'vuedraggable';
+import { getById, patch } from 'wrapper/ajax/module';
 import fields from './fields';
 import moduleDialog from './module-dialog.vue';
 import formEventDialog from './form-event-dialog.vue';
@@ -196,6 +203,25 @@ export default {
       editField: null, // 当前正在给那个字段编辑属性
       editMeta: [], // （中转值，给正在编辑的字段赋值meta）ele 原生属性
       fields,
+      key: 0, // 是可变的，获取值的时候需要设置
+      moduleList: [
+        {
+          name: '新区域一（请改名）',
+          open: true,
+          list: [],
+        },
+        {
+          name: '新区域二（请改名）',
+          open: true,
+          list: [],
+        },
+        {
+          name: '新区域三（请改名）',
+          open: true,
+          list: [],
+        },
+      ],
+      requiredState: false,
     };
   },
   components: {
@@ -204,21 +230,54 @@ export default {
     moduleDialog,
     formEventDialog,
   },
+  mounted() {
+    this.init();
+  },
+  computed: {
+    showOptionFormItem() {
+      if (this.editField) {
+        const { type } = this.editField;
+        return ['SELECT', 'RADIO'].indexOf(type) >= 0;
+      }
+      return false;
+    },
+  },
   methods: {
+    init() {
+      const { id } = this.$route.params;
+      getById(id).then((res) => {
+        this.moduleList = res.data.module;
+
+        this.moduleList = this.moduleList.map((item) => {
+          const list = item.list.map((i) => ({ ...i, set: false }));
+          return { ...item, list };
+        });
+      });
+    },
     cancel() {
       this.$router.push({ name: 'system.module.default' });
     },
-    onSubmit() {
+    async onSubmit() {
+      let validationStatus = true;
       if (this.editField) {
-        this.$refs.ruleForm.validate((valid) => {
-          if (valid) {
-            console.log(this.moduleList);
-          } else {
-            console.log('error submit!!');
-          }
-        });
-      } else {
-        console.log(this.moduleList);
+        validationStatus = await this.fieldValidate();
+      }
+      if (validationStatus) {
+        const arra = this.moduleList.reduce((arr, item) => {
+          let a = arr;
+          a = _.cloneDeep(item.list).concat(arr);
+          return a;
+        }, []);
+
+        if (new Set(arra.map((item) => item.name)).size === arra.length) {
+          const { id } = this.$route.params;
+          patch({ module: this.moduleList }, id).then(() => {
+            message.success('编辑成功');
+            this.$router.push({ name: 'system.module.default' });
+          });
+        } else {
+          message.error('字段名有重复，请检查');
+        }
       }
     },
   },

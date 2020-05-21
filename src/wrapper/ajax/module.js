@@ -8,6 +8,13 @@ export function get(params) {
   });
 }
 
+export function getById(id) {
+  return request({
+    url: `/api/module/${id}`,
+    method: 'GET',
+  });
+}
+
 export function post(data) {
   return request({
     url: '/api/module',

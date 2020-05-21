@@ -9,6 +9,7 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -25,6 +26,7 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -43,6 +45,7 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -61,6 +64,7 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -79,6 +83,7 @@ export default [
     meta: {
       placeholder: '请填写内容',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -95,6 +100,7 @@ export default [
     meta: {
       placeholder: '请选择日期',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -111,7 +117,7 @@ export default [
     meta: {
       placeholder: '请选择内容',
     },
-    options: [],
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -124,7 +130,9 @@ export default [
     label: '开关',
     type: 'SWITCH',
     rules: [],
+    describe: '',
     meta: {},
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -141,6 +149,7 @@ export default [
     meta: {
       action: '/api/file/upload',
     },
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -155,7 +164,7 @@ export default [
     rules: [],
     describe: '',
     meta: {},
-    options: [{ name: '男', value: 'male' }, { name: '女', value: 'female' }],
+    options: '',
     event: {
       emit: '',
       on: '',
@@ -163,36 +172,36 @@ export default [
     set: false,
   },
 
-  {
-    name: 'test1',
-    value: '',
-    label: '通信测试字段一',
-    type: 'TEXT',
-    rules: [],
-    describe: '',
-    meta: {
-      placeholder: '请填写内容',
-    },
-    event: {
-      emit: "[{'name':'transactionAmountCnCreate'}]",
-      on: '',
-    },
-    set: false,
-  },
-  {
-    name: 'test2',
-    value: '',
-    label: '通信测试字段二',
-    type: 'TEXT',
-    rules: [],
-    describe: '',
-    meta: {
-      placeholder: '请填写内容',
-    },
-    event: {
-      emit: 'null',
-      on: "{'name':'transactionAmountCnCreate','listener': 'function listener(toComponent) {return function (fromComponent) {var to = toComponent;console.log(fromComponent, to);};}' }",
-    },
-    set: false,
-  },
+  // {
+  //   name: 'test1',
+  //   value: '',
+  //   label: '通信测试字段一',
+  //   type: 'TEXT',
+  //   rules: [],
+  //   describe: '',
+  //   meta: {
+  //     placeholder: '请填写内容',
+  //   },
+  //   event: {
+  //     emit: "[{'name':'transactionAmountCnCreate'}]",
+  //     on: '',
+  //   },
+  //   set: false,
+  // },
+  // {
+  //   name: 'test2',
+  //   value: '',
+  //   label: '通信测试字段二',
+  //   type: 'TEXT',
+  //   rules: [],
+  //   describe: '',
+  //   meta: {
+  //     placeholder: '请填写内容',
+  //   },
+  //   event: {
+  //     emit: 'null',
+  //     on: "{'name':'transactionAmountCnCreate','listener': 'function listener(toComponent) {return function (fromComponent) {var to = toComponent;console.log(fromComponent, to);};}' }",
+  //   },
+  //   set: false,
+  // },
 ];

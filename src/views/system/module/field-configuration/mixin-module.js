@@ -1,28 +1,6 @@
 import _ from 'lodash';
 
 export default {
-  data() {
-    return {
-      key: 0, // 是可变的，获取值的时候需要设置
-      moduleList: [
-        {
-          name: '新区域一（请改名）',
-          open: true,
-          list: [],
-        },
-        {
-          name: '新区域二（请改名）',
-          open: true,
-          list: [],
-        },
-        {
-          name: '新区域三（请改名）',
-          open: true,
-          list: [],
-        },
-      ],
-    };
-  },
   methods: {
     delField(itemList, index, element) {
       if (this.editField && (this.editField.key === element.key)) {
@@ -36,6 +14,7 @@ export default {
       if (this.editField) {
         validationStatus = await this.fieldValidate();
       }
+
       if (validationStatus) {
         this.moduleList = this.moduleList.map((item, index1) => {
           const list = item.list.map((i, index2) => {
@@ -47,7 +26,7 @@ export default {
           return { ...item, list };
         });
         this.editField = this.moduleList[i1].list[i2];
-        const { meta } = this.editField;
+        const { meta = {} } = this.editField;
         this.editMeta = [].concat(Object.keys(meta).map((key) => ({ key, value: meta[key] })));
         // 每次选新的字段编辑时，必填重置是否必填
         this.requiredState = this.editField.rules.some((item) => !!item.required);
@@ -96,7 +75,7 @@ export default {
     },
     cloneHandle(field) {
       this.key += 1;
-      return _.cloneDeep({ ...field, key: this.key });
+      return _.cloneDeep({ ...field, key: `${this.key}${new Date().getTime()}` });
     },
   },
 };

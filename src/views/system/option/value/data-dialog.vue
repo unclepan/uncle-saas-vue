@@ -111,13 +111,11 @@ export default {
       const { id } = this.$route.params;
       const { _id: vid } = this.editPrivateData;
       if (this.type === 'add') {
-        await postValue(val, id).then(() => {
-          message.success('选项值新增成功');
-        });
+        await postValue(val, id);
+        message.success('选项值新增成功');
       } else if (this.type === 'edit') {
-        await patchValue(val, id, vid).then(() => {
-          message.success('选项值编辑成功');
-        });
+        await patchValue(val, id, vid);
+        message.success('选项值编辑成功');
       }
       this.$refs.dialog.dialogVisible = false;
       this.$emit('success');

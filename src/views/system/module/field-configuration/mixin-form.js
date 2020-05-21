@@ -1,9 +1,6 @@
-import script from 'lib/script';
-
 export default {
   data() {
     return {
-      requiredState: false,
       rules: {
         name: [
           { required: true, message: '必填项', trigger: 'blur' },
@@ -26,6 +23,9 @@ export default {
           {
             min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur',
           },
+        ],
+        options: [
+          { required: true, message: '必填项', trigger: 'blur' },
         ],
       },
     };
@@ -69,17 +69,15 @@ export default {
       this.editMeta.splice(-1, 1);
     },
     handleRequiredState() {
+      this.editField.rules = this.editField.rules.filter((item) => !item.required);
       if (this.requiredState) {
         this.editField.rules = this.editField.rules.concat({ required: true, message: '这是必填字段', trigger: 'blur' });
-      } else {
-        this.editField.rules = this.editField.rules.filter((item) => !item.required);
       }
     },
     openFormEventDialog(val) {
       this.$refs.formEventDialog.open(val);
     },
     editFormEvent(val) {
-      console.log(script(val.on));
       this.editField.event = val;
     },
   },

@@ -155,14 +155,12 @@ export default {
     async opera(val) {
       if (this.type === 'add') {
         const { _id: id } = this.editPrivateData;
-        await post({ ...val, parent: id }).then(() => {
-          message.success('选项新增成功');
-        });
+        await post({ ...val, parent: id });
+        message.success('选项新增成功');
       } else if (this.type === 'edit') {
         const { _id: id } = this.editPrivateData;
-        await patch(val, id).then(() => {
-          message.success('选项编辑成功');
-        });
+        await patch(val, id);
+        message.success('选项编辑成功');
       }
       this.$refs.dialog.dialogVisible = false;
       this.$emit('success');

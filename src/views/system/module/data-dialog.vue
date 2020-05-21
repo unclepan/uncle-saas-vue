@@ -107,14 +107,12 @@ export default {
     },
     async opera(val) {
       if (this.type === 'add') {
-        await post(val).then(() => {
-          message.success('模块新增成功');
-        });
+        await post(val);
+        message.success('模块新增成功');
       } else if (this.type === 'edit') {
         const { _id: id } = this.editPrivateData;
-        await patch(val, id).then(() => {
-          message.success('模块编辑成功');
-        });
+        await patch(val, id);
+        message.success('模块编辑成功');
       }
       this.$refs.dialog.dialogVisible = false;
       this.$emit('success');
