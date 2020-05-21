@@ -246,8 +246,8 @@ export default {
     init() {
       const { id } = this.$route.params;
       getById(id).then((res) => {
+        if (!res.data.module.length) return;
         this.moduleList = res.data.module;
-
         this.moduleList = this.moduleList.map((item) => {
           const list = item.list.map((i) => ({ ...i, set: false }));
           return { ...item, list };

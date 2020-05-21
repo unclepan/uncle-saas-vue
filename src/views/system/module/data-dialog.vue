@@ -79,7 +79,9 @@ export default {
           value: false,
           label: '状态',
           type: 'RADIO',
-          rules: [],
+          rules: [
+            { required: true, message: '必填项', trigger: 'blur' },
+          ],
           meta: {
           },
           options: [{ name: '启用', value: true }, { name: '关闭启用', value: false }],
