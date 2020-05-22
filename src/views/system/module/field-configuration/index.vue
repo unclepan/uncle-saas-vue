@@ -334,7 +334,7 @@ export default {
       background: #fefefe;
       padding: 10px;
       margin-bottom: 10px;
-      cursor: pointer;
+      cursor: move;
       .label{
         overflow: hidden;
       }
