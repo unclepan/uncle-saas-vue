@@ -28,8 +28,6 @@ export default {
         this.editField = this.moduleList[i1].list[i2];
         const { meta = {} } = this.editField;
         this.editMeta = [].concat(Object.keys(meta).map((key) => ({ key, value: meta[key] })));
-        // 每次选新的字段编辑时，必填重置是否必填
-        this.requiredState = this.editField.rules.some((item) => !!item.required);
       }
     },
     async unSetField() {

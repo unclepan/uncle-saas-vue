@@ -27,6 +27,15 @@ export default {
         options: [
           { required: true, message: '必填项', trigger: 'blur' },
         ],
+        required: [
+          { required: true, message: '必填项', trigger: 'blur' },
+        ],
+        showToList: [
+          { required: true, message: '必填项', trigger: 'blur' },
+        ],
+        searchAsList: [
+          { required: true, message: '必填项', trigger: 'blur' },
+        ],
       },
     };
   },
@@ -67,12 +76,6 @@ export default {
     },
     removeFieldMeta() {
       this.editMeta.splice(-1, 1);
-    },
-    handleRequiredState() {
-      this.editField.rules = this.editField.rules.filter((item) => !item.required);
-      if (this.requiredState) {
-        this.editField.rules = this.editField.rules.concat({ required: true, message: '这是必填字段', trigger: 'blur' });
-      }
     },
     openFormEventDialog(val) {
       this.$refs.formEventDialog.open(val);

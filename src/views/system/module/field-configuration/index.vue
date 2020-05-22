@@ -143,22 +143,38 @@
                   <el-input v-model="editField.describe"></el-input>
                 </el-form-item>
 
-                <el-form-item v-if="showOptionFormItem" label="选项接口" prop="options">
-                  <el-input v-model="editField.options"></el-input>
-                </el-form-item>
-
-                <el-form-item label="是否必填">
+                <el-form-item label="是否必填" prop="required">
                   <el-radio-group
-                    v-model="requiredState"
-                    @change="handleRequiredState">
+                    v-model="editField.required">
                     <el-radio :label="true">必填</el-radio>
                     <el-radio :label="false">非必填</el-radio>
                   </el-radio-group>
                 </el-form-item>
 
+                <el-form-item label="显示到列表" prop="showToList">
+                  <el-radio-group
+                    v-model="editField.showToList">
+                    <el-radio :label="true">显示</el-radio>
+                    <el-radio :label="false">不显示</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+
+                <el-form-item label="列表上是否可搜索" prop="searchAsList">
+                  <el-radio-group
+                    v-model="editField.searchAsList">
+                    <el-radio :label="true">可搜索</el-radio>
+                    <el-radio :label="false">不可搜索</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+
+                <el-form-item v-if="showOptionFormItem" label="选项接口" prop="options">
+                  <el-input v-model="editField.options"></el-input>
+                </el-form-item>
+
+
                 <el-form-item>
                   <span slot="label">
-                    组件属性
+                    组件附加属性
                     <i class="el-icon-circle-plus-outline" @click="addFieldMeta()"></i>
                     &nbsp;
                     <i class="el-icon-remove-outline" @click="removeFieldMeta()"></i>
@@ -221,7 +237,6 @@ export default {
           list: [],
         },
       ],
-      requiredState: false,
     };
   },
   components: {

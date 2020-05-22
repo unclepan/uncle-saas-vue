@@ -32,6 +32,9 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
       on: '',
     },
     set: false,
+    required: false,
+    showToList: true,
+    searchAsList: false,
   };
 });
 export default itemEnum;

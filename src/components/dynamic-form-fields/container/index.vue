@@ -1,6 +1,5 @@
 <template>
   <el-form-item
-    :class="$style.container"
     :prop="`${param.name}`"
     :rules="param.rules">
     <span slot="label" v-if="param.label">
