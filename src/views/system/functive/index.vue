@@ -133,11 +133,11 @@ export default {
   background: white;
   .tree{
     border: 1px solid #f0f0f0;
-    border-bottom: none;
     :global(.el-tree-node__content){
       height: 48px;
       padding: 10px 0;
       border-bottom: 1px solid #f0f0f0;
+      margin-bottom: -1px;
     }
   }
   .custom-tree-node{

@@ -14,7 +14,7 @@ const module = [
     meta: { title: 'module.add' },
   },
   {
-    path: 'edit/:mid/:vid',
+    path: 'edit/:id/:vid',
     name: 'module.edit',
     component: () => import('../../views/module/edit.vue'),
     meta: { title: 'module.edit' },
