@@ -65,6 +65,13 @@ export default {
             width: '180',
           },
           {
+            prop: 'functive',
+            label: '是否已推送',
+            align: 'center',
+            formatter: (row) => (row.functive ? '是' : '否'),
+            'min-width': '180',
+          },
+          {
             prop: 'description',
             label: '描述',
             'min-width': '180',
@@ -125,6 +132,7 @@ export default {
                 moduleId,
               }).then(() => {
                 message.success('推送成功，请到功能项管理模块查看');
+                this.init();
               });
             }
           },
