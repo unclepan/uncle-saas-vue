@@ -17,9 +17,9 @@
 </template>
 
 <script>
+import aForm from 'components/dynamic-form-fields/form/index.vue';
 import _ from 'lodash';
 import dialog from 'components/dialog/index.vue';
-import aForm from 'components/dynamic-form-fields/form/index.vue';
 
 export default {
   data() {

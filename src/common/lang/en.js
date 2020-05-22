@@ -63,6 +63,12 @@ export default {
     },
     home: 'Home',
     personal: 'Personal',
+    module: {
+      rec: 'Dynamic Module',
+      list: 'Module List',
+      add: 'Add',
+      edit: 'Edit',
+    },
   },
   guide: {
     sidebarTitle: 'Sidebar operation',

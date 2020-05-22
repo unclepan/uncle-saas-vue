@@ -15,10 +15,10 @@
 </template>
 
 <script>
+import xForm from 'components/dynamic-form-fields/form/index.vue';
+import aTitle from 'components/a-title.vue';
 import middlewares from 'lib/middlewares';
 import message from 'lib/message';
-import aTitle from 'components/a-title.vue';
-import xForm from 'components/dynamic-form-fields/form/index.vue';
 import { get, patch } from 'wrapper/ajax/role';
 
 export default {

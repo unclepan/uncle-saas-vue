@@ -4,13 +4,13 @@ const system = [
   {
     path: 'user',
     name: 'system.user.default',
-    component: () => import('../../views/system/user/index.vue'),
+    component: () => import(/* webpackChunkName: "system.user.default" */ '../../views/system/user/index.vue'),
     meta: { title: 'system.user.default' },
   },
   {
     path: 'role',
     name: 'system.role.default',
-    component: () => import('../../views/system/role/index.vue'),
+    component: () => import(/* webpackChunkName: "system.role.default" */ '../../views/system/role/index.vue'),
     meta: { title: 'system.role.default' },
   },
   {

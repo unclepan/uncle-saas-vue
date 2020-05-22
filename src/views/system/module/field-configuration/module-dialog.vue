@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import dialog from 'components/dialog/index.vue';
 import aForm from 'components/dynamic-form-fields/form/index.vue';
+import dialog from 'components/dialog/index.vue';
 
 export default {
   data() {

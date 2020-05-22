@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import moment from 'moment';
-import CryptoJS from 'crypto-js';
 import xForm from 'components/dynamic-form-fields/form/index.vue';
 import aTitle from 'components/a-title.vue';
+import moment from 'moment';
+import CryptoJS from 'crypto-js';
 import { mapState, mapMutations } from 'vuex';
 import { userInfo, patch, logout } from 'wrapper/ajax/users';
 import avatar from './avatar.vue';

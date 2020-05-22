@@ -63,6 +63,12 @@ export default {
     },
     home: '首页',
     personal: '个人中心',
+    module: {
+      rec: '动态模块',
+      list: '模块列表',
+      add: '新增',
+      edit: '编辑',
+    },
   },
   guide: {
     sidebarTitle: '侧边栏操作',

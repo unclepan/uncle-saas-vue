@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.form">
+  <div :class="$style['dynamic-form']">
     <el-form
       :inline="true"
       :model="ruleForm"
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.form{
+.dynamic-form{
   .col{
     padding: 8px 0;
     .card{

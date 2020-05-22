@@ -182,8 +182,8 @@
 
 <script>
 import message from 'lib/message';
-import _ from 'lodash';
 import aTitle from 'components/a-title.vue';
+import _ from 'lodash';
 import draggable from 'vuedraggable';
 import { getById, patch } from 'wrapper/ajax/module';
 import fields from './fields';

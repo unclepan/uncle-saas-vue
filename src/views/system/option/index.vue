@@ -29,8 +29,8 @@
 
 <script>
 import moment from 'moment';
-import middlewares from 'lib/middlewares';
 import aTitle from 'components/a-title.vue';
+import middlewares from 'lib/middlewares';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import { option } from 'wrapper/ajax/option';

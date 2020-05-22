@@ -73,8 +73,8 @@
 
 <script>
 import message from 'lib/message';
-import { tree, del } from 'wrapper/ajax/functive';
 import aTitle from 'components/a-title.vue';
+import { tree, del } from 'wrapper/ajax/functive';
 import dataDialog from './data-dialog.vue';
 
 export default {

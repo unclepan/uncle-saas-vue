@@ -13,9 +13,10 @@
 </template>
 
 <script>
+import aForm from 'components/dynamic-form-fields/form/index.vue';
 import message from 'lib/message';
 import dialog from 'components/dialog/index.vue';
-import aForm from 'components/dynamic-form-fields/form/index.vue';
+
 import {
   post,
   patch,

@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css';
 import Layout from 'layout/index.vue';
 
 import System from './modules/system';
+import Module from './modules/module';
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,7 @@ export const constantRoutes = [
     ],
   },
   ...System,
+  ...Module,
   { path: '*', redirect: '/error' },
 ];
 
