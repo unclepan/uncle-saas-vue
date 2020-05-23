@@ -14,10 +14,9 @@
       :on-error="handleError"
       :before-remove="handleBeforeRemove"
       :before-upload="beforeUpload"
-      :auto-upload="false"
       :limit="1">
         <el-button slot="trigger" size="small" type="primary" icon="el-icon-upload">选取</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
+        <el-button v-if="file" style="margin-left: 10px;" size="small" type="success" @click="submitUpload">确定</el-button>
     </el-upload>
     <span v-else>{{value || '字段无值'}}</span>
   </container>
@@ -25,6 +24,7 @@
 
 <script>
 import message from 'lib/message';
+import rename from 'wrapper/ajax/common';
 import fieldMixin from './basic/field-mixin';
 
 export default {
@@ -34,13 +34,17 @@ export default {
   ],
   data() {
     return {
+      file: '',
       baseApi: process.env.VUE_APP_BASE_API,
       Authorization: localStorage.getItem('userToken'),
     };
   },
   methods: {
     submitUpload() {
-      this.$refs.upload.submit();
+      this.value = this.file;
+      rename({ folder: 'module', fileName: this.file }).then(() => {
+        this.file = '';
+      });
     },
     beforeUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -51,6 +55,7 @@ export default {
     },
     handleBeforeRemove() {
       this.value = '';
+      this.file = '';
     },
     handleError() {
       message.error('上传失败');
@@ -60,8 +65,7 @@ export default {
     },
     handleSuccess(res) {
       if (res) {
-        this.value = res.basename;
-        message.success(res.message);
+        this.file = res.basename;
       } else {
         message.error(res.message);
       }

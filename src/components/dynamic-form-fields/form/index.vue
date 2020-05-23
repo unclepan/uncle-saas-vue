@@ -1,6 +1,5 @@
 <template>
   <div :class="$style['dynamic-form']">
-    {{ruleForm}}
     <el-form
       :inline="true"
       :model="ruleForm"

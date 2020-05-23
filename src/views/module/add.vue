@@ -62,7 +62,6 @@ export default {
         item.submitForm('ruleForm', (val) => {
           ruleForm = Object.assign(ruleForm, val);
         }, () => {
-          console.log('错误');
           done = false;
         });
       });
