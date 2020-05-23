@@ -3,6 +3,7 @@
   <div :class="$style['header']">
     <module-dialog ref="moduleDialog" @success="editModule"/>
     <form-event-dialog ref="formEventDialog" @success="editFormEvent"/>
+    {{editField}}
     <a-title>
       模块字段编辑器
       <template slot="button">

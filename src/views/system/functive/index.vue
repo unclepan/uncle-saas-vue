@@ -50,7 +50,6 @@
             新增
           </el-button>
           <el-button
-            v-if="data.type !== 'module'"
             size="mini"
             type="primary"
             plain

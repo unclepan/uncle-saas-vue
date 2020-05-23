@@ -44,3 +44,19 @@ export function del(id) {
     method: 'DELETE',
   });
 }
+
+export function getGeneralList(id, params) {
+  return request({
+    url: `api/module/general/${id}`,
+    method: 'GET',
+    params,
+  });
+}
+
+
+export function getGeneralModule(id) {
+  return request({
+    url: `api/module/general/${id}/module`,
+    method: 'GET',
+  });
+}

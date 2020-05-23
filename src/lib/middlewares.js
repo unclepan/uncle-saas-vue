@@ -64,20 +64,46 @@ const middle = {
     };
   },
 
-  test(val) {
+  forModuleEdit(val) {
     return (data) => {
-      console.log(data, val, '测试');
+      const { id } = val.components.$route.params;
+      const { _id: vid } = data;
+      router.push({ name: val.pathName, params: { id, vid } });
     };
   },
-  optionstest(val) {
-    console.log(val, 12);
-    return (cb) => {
-      const res = {
-        data: [{ name: '1111', value: 1111 }, { name: '2222', value: 2222 }, { name: '3333', value: 3333 }],
-      };
-      cb(res);
+
+  forModuleDel(val) {
+    return async (data) => {
+      const stl = await message.confirm('确认删除？');
+      if (stl) {
+        const { id } = val.components.$route.params;
+        const { _id: vid } = data;
+        request({
+          url: `${val.apiName}/${id}/${vid}`,
+          method: 'DELETE',
+          params: val.params,
+        }).then(() => {
+          message.success('删除成功');
+          val.components.init();
+        });
+      }
     };
   },
+
+  // test(val) {
+  //   return (data) => {
+  //     console.log(data, val, '测试');
+  //   };
+  // },
+  // optionstest(val) {
+  //   console.log(val, 12);
+  //   return (cb) => {
+  //     const res = {
+  //       data: [{ name: '1111', value: 1111 }, { name: '2222', value: 2222 }, { name: '3333', value: 3333 }],
+  //     };
+  //     cb(res);
+  //   };
+  // },
 };
 
 export default middle;

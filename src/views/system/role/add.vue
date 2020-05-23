@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.edit">
+  <div :class="$style.add">
     <a-title>
       新增角色
       <template slot="button">
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.edit{
+.add{
   padding: 20px;
   background: white;
 }

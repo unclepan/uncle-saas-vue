@@ -4,11 +4,18 @@
 
 <script>
 export default {
+  name: 'module.edit',
   data() {
     return {
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    init() {
+      console.log(345);
+    },
   },
 };
 </script>

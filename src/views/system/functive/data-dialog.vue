@@ -42,10 +42,10 @@ export default {
         {
           name: 'name',
           value: '',
-          label: '选项名称',
+          label: '功能项名称',
           type: 'TEXT',
           rules: [
-            { required: true, message: '请填写选项名称', trigger: 'blur' },
+            { required: true, message: '请填写名称', trigger: 'blur' },
           ],
           meta: {
             placeholder: '请填写内容',
@@ -54,10 +54,10 @@ export default {
         {
           name: 'ename',
           value: '',
-          label: '选项英文名称',
+          label: '功能项英文名称',
           type: 'TEXT',
           rules: [
-            { required: true, message: '请填写选项英文名称', trigger: 'blur' },
+            { required: true, message: '请填写英文名称', trigger: 'blur' },
             {
               validator: (rule, value, callback) => {
                 if (!(/^[a-z]+$/i).test(value)) {

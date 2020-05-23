@@ -13,14 +13,18 @@ const fieldEnum = {
 
 const itemEnum = Object.keys(fieldEnum).map((item) => {
   let rules = [];
+  let value = '';
   if (['NUMBER', 'CURRENCY', 'PERCENT'].indexOf(item) >= 0) {
     rules = [
       { type: 'number', message: '数字类型', trigger: 'blur' },
     ];
   }
+  if (['SWITCH'].indexOf(item) >= 0) {
+    value = false;
+  }
   return {
     name: item.toLowerCase(),
-    value: '',
+    value,
     label: fieldEnum[item],
     type: item,
     rules,

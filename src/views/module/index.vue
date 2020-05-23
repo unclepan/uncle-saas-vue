@@ -1,28 +1,102 @@
 <template>
-  <div>模块列表页面</div>
+  <div :class="$style.module">
+    <a-title>
+      <span>{{moduleName}}</span>
+      <template slot="button">
+        <el-button type="primary" icon="el-icon-plus" size="mini" @click="add()">新增</el-button>
+      </template>
+    </a-title>
+    <a-table v-loading="loading" :tableData="tableData"/>
+    <pagination :pagina="pagina" :sizeChange="sizeChange" :currentChange="currentChange"/>
+  </div>
+
 </template>
 
 <script>
-import { getById } from 'wrapper/ajax/module';
+import aTitle from 'components/a-title.vue';
+import aTable from 'components/a-table/index.vue';
+import pagination from 'components/pagination/index.vue';
+import middlewares from 'lib/middlewares';
+import { getGeneralList } from 'wrapper/ajax/module';
 
 export default {
+  name: 'module.list',
   data() {
     return {
+      moduleName: '',
+      loading: true,
+      pagina: {
+        current: 1,
+        size: 10,
+        total: 0,
+      },
+      tableData: {
+        column: [],
+        row: [],
+        operation: [],
+        meta: {},
+      },
+      operation: [
+        {
+          label: '编辑',
+          func: { name: 'forModuleEdit', value: { pathName: 'module.edit' } },
+        },
+        {
+          label: '删除',
+          type: 'danger',
+          func: { name: 'forModuleDel', value: { apiName: '/api/module/general/delete', params: {} } },
+        },
+      ],
     };
+  },
+  components: {
+    aTitle,
+    aTable,
+    pagination,
   },
   mounted() {
     this.init();
   },
   methods: {
-    init() {
+    add() {
       const { id } = this.$route.params;
-      getById(id).then((res) => {
-        console.log(res);
+      this.$router.push({ name: 'module.add', params: { id } });
+    },
+    init() {
+      this.loading = true;
+      const { id } = this.$route.params;
+      const params = { size: this.pagina.size, current: this.pagina.current };
+      getGeneralList(id, params).then((res) => {
+        const {
+          count, current, data, size, moduleName,
+        } = res.data;
+        this.moduleName = moduleName;
+        this.tableData = data;
+        this.tableData.operation = middlewares.init(this.operation, this);
+        const pagina = {
+          current,
+          size,
+          total: count,
+        };
+        this.pagina = pagina;
+        this.loading = false;
       });
+    },
+    sizeChange(val) {
+      this.pagina.size = val;
+      this.init();
+    },
+    currentChange(val) {
+      this.pagina.current = val;
+      this.init();
     },
   },
 };
 </script>
 
 <style lang="scss" module>
+.module {
+  padding: 20px;
+  background: white;
+}
 </style>
