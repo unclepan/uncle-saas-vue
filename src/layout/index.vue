@@ -49,7 +49,17 @@ export default {
       userInfo().then((res) => {
         this.setUser(res.data);
         this.isShow = true;
-        this.menuList = menus;
+        this.menuList = menus.concat(res.data.menus);
+
+        this.$nextTick(() => {
+          this.$i18n.mergeLocaleMessage('en-US', {
+            m: { far: res.data.en },
+          });
+          this.$i18n.mergeLocaleMessage('zh-CN', {
+            m: { far: res.data.zh },
+          });
+        });
+
         setTimeout(() => {
           this.$nextTick(() => {
             window.yangpanLoading.hide();

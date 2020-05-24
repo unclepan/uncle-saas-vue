@@ -37,7 +37,7 @@ const fieldEnum = {
   TEXTAREA: { name: '多行文本输入框', components: null, formatter: null },
   NUMBER: { name: '纯数字', components: null, formatter: null },
   CURRENCY: { name: '货币', components: null, formatter: null },
-  PERCENT: { name: '百分比, components: null, formatter: null' },
+  PERCENT: { name: '百分比', components: null, formatter: null },
   DATE: { name: '日期', components: null, formatter: (row, prop) => moment(row[prop]).format('YYYY-MM-DD HH:mm:ss') },
   SELECT: { name: '下拉选择', components: null, formatter: null },
   SWITCH: { name: '开关', components: { key: 'state' }, formatter: null },
@@ -87,7 +87,7 @@ function formatColumn(column) {
         components: fieldEnum[item.columnType].components,
         formatter: fieldEnum[item.columnType].formatter,
         align: 'center',
-        width: '160',
+        'min-width': '160',
       });
     }
     return c;
