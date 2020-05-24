@@ -18,16 +18,20 @@
         <el-button slot="trigger" size="small" type="primary" icon="el-icon-upload">选取</el-button>
         <el-button v-if="file" style="margin-left: 10px;" size="small" type="success" @click="submitUpload">确定</el-button>
     </el-upload>
-    <span v-else>{{value || '字段无值'}}</span>
+    <span>{{value | substr(18)}}</span>
   </container>
 </template>
 
 <script>
 import message from 'lib/message';
 import rename from 'wrapper/ajax/common';
+import { getPropString } from 'lib/vue-prop';
 import fieldMixin from './basic/field-mixin';
 
 export default {
+  props: {
+    filePrefix: getPropString('module'),
+  },
   INDEX: ['UPLOAD'],
   mixins: [
     fieldMixin,
@@ -41,8 +45,8 @@ export default {
   },
   methods: {
     submitUpload() {
-      this.value = this.file;
-      rename({ folder: 'module', fileName: this.file }).then(() => {
+      rename({ folder: this.filePrefix, fileName: this.file }).then(() => {
+        this.value = `/${this.filePrefix}/${this.file}`;
         this.file = '';
       });
     },

@@ -1,12 +1,19 @@
 <template>
-  <div>编辑</div>
+  <operation v-if="editData" type="edit" :editData="editData"/>
 </template>
 
 <script>
+import { getModuleGeneralById } from 'wrapper/ajax/module';
+import operation from './operation.vue';
+
 export default {
   name: 'module.edit',
+  components: {
+    operation,
+  },
   data() {
     return {
+      editData: null,
     };
   },
   mounted() {
@@ -14,11 +21,11 @@ export default {
   },
   methods: {
     init() {
-      console.log(345);
+      const { id, vid } = this.$route.params;
+      getModuleGeneralById(id, vid).then((res) => {
+        this.editData = res.data;
+      });
     },
   },
 };
 </script>
-
-<style lang="scss" module>
-</style>

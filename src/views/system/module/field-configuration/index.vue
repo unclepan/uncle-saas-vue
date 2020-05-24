@@ -203,7 +203,7 @@ import aTitle from 'components/a-title.vue';
 import _ from 'lodash';
 import draggable from 'vuedraggable';
 import { getById, patch } from 'wrapper/ajax/module';
-import fields from './fields';
+import { itemEnum } from 'components/dynamic-form-fields/fields';
 import moduleDialog from './module-dialog.vue';
 import formEventDialog from './form-event-dialog.vue';
 import mixinForm from './mixin-form';
@@ -219,7 +219,7 @@ export default {
     return {
       editField: null, // 当前正在给那个字段编辑属性
       editMeta: [], // （中转值，给正在编辑的字段赋值meta）ele 原生属性
-      fields,
+      fields: itemEnum,
       key: 0, // 是可变的，获取值的时候需要设置
       moduleList: [
         {

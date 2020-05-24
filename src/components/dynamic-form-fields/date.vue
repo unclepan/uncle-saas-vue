@@ -5,7 +5,8 @@
       v-if="editingStatus"
       :style="{width:'100%'}"
       v-model="value"
-      v-bind="addParam">
+      v-bind="addParam"
+      value-format="timestamp">
     </el-date-picker>
     <span v-else>{{value || '字段无值'}}</span>
   </container>

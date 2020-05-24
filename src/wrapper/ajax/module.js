@@ -60,3 +60,26 @@ export function getGeneralModule(id) {
     method: 'GET',
   });
 }
+
+export function createModuleGeneral(id, data) {
+  return request({
+    url: `api/module/general/${id}`,
+    method: 'POST',
+    data,
+  });
+}
+
+export function getModuleGeneralById(id, vid) {
+  return request({
+    url: `api/module/general/${id}/${vid}`,
+    method: 'GET',
+  });
+}
+
+export function updateModuleGeneral(id, vid, data) {
+  return request({
+    url: `api/module/general/${id}/${vid}`,
+    method: 'PATCH',
+    data,
+  });
+}

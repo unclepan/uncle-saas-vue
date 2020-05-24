@@ -17,6 +17,7 @@ import aTitle from 'components/a-title.vue';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import middlewares from 'lib/middlewares';
+import { formatColumn } from 'components/dynamic-form-fields/fields';
 import { getGeneralList } from 'wrapper/ajax/module';
 
 export default {
@@ -71,8 +72,10 @@ export default {
           count, current, data, size, moduleName,
         } = res.data;
         this.moduleName = moduleName;
-        this.tableData = data;
+        this.tableData.column = formatColumn(data.column);
+        this.tableData.row = data.row;
         this.tableData.operation = middlewares.init(this.operation, this);
+        this.tableData.meta = data.meta;
         const pagina = {
           current,
           size,

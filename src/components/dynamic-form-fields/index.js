@@ -1,5 +1,5 @@
 
-import Fields from './fields';
+import { Fields } from './fields';
 import Input from './input.vue';
 import Select from './select.vue';
 import xNumber from './number.vue';
