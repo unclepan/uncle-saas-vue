@@ -98,9 +98,7 @@ export default {
           value: '',
           label: '排序',
           type: 'NUMBER',
-          rules: [
-            { type: 'number', message: '排序号必须为数字值' },
-          ],
+          rules: [],
           meta: {
             placeholder: '请填写内容',
           },
@@ -157,11 +155,11 @@ export default {
     async opera(val) {
       if (this.type === 'add') {
         const { _id: id } = this.editPrivateData;
-        await post({ ...val, parent: id });
+        await post({ ...val, parent: id, sort: !val.sort ? 0 : val.sort });
         message.success('新增成功');
       } else if (this.type === 'edit') {
         const { _id: id } = this.editPrivateData;
-        await patch(val, id);
+        await patch({ ...val, sort: !val.sort ? 0 : val.sort }, id);
         message.success('编辑成功');
       }
       this.$refs.dialog.dialogVisible = false;
