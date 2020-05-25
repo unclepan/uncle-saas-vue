@@ -47,7 +47,7 @@ import { getRoleBindFunctive, addRoleBindFunctive } from 'wrapper/ajax/role';
 
 
 export default {
-  name: 'system.role.edit',
+  name: 'system.role.bindFunctive',
   components: {
     aTitle,
   },
