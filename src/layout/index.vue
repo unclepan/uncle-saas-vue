@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import message from 'lib/message';
 import { mapState, mapMutations } from 'vuex';
 import { userInfo, logout } from 'wrapper/ajax/users';
@@ -49,15 +50,17 @@ export default {
       userInfo().then((res) => {
         this.setUser(res.data);
         this.isShow = true;
-        this.menuList = menus.concat(res.data.menus);
+
+        this.$i18n.mergeLocaleMessage('en-US', {
+          m: { far: res.data.en },
+        });
+        this.$i18n.mergeLocaleMessage('zh-CN', {
+          m: { far: res.data.zh },
+        });
 
         this.$nextTick(() => {
-          this.$i18n.mergeLocaleMessage('en-US', {
-            m: { far: res.data.en },
-          });
-          this.$i18n.mergeLocaleMessage('zh-CN', {
-            m: { far: res.data.zh },
-          });
+          this.menuList = _.cloneDeep(menus);
+          this.menuList.splice(1, 0, ...res.data.menus);
         });
 
         setTimeout(() => {
