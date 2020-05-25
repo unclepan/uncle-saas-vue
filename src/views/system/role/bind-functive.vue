@@ -19,6 +19,22 @@
       :default-checked-keys="defaultCheckedKeys"
       default-expand-all
       check-strictly>
+      <div :class="$style['custom-tree-node']" slot-scope="{ node, data }">
+        <div :class="$style.node">
+          <div :class="$style.item">
+            <span :class="$style.lable">名称: </span>
+            {{ data.name }}
+          </div>
+          <div :class="$style.item">
+            <span :class="$style.lable">类型: </span>
+            {{data.type}}
+          </div>
+          <div :class="$style.item">
+            <span :class="$style.lable">状态: </span>
+            <i :class="data.state ? 'el-icon-success' : 'el-icon-remove'" :style="{color: data.state ? 'green' : 'red' }"></i>
+          </div>
+        </div>
+      </div>
     </el-tree>
   </div>
 </template>
@@ -82,9 +98,26 @@ export default {
   padding: 20px;
   background: white;
   .tree{
+    border: 1px solid #f0f0f0;
     :global(.el-tree-node__content){
       height: 42px;
       padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: -1px;
+    }
+  }
+  .custom-tree-node{
+    width: 100%;
+    padding-right: 20px;
+    .node{
+      display: flex;
+      justify-content: space-between;
+      .item{
+        .lable{
+          color: #999999;
+          padding-right: 8px;
+        }
+      }
     }
   }
 }
