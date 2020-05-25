@@ -118,7 +118,7 @@ export default {
           },
           options: (cb) => {
             const res = {
-              data: [{ name: '菜单', value: 'menu' }, { name: '操作', value: 'handle' }, { name: '动态模块', value: 'module' }],
+              data: [{ name: '菜单', value: 'menu' }, { name: '操作', value: 'handle' }],
             };
             cb(res);
           },

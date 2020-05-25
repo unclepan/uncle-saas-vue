@@ -53,3 +53,19 @@ export function removeRoleBindUser(id, data) {
     data,
   });
 }
+
+
+export function getRoleBindFunctive(id) {
+  return request({
+    url: `/api/role/${id}/bind/functive`,
+    method: 'GET',
+  });
+}
+
+export function addRoleBindFunctive(id, data) {
+  return request({
+    url: `/api/role/${id}/bind/functive`,
+    method: 'POST',
+    data,
+  });
+}

@@ -48,6 +48,7 @@ export default {
         default: '角色管理',
         edit: '角色编辑',
         add: '新增角色',
+        bindFunctive: '绑定功能',
       },
       option: {
         default: '选项配置管理',

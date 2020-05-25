@@ -71,7 +71,6 @@ const middle = {
       router.push({ name: val.pathName, params: { id, vid } });
     };
   },
-
   forModuleDel(val) {
     return async (data) => {
       const stl = await message.confirm('确认删除？');
@@ -89,21 +88,6 @@ const middle = {
       }
     };
   },
-
-  // test(val) {
-  //   return (data) => {
-  //     console.log(data, val, '测试');
-  //   };
-  // },
-  // optionstest(val) {
-  //   console.log(val, 12);
-  //   return (cb) => {
-  //     const res = {
-  //       data: [{ name: '1111', value: 1111 }, { name: '2222', value: 2222 }, { name: '3333', value: 3333 }],
-  //     };
-  //     cb(res);
-  //   };
-  // },
 };
 
 export default middle;

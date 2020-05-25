@@ -129,6 +129,13 @@ export default {
             this.$refs.bindUserDialog.open(data);
           },
         },
+        {
+          label: '分配功能',
+          func: (data) => {
+            const { _id: id } = data;
+            this.$router.push({ name: 'system.role.bindFunctive', params: { id } });
+          },
+        },
       ],
     };
   },

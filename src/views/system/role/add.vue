@@ -3,7 +3,7 @@
     <a-title>
       新增角色
       <template slot="button">
-        <el-button size="mini" @click="cancel">返回角色列表</el-button>
+        <el-button size="mini" @click="cancel">返回</el-button>
         <el-button size="mini" type="primary" @click="onSubmit">确定</el-button>
       </template>
     </a-title>
@@ -17,7 +17,6 @@
 <script>
 import xForm from 'components/dynamic-form-fields/form/index.vue';
 import aTitle from 'components/a-title.vue';
-import middlewares from 'lib/middlewares';
 import message from 'lib/message';
 import { post } from 'wrapper/ajax/role';
 
@@ -73,18 +72,6 @@ export default {
           options: [{ name: '启用', value: true }, { name: '关闭启用', value: false }],
         },
         {
-          name: 'functive',
-          value: '',
-          label: '功能项',
-          type: 'SELECTMULTIPLE',
-          rules: [],
-          describe: '功能项涵盖自定义的和动态模块的，动态模块不需要配置，详情请参考功能项管理。',
-          meta: {
-            placeholder: '请选择功能项',
-          },
-          options: { name: 'option', value: { apiName: '/api/option/select/functive' } },
-        },
-        {
           name: 'description',
           value: '',
           label: '备注',
@@ -97,7 +84,7 @@ export default {
           },
         },
       ];
-      this.formRender = middlewares.init(formRender, this, 'options');
+      this.formRender = formRender;
     },
     cancel() {
       this.$router.push({ name: 'system.role.default' });

@@ -26,6 +26,12 @@ const system = [
     meta: { title: 'system.role.edit' },
   },
   {
+    path: 'role/:id/bind/functive',
+    name: 'system.role.bindFunctive',
+    component: () => import('../../views/system/role/bind-functive.vue'),
+    meta: { title: 'system.role.bindFunctive' },
+  },
+  {
     path: 'option',
     name: 'system.option.default',
     component: () => import('../../views/system/option/index.vue'),

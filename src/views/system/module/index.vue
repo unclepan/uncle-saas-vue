@@ -126,10 +126,11 @@ export default {
               postFunctive({
                 name,
                 ename,
-                type: 'module',
+                type: 'menu',
                 state: true,
                 parent: 'parent',
                 moduleId,
+                link: `/module/list/${moduleId}`,
               }).then(() => {
                 message.success('推送成功，请到功能项管理模块查看');
                 this.init();

@@ -33,16 +33,56 @@ class Fields {
 
 
 const fieldEnum = {
-  TEXT: { name: '输入框', components: null, formatter: null },
-  TEXTAREA: { name: '多行文本输入框', components: null, formatter: null },
-  NUMBER: { name: '纯数字', components: null, formatter: null },
-  CURRENCY: { name: '货币', components: null, formatter: null },
-  PERCENT: { name: '百分比', components: null, formatter: null },
-  DATE: { name: '日期', components: null, formatter: (row, prop) => moment(row[prop]).format('YYYY-MM-DD HH:mm:ss') },
-  SELECT: { name: '下拉选择', components: null, formatter: null },
-  SWITCH: { name: '开关', components: { key: 'state' }, formatter: null },
-  UPLOAD: { name: '上传', components: { key: 'filelink' }, formatter: null },
-  RADIO: { name: '单选', components: null, formatter: null },
+  TEXT: {
+    name: '输入框',
+    components: null,
+    formatter: null,
+  },
+  TEXTAREA: {
+    name: '多行文本输入框',
+    components: null,
+    formatter: null,
+  },
+  NUMBER: {
+    name: '纯数字',
+    components: null,
+    formatter: null,
+  },
+  CURRENCY: {
+    name: '货币',
+    components: null,
+    formatter: null,
+  },
+  PERCENT: {
+    name: '百分比',
+    components: null,
+    formatter: null,
+  },
+  DATE: {
+    name: '日期',
+    components: null,
+    formatter: (row, prop) => moment(row[prop]).format('YYYY-MM-DD HH:mm:ss'),
+  },
+  SELECT: {
+    name: '下拉选择',
+    components: null,
+    formatter: null,
+  },
+  SWITCH: {
+    name: '开关',
+    components: { key: 'state' },
+    formatter: null,
+  },
+  UPLOAD: {
+    name: '上传',
+    components: { key: 'filelink' },
+    formatter: null,
+  },
+  RADIO: {
+    name: '单选',
+    components: null,
+    formatter: null,
+  },
 };
 
 // 2. 后台字段配置字段池
@@ -77,7 +117,8 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
   };
 });
 
-// .格式化表格列
+
+// 3.格式化表格列
 function formatColumn(column) {
   return column.reduce((col, item) => {
     let c = col;

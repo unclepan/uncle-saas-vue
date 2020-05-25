@@ -48,6 +48,7 @@ export default {
         default: 'Role',
         edit: 'Role Edit',
         add: 'Role Add',
+        bindFunctive: 'Bind Functive',
       },
       option: {
         default: 'Option',
