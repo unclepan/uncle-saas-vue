@@ -35,7 +35,6 @@ import message from 'lib/message';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import { getModuleFunctive } from 'wrapper/ajax/module';
-
 import { post as postFunctive } from 'wrapper/ajax/functive';
 import dataDialog from './data-dialog.vue';
 

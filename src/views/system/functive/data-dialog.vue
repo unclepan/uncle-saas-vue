@@ -1,5 +1,6 @@
 <template>
   <a-dialog
+    :drag="false"
     :title="title"
     ref="dialog"
     @determine="($refs.xForm.submitForm('ruleForm', opera))"
@@ -145,7 +146,12 @@ export default {
         },
       ];
       if (val.type === 'edit') {
-        this.formRender = formRender.map((item) => ({ ...item, value: val.data[item.name] }));
+        this.formRender = formRender.map((item) => {
+          if (val.data.moduleId && ['icon', 'description'].indexOf(item.name) < 0) {
+            return { ...item, value: val.data[item.name], meta: { ...item.meta, disabled: true } };
+          }
+          return { ...item, value: val.data[item.name] };
+        });
       } else {
         this.formRender = formRender.map((item) => ({ ...item, value: '' }));
       }

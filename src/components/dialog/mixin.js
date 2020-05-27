@@ -3,6 +3,8 @@ export default {
     'el-drag-dialog': {
       // 指令的定义
       inserted(el, binding, vnode) {
+        if (!binding.value.drag) return;
+
         const dialogHeaderEl = el.querySelector('.el-dialog__header');
         const dragDom = el.querySelector('.el-dialog');
         dialogHeaderEl.style.cssText += ';cursor:move;';

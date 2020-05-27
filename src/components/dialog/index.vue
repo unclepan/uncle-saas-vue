@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-if="dialogVisible"
-    v-el-drag-dialog
+    v-el-drag-dialog="{ drag }"
     :title="title"
     :destroy-on-close="true"
     :close-on-click-modal="false"
@@ -11,7 +11,6 @@
     <span slot="footer" v-if="footer">
       <el-button @click="dialogVisible = false">{{$t('m.cancel')}}</el-button>
       <el-button
-        :disabled="disabled"
         type="primary"
         @click="determine()">
         {{$t('m.determine')}}
@@ -30,9 +29,7 @@ export default {
     width: getPropString('30%'),
     title: getPropString('提示'),
     footer: getPropBoolean(true),
-    disabled: getPropBoolean(false),
-  },
-  components: {
+    drag: getPropBoolean(true),
   },
   data() {
     return {
