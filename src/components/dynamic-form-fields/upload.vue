@@ -17,8 +17,14 @@
       :limit="1">
         <el-button slot="trigger" size="small" type="primary" icon="el-icon-upload">选取</el-button>
         <el-button v-if="file" style="margin-left: 10px;" size="small" type="success" @click="submitUpload">确定</el-button>
+        <el-tooltip
+          v-else
+          effect="dark"
+          :content="value"
+          placement="top">
+          <span :class="$style.value">{{value | substr(18)}}</span>
+        </el-tooltip>
     </el-upload>
-    <span>{{value | substr(18)}}</span>
   </container>
 </template>
 
@@ -82,6 +88,9 @@ export default {
 .upload{
   :global(.el-upload-list__item-name){
     padding-left: 0;
+  }
+  .value{
+    padding-left: 10px;
   }
 }
 </style>
