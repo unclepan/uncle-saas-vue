@@ -22,7 +22,7 @@
           effect="dark"
           :content="value"
           placement="top">
-          <span :class="$style.value">{{value | substr(18)}}</span>
+          <span :class="$style.value">{{value | substr(18, -18)}}</span>
         </el-tooltip>
     </el-upload>
   </container>

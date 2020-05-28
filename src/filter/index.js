@@ -1,8 +1,8 @@
 import Vue from 'vue';
 
-Vue.filter('substr', (value, num) => {
+Vue.filter('substr', (value, num, start = 0) => {
   if (!value) return '';
-  let v = value.substr(0, num);
+  let v = value.substr(start, num);
   if (value.length > num) {
     v = `${v}...`;
   }
