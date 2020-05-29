@@ -5,12 +5,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 import vuescroll from 'vuescroll';
 import 'vuescroll/dist/vuescroll.css';
 import 'normalize.css';
+import VueSocketIO from 'vue-socket.io';
 import App from './App.vue';
 import router from '../../router';
 import store from '../../store';
 import '../../registerServiceWorker';
 import '@/assets/styles/main.scss';
 import 'filter/index'; // 过滤器
+
 
 import zh from '../../common/lang/zh';
 import en from '../../common/lang/en';
@@ -29,6 +31,11 @@ const i18n = new VueI18n({
 
 Vue.use(ElementUI);
 Vue.use(vuescroll);
+
+Vue.use(new VueSocketIO({
+  debug: true, // 设置true可以让你的控制台文字变颜色，更好的调试阅读
+  connection: process.env.VUE_APP_BASE_API,
+}));
 
 new Vue({
   router,

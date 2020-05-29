@@ -44,4 +44,11 @@ export default [
       },
     ],
   },
+  {
+    id: '8',
+    menuName: 'socket',
+    invokeUrl: '/socket',
+    iconStr: 'el-icon-chat-line-square',
+    subMenus: [],
+  },
 ];

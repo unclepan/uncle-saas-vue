@@ -70,6 +70,7 @@ export default {
       add: '新增',
       edit: '编辑',
     },
+    socket: '聊天室',
   },
   guide: {
     sidebarTitle: '侧边栏操作',

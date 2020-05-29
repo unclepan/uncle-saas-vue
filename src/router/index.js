@@ -48,6 +48,12 @@ export const constantRoutes = [
         name: 'personal',
         meta: { title: 'personal' }, // title 用于国际化等，affix 固定钉
       },
+      {
+        path: 'socket',
+        name: 'socket',
+        component: () => import('@/views/socket/index.vue'),
+        meta: { title: 'socket' },
+      },
     ],
   },
   ...System,

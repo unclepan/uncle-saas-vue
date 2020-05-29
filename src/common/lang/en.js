@@ -70,6 +70,7 @@ export default {
       add: 'Add',
       edit: 'Edit',
     },
+    socket: 'Socket',
   },
   guide: {
     sidebarTitle: 'Sidebar operation',
