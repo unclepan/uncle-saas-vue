@@ -6,14 +6,14 @@
       </div>
 
       <div :class="$style.chat">
-        <vue-scroll :ops='ops'>
+        <vue-scroll :ops='ops' ref="vs">
           <template v-for="(item, index) in speakList">
-            <div v-if="item.user._id === userInfo._id" :class="[$style.item ,$style.me]" :key="index">
+            <div :id="`d${index}`" v-if="item.user._id === userInfo._id" :class="[$style.item ,$style.me]" :key="index">
               <div :class="$style.text">{{item.msg}}</div>
               <el-avatar :src="`${baseApi}${item.user.avatar}`"></el-avatar>
             </div>
 
-            <div v-else :class="$style.item" :key="index">
+            <div :id="`d${index}`" v-else :class="$style.item" :key="index">
               <el-avatar :src="`${baseApi}${item.user.avatar}`"></el-avatar>
               <div :class="$style.text">{{item.msg}}</div>
             </div>
@@ -119,6 +119,10 @@ export default {
     },
     getMsg(data) {
       this.speakList = data;
+      this.$nextTick(() => {
+        console.log(`#d${this.speakList.length}`);
+        this.$refs.vs.scrollIntoView(`#d${this.speakList.length - 1}`, 500);
+      });
     },
   },
   destroyed() {
