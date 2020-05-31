@@ -1,107 +1,218 @@
 <template>
-  <div class="content">
-    <!-- <h1>{{ msg }}</h1> -->
-    <h1>多人实时在线聊天</h1>
-    <p>当前在线人数：{{userNmber}}</p>
-    <input type="请输入内容" v-model="inValue" @keyup.enter="btn_sbmit">
-    <input type="button" value="发送" @click="btn_sbmit">
-    <ul>
-      <!-- 最新加入 -->
-      <li v-if="newUser">有新人加入</li>
-      <li v-for="(item,index) in speak" :key="index" :class="{active:item.name == userStorage}">
-        <span>
-          <font v-if="item.name == userStorage">：</font>
-          {{item.name}}
-          <font v-if="item.name != userStorage">：</font>
-        </span>
-        {{item.msg}}
-      </li>
-    </ul>
+  <div :class="$style.socket">
+    <div :span="16" :class="$style.left">
+      <div :class="$style.head">
+        <h4>多人实时在线聊天</h4>
+      </div>
+
+      <div :class="$style.chat">
+        <vue-scroll :ops='ops'>
+          <template v-for="(item, index) in speakList">
+            <div v-if="item.user._id === userInfo._id" :class="[$style.item ,$style.me]" :key="index">
+              <div :class="$style.text">{{item.msg}}</div>
+              <el-avatar :src="`${baseApi}${item.user.avatar}`"></el-avatar>
+            </div>
+
+            <div v-else :class="$style.item" :key="index">
+              <el-avatar :src="`${baseApi}${item.user.avatar}`"></el-avatar>
+              <div :class="$style.text">{{item.msg}}</div>
+            </div>
+          </template>
+        </vue-scroll>
+      </div>
+
+
+      <div :class="$style.input">
+        <el-input
+          type="textarea"
+          placeholder="请输入内容"
+          v-model="inValue"
+          maxlength="30"
+          show-word-limit
+          >
+        </el-input>
+
+        <div :class="$style.button">
+          <el-button :disabled="!inValue" type="primary" size="small" @click="submit">发送</el-button>
+        </div>
+      </div>
+    </div>
+
+    <div :span="8" :class="$style.right">
+      <div :class="$style.head">
+        <el-input
+          size="small"
+          placeholder="请输入内容"
+          prefix-icon="el-icon-search"
+          v-model="search">
+        </el-input>
+      </div>
+
+      <div :class="$style['on-line']">
+        <vue-scroll :ops='ops'>
+          <div :class="$style.item" v-for="(item, index) in onLine" :key="index">
+            <el-avatar size="small" :src="`${baseApi}${item.avatar}`"></el-avatar>
+            <div :class="$style.info">
+              <h4 :class="$style.name">{{item.name}}</h4>
+              <p :class="$style.text">{{item.introduce}}</p>
+            </div>
+          </div>
+        </vue-scroll>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
+  name: 'socket',
+  computed: {
+    ...mapState('user', ['userInfo']),
   },
   data() {
     return {
-      speak: [], // 聊天记录
+      baseApi: process.env.VUE_APP_BASE_API,
+      search: '',
+      speakList: [], // 聊天记录
       inValue: '', // 当前输入信息
-      userIp: '未知用户',
-      userStorage: localStorage.getItem('userId'),
-      newUser: false, // 是否有新人加入
-      userNmber: 0, // 在线人数
+      onLine: {}, // 当前在线用户
+      ops: {
+        scrollPanel: {
+          scrollingX: false,
+        },
+        bar: {
+          background: '#aaaaaa',
+          onlyShowBarOnScroll: true,
+          opacity: 0.2,
+        },
+      },
     };
   },
-  // created() {
-  //   fetch(process.env.VUE_APP_BASE_API)
-  //     .then((response) => response.json())
-  //     .then((myJson) => {
-  //       console.log(myJson);
-  //     });
-  // },
   mounted() {
-    this.$socket.emit('connect', 1);
-    console.log(this.userStorage);
+    this.$socket.emit('connect', true);
   },
   methods: {
     // 提交向后端发送数据
-    btn_sbmit() {
-      if (!localStorage.getItem('userId')) {
-        this.userIp = this.formatDateTime() + Math.random().toString(36).substr(2);
-        this.speak.push({ name: this.userIp.substr(-5, 5), msg: this.inValue });
-        this.$socket.emit('send', { name: `用户${this.userIp.substr(-5, 5)}`, getMsg: this.inValue });
-        localStorage.setItem('userId', `用户${this.userIp.substr(-5, 5)}`);
-        this.userStorage = localStorage.getItem('userId');
-      } else {
-        this.speak.push({ name: localStorage.getItem('userId'), msg: this.inValue });
-        this.$socket.emit('send', { name: localStorage.getItem('userId'), getMsg: this.inValue });
-      }
+    submit() {
+      const { _id: id } = this.userInfo;
+      this.$socket.emit('send', { user: id, getMsg: this.inValue });
       this.inValue = '';
-    },
-    // 生成id
-    formatDateTime() {
-      const date = new Date();
-      const y = date.getFullYear();
-      let m = date.getMonth() + 1;
-      m = m < 10 ? (`0${m}`) : m;
-      let d = date.getDate();
-      d = d < 10 ? (`0${d}`) : d;
-      const h = date.getHours();
-      const minute = date.getMinutes();
-      const second = date.getSeconds();
-      return y + m + d + h + minute + second;
     },
   },
   sockets: {
     connect(data) {
-      if (data) {
-        console.log('连接成功', data);
-        this.$socket.emit('users');
+      if (data) { // 连接成功
+        this.$socket.emit('users', this.userInfo);
+        this.$socket.emit('one');
       }
     },
     users(data) {
-      console.log('在线人数', data);
-      this.userNmber = data;
+      this.onLine = data;
     },
-    reconnect(data) {
-      console.log('重新连接', data);
-    },
-    disconnecting(data) {
-      console.log(data);
-      console.log('socket已断开连接');
-      this.$socket.emit('users');
-    },
-    // 有新人加入
-    // userinfoNumber(data){
-    //   this.userNmber = true;
+    // reconnect(data) {
+    //   console.log('重新连接', data);
     // },
-    getMsg(data) {
-      console.log('后端传过来的消息', data);
-      this.speak = data;
+    disconnecting(data) {
+      console.log('socket已断开连接', data);
     },
+    getMsg(data) {
+      this.speakList = data;
+    },
+  },
+  destroyed() {
+    debugger;
   },
 };
 </script>
+
+<style lang="scss" module>
+.socket {
+  padding: 20px;
+  background: white;
+  display: flex;
+  .left{
+    border: 1px solid #f0f0f0;
+    width: 70%;
+    .head {
+      background: #f3f3f3;
+      text-align: center;
+      padding: 10px;
+      h4{
+        padding: 0;
+        line-height: 32px;
+      }
+    }
+    .chat{
+      height: calc(100vh - 295px);
+      .item{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        justify-content: flex-start;
+        .text{
+          background: #f7f7f7;
+          color: #666666;
+          font-size: 12px;
+          line-height: 16px;
+          padding: 10px;
+          margin-left: 10px;
+          border-radius: 10px;
+          max-width: 70%;
+        }
+      }
+      .me{
+        justify-content: flex-end;
+        .text{
+          margin: 0;
+          margin-right: 10px;
+          background: #e9f1f5;
+        }
+      }
+    }
+    .input{
+      border-top: 1px solid #f0f0f0;
+      padding: 20px 10px;
+      display: flex;
+      .button{
+        padding-left: 10px;
+      }
+    }
+  }
+  .right{
+    border: 1px solid #f0f0f0;
+    border-left: 0;
+    width: 30%;
+    .head {
+      background: #f3f3f3;
+      text-align: center;
+      padding: 10px;
+    }
+    .on-line{
+      height: calc(100vh - 200px);
+      .item{
+        padding: 10px;
+        display: flex;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: -1px;
+        .info{
+          padding-left: 10px;
+          .name{
+            padding: 0;
+          }
+          .text{
+            font-size: 12px;
+            color: #999999;
+            padding-top: 4px;
+          }
+        }
+        &:hover{
+          background: #e9f1f5;
+        }
+
+      }
+    }
+  }
+}
+</style>
