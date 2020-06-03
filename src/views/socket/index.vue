@@ -42,7 +42,7 @@
       <div :class="$style.head">
         <el-input
           size="small"
-          placeholder="请输入内容"
+          placeholder="当前在线"
           prefix-icon="el-icon-search"
           v-model="search">
         </el-input>
@@ -111,16 +111,15 @@ export default {
     users(data) {
       this.onLine = data;
     },
-    // reconnect(data) {
-    //   console.log('重新连接', data);
-    // },
-    disconnecting(data) {
-      console.log('socket已断开连接', data);
+    reconnect(data) {
+      console.log('重新连接', data);
+    },
+    disconnecting() {
+      this.$socket.emit('discUsers', this.userInfo);
     },
     getMsg(data) {
       this.speakList = data;
       this.$nextTick(() => {
-        console.log(`#d${this.speakList.length}`);
         this.$refs.vs.scrollIntoView(`#d${this.speakList.length - 1}`, 500);
       });
     },

@@ -3,14 +3,14 @@ export default [
     id: '1',
     menuName: 'home',
     invokeUrl: '/index',
-    iconStr: 'el-icon-s-home',
+    iconStr: 'el-icon-school',
     subMenus: [],
   },
   {
     id: '2',
     menuName: 'system.default',
     invokeUrl: '/system',
-    iconStr: 'el-icon-s-tools',
+    iconStr: 'el-icon-setting',
     subMenus: [
       {
         id: '3',
