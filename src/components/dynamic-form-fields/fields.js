@@ -128,7 +128,7 @@ function formatColumn(column) {
         components: fieldEnum[item.columnType].components,
         formatter: fieldEnum[item.columnType].formatter,
         align: 'center',
-        'min-width': '160',
+        'min-width': '200',
       });
     }
     return c;
