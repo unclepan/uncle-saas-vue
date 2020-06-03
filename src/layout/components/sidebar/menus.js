@@ -3,14 +3,14 @@ export default [
     id: '1',
     menuName: 'home',
     invokeUrl: '/index',
-    iconStr: 'el-icon-school',
+    iconStr: 'iconhome-fill',
     subMenus: [],
   },
   {
     id: '2',
     menuName: 'system.default',
     invokeUrl: '/system',
-    iconStr: 'el-icon-setting',
+    iconStr: 'iconsetting-fill',
     subMenus: [
       {
         id: '3',
@@ -48,7 +48,7 @@ export default [
     id: '8',
     menuName: 'socket',
     invokeUrl: '/socket',
-    iconStr: 'el-icon-chat-line-square',
+    iconStr: 'iconmessage-fill',
     subMenus: [],
   },
 ];
