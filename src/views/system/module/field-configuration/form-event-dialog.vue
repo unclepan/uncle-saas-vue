@@ -65,8 +65,12 @@ export default {
       this.$refs.dialog.dialogVisible = true;
     },
     opera(val) {
+      const obj = {};
+      Object.keys(val).forEach((item) => {
+        obj[item] = val[item] ? val[item].replace(/\s+/g, '') : val[item];
+      });
       this.$refs.dialog.dialogVisible = false;
-      this.$emit('success', val);
+      this.$emit('success', obj);
     },
   },
 };
