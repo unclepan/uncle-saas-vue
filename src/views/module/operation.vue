@@ -33,6 +33,7 @@ import aForm from 'components/dynamic-form-fields/form/index.vue';
 import aTitle from 'components/a-title.vue';
 import middlewares from 'lib/middlewares';
 import message from 'lib/message';
+import script from 'lib/script';
 import { getGeneralModule, createModuleGeneral, updateModuleGeneral } from 'wrapper/ajax/module';
 import { getPropString, getPropObject } from 'lib/vue-prop';
 
@@ -99,14 +100,25 @@ export default {
             if (this.type === 'edit') {
               value = this.editData[i.name];
             }
+
+            // 事件通信处理
+            const { event } = i;
+            if (event.emit) {
+              event.emit = script(event.emit);
+            }
+            if (event.on) {
+              event.on = script(event.on);
+            }
+
             return {
-              ...i, rules, options, value,
+              ...i, rules, options, value, event,
             };
           });
           list = middlewares.init(list, this, 'options');
           return { ...item, list };
         });
         this.moduleInfo = { ...res.data, module: modu };
+        console.log(this.moduleInfo);
       });
     },
   },

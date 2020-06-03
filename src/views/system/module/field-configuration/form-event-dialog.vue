@@ -44,7 +44,7 @@ export default {
           type: 'TEXTAREA',
           rules: [],
           meta: {
-            placeholder: '请填写脚本',
+            placeholder: "例如：{name: 'eventName' }",
             rows: 4,
           },
         },
@@ -55,7 +55,7 @@ export default {
           type: 'TEXTAREA',
           rules: [],
           meta: {
-            placeholder: '请填写脚本',
+            placeholder: "例如：{name: 'eventName',listener: toComponent => (fromComponent) => {console.log(toComponent, fromComponent);}}",
             rows: 4,
           },
         },

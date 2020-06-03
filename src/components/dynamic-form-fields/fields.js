@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-// 1. 动态表单组件
+// 动态表单组件
 class Fields {
   constructor(data) {
     const Fie = data.reduce((result, Component) => {
@@ -85,7 +85,7 @@ const fieldEnum = {
   },
 };
 
-// 2. 后台字段配置字段池
+// 后台字段配置字段池
 const itemEnum = Object.keys(fieldEnum).map((item) => {
   let rules = [];
   let value = '';
@@ -118,7 +118,7 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
 });
 
 
-// 3.格式化表格列
+// 格式化表格列
 function formatColumn(column) {
   return column.reduce((col, item) => {
     let c = col;
