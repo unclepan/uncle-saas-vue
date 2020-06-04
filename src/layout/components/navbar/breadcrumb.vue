@@ -5,9 +5,9 @@
         <span
           v-if="item.redirect==='noRedirect'|| index==levelList.length-1"
           :class="$style['no-redirect']">
-          {{$t(`m.${item.meta.title}`)}}
+          {{$t(`m.${item.title}`)}}
         </span>
-        <a v-else @click.prevent="handleLink(item)">{{$t(`m.${item.meta.title}`)}}</a>
+        <a v-else @click.prevent="handleLink(item)">{{$t(`m.${item.title}`)}}</a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -42,7 +42,15 @@ export default {
         matched = [{ path: '/index', meta: { title: 'home' } }].concat(matched);
       }
       this.levelList = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false);
-      console.log(this.levelList);
+      // 动态模块单独处理
+      this.levelList = this.levelList.map((item) => {
+        let { title = 'no-name' } = item.meta;
+        if (['module.list'].indexOf(item.name) >= 0) {
+          const { ename } = this.$route.params;
+          title = `far.${ename}`;
+        }
+        return { ...item, title };
+      });
     },
     isDashboard(route) {
       const name = route && route.name;
