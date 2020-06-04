@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.layout" v-if="isShow">
     <sidebar :menuList='menuList'/>
-    <div :class="$style['main-container']" :style="{paddingLeft: isCollapse ? '64px': '200px', minWidth: '960px'}">
+    <div :class="$style['main-container']" :style="{paddingLeft: isCollapse ? '64px': '180px', minWidth: '960px'}">
       <navbar @logout="logout" @personal="personal"/>
       <tags-view id="handler-tags-view" @refresh="reloadView"/>
       <app-main ref="appMain"/>
