@@ -38,8 +38,13 @@ const fieldEnum = {
     components: null,
     formatter: null,
   },
+  URL: {
+    name: '链接',
+    components: { key: 'url' },
+    formatter: null,
+  },
   TEXTAREA: {
-    name: '多行文本输入框',
+    name: '多行文本',
     components: null,
     formatter: null,
   },
@@ -96,6 +101,11 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
   }
   if (['SWITCH'].indexOf(item) >= 0) {
     value = false;
+  }
+  if (['URL'].indexOf(item) >= 0) {
+    rules = [
+      { type: 'url', message: '链接类型', trigger: 'blur' },
+    ];
   }
   return {
     name: item.toLowerCase(),

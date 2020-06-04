@@ -104,6 +104,7 @@ import tooltip from './components/tooltip.vue';
 import aswitch from './components/switch.vue';
 import state from './components/state.vue';
 import filelink from './components/filelink.vue';
+import url from './components/url.vue';
 
 export default {
   props: {
@@ -116,6 +117,7 @@ export default {
     tooltip,
     state,
     filelink,
+    url,
   },
   data() {
     return {
