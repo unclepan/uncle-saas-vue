@@ -12,6 +12,7 @@ export default {
     prev: '上一步',
     close: '关闭',
     complete: '完成',
+    icon: '图标',
     login: {
       default: '登陆',
       started: '你好！欢迎登陆管理系统',

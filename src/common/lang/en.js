@@ -12,6 +12,7 @@ export default {
     prev: 'Prev',
     close: 'Close',
     complete: 'Complete',
+    icon: 'Icon',
     login: {
       default: 'Login',
       started: "Hello! let's get started",

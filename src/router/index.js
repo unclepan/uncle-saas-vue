@@ -43,6 +43,12 @@ export const constantRoutes = [
         meta: { title: 'home', affix: true }, // title 用于国际化等，affix 固定钉
       },
       {
+        path: '/icon',
+        name: 'icon',
+        component: () => import('../views/icon.vue'),
+        meta: { title: 'icon' },
+      },
+      {
         path: 'personal',
         component: () => import(/* webpackChunkName: "personal" */ '@/views/personal/index'),
         name: 'personal',
