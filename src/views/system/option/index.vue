@@ -148,6 +148,6 @@ export default {
 <style lang="scss" module>
 .option{
   background: #ffffff;
-  padding: 20px;
+  padding: 13px;
 }
 </style>

@@ -169,7 +169,7 @@ export default {
 
 <style lang="scss" module>
 .personal{
-  padding: 20px;
+  padding: 13px;
   background: white;
   .header{
     display: flex;

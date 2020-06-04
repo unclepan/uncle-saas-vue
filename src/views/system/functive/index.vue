@@ -128,7 +128,7 @@ export default {
 
 <style lang="scss" module>
 .functive{
-  padding: 20px;
+  padding: 13px;
   background: white;
   .tree{
     border: 1px solid #f0f0f0;

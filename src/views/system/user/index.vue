@@ -152,7 +152,7 @@ export default {
 
 <style lang="scss" module>
 .role{
-  padding: 20px;
+  padding: 13px;
   background: white;
 }
 </style>

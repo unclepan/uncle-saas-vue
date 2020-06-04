@@ -92,7 +92,7 @@ export default {
 </script>
 <style lang="scss" module>
   .condition{
-    padding: 20px;
+    padding: 13px;
     background: white;
     margin-bottom: 10px;
     .query-time {

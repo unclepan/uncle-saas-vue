@@ -102,7 +102,7 @@ export default {
 
 <style lang="scss" module>
 .add{
-  padding: 20px;
+  padding: 13px;
   background: white;
 }
 </style>

@@ -131,7 +131,7 @@ export default {
 
 <style lang="scss" module>
 .operation{
-  padding: 20px;
+  padding: 13px;
   background: white;
   .block{
     padding-bottom: 20px;

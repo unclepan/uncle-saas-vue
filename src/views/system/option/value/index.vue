@@ -149,6 +149,6 @@ export default {
 <style lang="scss" module>
 .option-value{
   background: #ffffff;
-  padding: 20px;
+  padding: 13px;
 }
 </style>

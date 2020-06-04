@@ -300,7 +300,7 @@ export default {
 </script>
 <style lang="scss" module>
 .header{
-  padding: 20px;
+  padding: 13px;
   padding-bottom: 0;
   background: white;
 }
@@ -308,7 +308,7 @@ export default {
   padding: 10px 0;
   .col{
     border: 1px solid #f0f0f0;
-    padding: 20px;
+    padding: 13px;
     padding-bottom: 0;
     margin-bottom: 10px;
     background: white;

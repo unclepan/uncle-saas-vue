@@ -132,7 +132,7 @@ export default {
 
 <style lang="scss" module>
 .socket {
-  padding: 20px;
+  padding: 13px;
   background: white;
   display: flex;
   .left{
