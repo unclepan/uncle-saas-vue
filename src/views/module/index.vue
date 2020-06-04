@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import aTitle from 'components/a-title.vue';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
@@ -72,7 +73,23 @@ export default {
           count, current, data, size, moduleName,
         } = res.data;
         this.moduleName = moduleName;
-        this.tableData.column = formatColumn(data.column);
+
+        const column = formatColumn(data.column);
+        this.tableData.column = column.concat({
+          prop: 'createdAt',
+          label: '创建时间',
+          formatter: (row) => moment(row.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+          width: '180',
+          align: 'center',
+        },
+        {
+          prop: 'updatedAt',
+          label: '更新时间',
+          formatter: (row) => moment(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+          width: '180',
+          align: 'center',
+        });
+
         this.tableData.row = data.row;
         this.tableData.operation = middlewares.init(this.operation, this);
         this.tableData.meta = data.meta;

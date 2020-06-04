@@ -72,6 +72,11 @@ export default {
       });
       if (done) {
         const { id, vid } = this.$route.params;
+        Object.keys(ruleForm).forEach((item) => {
+          if (!ruleForm[item] && ruleForm[item] !== 0) {
+            delete ruleForm[item];
+          }
+        });
         if (this.type === 'edit') {
           updateModuleGeneral(id, vid, ruleForm).then(() => {
             message.success('编辑成功');
@@ -118,7 +123,6 @@ export default {
           return { ...item, list };
         });
         this.moduleInfo = { ...res.data, module: modu };
-        console.log(this.moduleInfo);
       });
     },
   },

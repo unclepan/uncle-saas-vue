@@ -21,14 +21,26 @@ export default {
   },
   methods: {
     icon(val) {
-      if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(val)) {
+      if (/\.(png|jpe?g|gif|svg|psd)(\?.*)?$/.test(val)) {
         return 'iconfile-image-fill';
       }
       if (/\.xl(s[xmb]|t[xm]|am)$/.test(val)) {
         return 'iconfile-excel-fill';
       }
-      if (/\.(txt)(\?.*)?$/.test(val)) {
+      if (/\.(txt|html|css)(\?.*)?$/.test(val)) {
         return 'iconfile-text-fill';
+      }
+      if (/\.(ppt|pptx)(\?.*)?$/.test(val)) {
+        return 'iconfile-ppt-fill';
+      }
+      if (/\.(doc|docx)(\?.*)?$/.test(val)) {
+        return 'iconfile-word-fill';
+      }
+      if (/\.(pdf)(\?.*)?$/.test(val)) {
+        return 'iconfile-pdf-fill';
+      }
+      if (/\.(zip|rar|arj)(\?.*)?$/.test(val)) {
+        return 'iconfile-zip-fill';
       }
       return 'iconfile-unknown-fill';
     },
@@ -38,12 +50,12 @@ export default {
 <style lang="scss" module>
 .link{
   text-align: left;
-  line-height: 22px;
+  line-height: 30px;
   display: flex;
   align-items: center;
   i{
     font-size: 20px;
-    color: #409EFF;
+    color: #F56C6C;
     padding-right: 6px;
   }
   a{
