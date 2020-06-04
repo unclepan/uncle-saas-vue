@@ -129,7 +129,7 @@ export default {
                 state: true,
                 parent: 'parent',
                 moduleId,
-                link: `/module/list/${moduleId}`,
+                link: `/module/list/${ename}/${moduleId}`,
               }).then(() => {
                 message.success('推送成功，请到功能项管理模块查看');
                 this.init();

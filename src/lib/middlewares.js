@@ -66,9 +66,9 @@ const middle = {
 
   forModuleEdit(val) {
     return (data) => {
-      const { id } = val.components.$route.params;
+      const { ename, id } = val.components.$route.params;
       const { _id: vid } = data;
-      router.push({ name: val.pathName, params: { id, vid } });
+      router.push({ name: val.pathName, params: { ename, id, vid } });
     };
   },
   forModuleDel(val) {

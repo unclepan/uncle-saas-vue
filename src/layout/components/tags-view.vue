@@ -11,7 +11,7 @@
           :key="index"
           :closable="!item.meta.affix">
           <i v-if="!item.meta.noRefresh" class="el-icon-refresh" @click="$emit('refresh')"></i>
-          {{$t(`m.${item.meta.title}`)}}
+          {{$t(`m.${item.title}`)}}
         </el-tag>
       </vue-scroll>
   </div>
@@ -84,17 +84,30 @@ export default {
       const { affixTags } = this;
       affixTags.forEach((item) => {
         if (item.name) {
-          this.tags.push(item);
+          let { title = 'no-name' } = item.meta;
+          // 动态模块单独处理
+          if (['module.list'].indexOf(item.name) >= 0) {
+            const { ename } = this.$route.params;
+            title = `far.${ename}`;
+          }
+          this.tags.push({ ...item, title });
         }
       });
     },
     addTags() {
       const { name } = this.$route;
       if (name) {
-        if (this.tags.some((v) => v.path === this.$route.path)) return;
+        let { title = 'no-name' } = this.$route.meta;
+        const { noAdd } = this.$route.meta;
+        // 动态模块单独处理
+        if (['module.list'].indexOf(name) >= 0) {
+          const { ename } = this.$route.params;
+          title = `far.${ename}`;
+        }
+        if (this.tags.some((v) => v.path === this.$route.path) || noAdd) return;
         this.tags.push({
           ...this.$route,
-          title: this.$route.meta.title || 'no-name',
+          title,
           name,
         });
       }

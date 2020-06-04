@@ -42,6 +42,7 @@ export default {
         matched = [{ path: '/index', meta: { title: 'home' } }].concat(matched);
       }
       this.levelList = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false);
+      console.log(this.levelList);
     },
     isDashboard(route) {
       const name = route && route.name;

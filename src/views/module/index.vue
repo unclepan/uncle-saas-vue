@@ -61,8 +61,8 @@ export default {
   },
   methods: {
     add() {
-      const { id } = this.$route.params;
-      this.$router.push({ name: 'module.add', params: { id } });
+      const { ename, id } = this.$route.params;
+      this.$router.push({ name: 'module.add', params: { ename, id } });
     },
     init() {
       this.loading = true;
