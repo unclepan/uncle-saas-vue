@@ -1,7 +1,8 @@
 <template>
   <div :class="$style.link">
     <i class="icon iconfont" :class="icon(link)"></i>
-    <a :href="`${baseApi}${link}`" :download="link">{{link | substr(18, -18)}}</a>
+    <a v-if="link" :href="`${baseApi}${link}`" :download="link">{{link | substr(18, -18)}}</a>
+    <span v-else>文件内容为空，请上传</span>
   </div>
 </template>
 

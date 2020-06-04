@@ -187,6 +187,6 @@ export default {
 <style lang="scss" module>
 .module{
   background: #ffffff;
-  padding: 16px;
+  padding: 20px;
 }
 </style>
