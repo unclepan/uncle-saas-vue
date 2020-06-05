@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.condition">
     <a-title>
-      筛选条件
+      <slot name="title">筛选条件</slot>
       <template slot="button">
         <span :class="$style['query-time']">距上次查询已过去：{{ past }}分钟</span>
         <el-button v-if="btnShow.reset" size="mini" @click="reset()">重置</el-button>

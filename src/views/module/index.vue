@@ -1,11 +1,11 @@
 <template>
   <div :class="$style.module">
-    <a-title>
-      <span>{{moduleName}}</span>
-      <template slot="button">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="add()">新增</el-button>
-      </template>
-    </a-title>
+   <condition
+      v-if="condList"
+      ref="condition"
+      @add="add"
+      @search="search"
+      :condList="condList"/>
     <a-table v-loading="loading" :tableData="tableData"/>
     <pagination :pagina="pagina" :sizeChange="sizeChange" :currentChange="currentChange"/>
   </div>
@@ -14,17 +14,18 @@
 
 <script>
 import moment from 'moment';
-import aTitle from 'components/a-title.vue';
 import aTable from 'components/a-table/index.vue';
 import pagination from 'components/pagination/index.vue';
 import middlewares from 'lib/middlewares';
-import { formatColumn } from 'components/dynamic-form-fields/fields';
+import condition from 'components/condition/index.vue';
+import { formatColumn, formatCondList } from 'components/dynamic-form-fields/fields';
 import { getGeneralList } from 'wrapper/ajax/module';
 
 export default {
   name: 'module.list',
   data() {
     return {
+      condList: null,
       moduleName: '',
       loading: true,
       pagina: {
@@ -52,7 +53,7 @@ export default {
     };
   },
   components: {
-    aTitle,
+    condition,
     aTable,
     pagination,
   },
@@ -64,10 +65,17 @@ export default {
       const { ename, id } = this.$route.params;
       this.$router.push({ name: 'module.add', params: { ename, id } });
     },
+    search() {
+      this.init();
+    },
     init() {
       this.loading = true;
       const { id } = this.$route.params;
-      const params = { size: this.pagina.size, current: this.pagina.current };
+      let form = {};
+      if (this.condList) {
+        form = this.$refs.condition.form;
+      }
+      const params = { ...form, size: this.pagina.size, current: this.pagina.current };
       getGeneralList(id, params).then((res) => {
         const {
           count, current, data, size, moduleName,
@@ -91,6 +99,7 @@ export default {
         });
 
         this.tableData.row = data.row;
+        // operation，meta 后期可拓展功能
         this.tableData.operation = middlewares.init(this.operation, this);
         this.tableData.meta = data.meta;
         const pagina = {
@@ -99,6 +108,9 @@ export default {
           total: count,
         };
         this.pagina = pagina;
+
+        // 搜索组件
+        this.condList = formatCondList(data.column);
         this.loading = false;
       });
     },

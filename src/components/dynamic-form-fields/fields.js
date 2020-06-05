@@ -1,4 +1,5 @@
 import moment from 'moment';
+import request from 'wrapper/ajax/basic';
 
 // 动态表单组件
 class Fields {
@@ -31,62 +32,72 @@ class Fields {
   }
 }
 
-
 const fieldEnum = {
   TEXT: {
     name: '输入框',
     components: null,
     formatter: null,
+    condition: 'a-input',
   },
   URL: {
     name: '链接',
     components: { key: 'url' },
     formatter: null,
+    condition: 'a-input',
   },
   TEXTAREA: {
     name: '多行文本',
     components: null,
     formatter: null,
+    condition: 'a-input',
   },
   NUMBER: {
     name: '纯数字',
     components: null,
     formatter: null,
+    condition: 'a-input',
   },
   CURRENCY: {
     name: '货币',
     components: null,
     formatter: null,
+    condition: 'a-input',
   },
   PERCENT: {
     name: '百分比',
     components: null,
     formatter: null,
+    condition: 'a-input',
   },
   DATE: {
     name: '日期',
     components: null,
     formatter: (row, prop) => moment(row[prop]).format('YYYY-MM-DD HH:mm:ss'),
+    condition: 'a-input',
   },
   SELECT: {
     name: '下拉选择',
     components: null,
     formatter: null,
+    condition: 'a-single',
   },
   SWITCH: {
     name: '开关',
     components: { key: 'state' },
     formatter: null,
+    condition: 'a-single',
   },
   UPLOAD: {
     name: '上传',
     components: { key: 'filelink' },
     formatter: null,
+    condition: 'a-input',
   },
   RADIO: {
     name: '单选',
     components: null,
     formatter: null,
+    condition: 'a-single',
   },
 };
 
@@ -127,7 +138,6 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
   };
 });
 
-
 // 格式化表格列
 function formatColumn(column) {
   return column.reduce((col, item) => {
@@ -145,8 +155,50 @@ function formatColumn(column) {
   }, []);
 }
 
+// 格式化搜索条件
+function formatCondList(column) {
+  return column.reduce((col, item) => {
+    let c = col;
+    if (item.showToList && item.searchAsList) {
+      const meta = {
+        label: item.label,
+      };
+      if (item.options && fieldEnum[item.columnType].condition !== 'a-input') {
+        meta.optionsFun = async (search) => {
+          const op = await request({
+            url: item.options,
+            method: 'GET',
+            params: { search },
+          });
+          return op.data;
+        };
+      }
+      if (item.columnType === 'SWITCH') {
+        meta.optionsFun = () => [
+          {
+            name: '开',
+            value: true,
+          },
+          {
+            name: '关',
+            value: false,
+          },
+        ];
+      }
+      c = col.concat({
+        name: item.prop,
+        key: fieldEnum[item.columnType].condition,
+        value: '',
+        meta,
+      });
+    }
+    return c;
+  }, []);
+}
+
 export {
   Fields,
   itemEnum,
   formatColumn,
+  formatCondList,
 };

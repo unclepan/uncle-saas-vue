@@ -32,7 +32,6 @@ const i18n = new VueI18n({
 Vue.use(ElementUI);
 Vue.use(vuescroll);
 
-console.log();
 Vue.use(new VueSocketIO({
   debug: process.env.NODE_ENV === 'development', // 设置true可以让你的控制台文字变颜色，更好的调试阅读
   connection: process.env.VUE_APP_BASE_API,

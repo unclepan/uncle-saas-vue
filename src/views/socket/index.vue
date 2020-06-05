@@ -44,6 +44,7 @@
           size="small"
           placeholder="当前在线"
           prefix-icon="el-icon-search"
+          clearable
           v-model="search">
         </el-input>
       </div>
