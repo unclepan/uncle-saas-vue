@@ -50,7 +50,7 @@
 
       <div :class="$style['on-line']">
         <vue-scroll :ops='ops'>
-          <div :class="$style.item" v-for="(item, index) in onLine" :key="index">
+          <div :class="$style.item" v-for="(item, index) in onLine" :key="index" v-show="showOnLine(item)">
             <el-avatar size="small" :src="`${baseApi}${item.avatar}`"></el-avatar>
             <div :class="$style.info">
               <h4 :class="$style.name">{{item.name}}</h4>
@@ -99,6 +99,10 @@ export default {
       const { _id: id } = this.userInfo;
       this.$socket.emit('send', { user: id, getMsg: this.inValue });
       this.inValue = '';
+    },
+    showOnLine(val) {
+      if (val.name.indexOf(this.search) >= 0) return true;
+      return false;
     },
   },
   sockets: {
