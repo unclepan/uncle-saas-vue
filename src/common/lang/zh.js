@@ -1,5 +1,6 @@
 export default {
   m: {
+    test: '测试',
     error: '错误',
     guide: '系统指引',
     setUp: '设置',

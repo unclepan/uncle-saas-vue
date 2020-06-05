@@ -43,7 +43,7 @@ export const constantRoutes = [
         meta: { title: 'home', affix: true }, // title 用于国际化等，affix 固定钉
       },
       {
-        path: '/icon',
+        path: 'icon',
         name: 'icon',
         component: () => import('../views/icon.vue'),
         meta: { title: 'icon' },
@@ -59,6 +59,12 @@ export const constantRoutes = [
         name: 'socket',
         component: () => import('@/views/socket/index.vue'),
         meta: { title: 'socket' },
+      },
+      {
+        path: 'test',
+        name: 'test',
+        component: () => import('@/views/test.vue'),
+        meta: { title: 'test' },
       },
     ],
   },

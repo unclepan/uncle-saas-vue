@@ -14,7 +14,7 @@
 
   <div :class="$style['configuration']">
     <el-row :gutter="10">
-      <el-col :span="5">
+      <el-col :span="5" :class="$style.sticky">
         <div :class="$style.col">
           <div :class="$style.title">
             <h4>
@@ -113,7 +113,7 @@
         </draggable>
       </el-col>
 
-      <el-col :span="6">
+      <el-col :span="6" :class="$style.sticky">
         <div :class="$style.col">
           <div :class="$style.title">
             <h4>
@@ -191,6 +191,7 @@
           </div>
         </div>
       </el-col>
+
     </el-row>
   </div>
 </div>
@@ -306,6 +307,10 @@ export default {
 }
 .configuration{
   padding: 10px 0;
+  .sticky{
+    position: sticky;
+    top:0;
+  }
   .col{
     border: 1px solid #f0f0f0;
     padding: 13px;

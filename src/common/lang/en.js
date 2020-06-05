@@ -1,5 +1,6 @@
 export default {
   m: {
+    test: 'Test',
     error: 'Error',
     guide: 'Guide',
     setUp: 'Set Up',
