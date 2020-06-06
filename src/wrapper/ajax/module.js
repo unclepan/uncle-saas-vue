@@ -45,14 +45,14 @@ export function del(id) {
   });
 }
 
-export function getGeneralList(id, params) {
+export function getGeneralList(id, params, data) {
   return request({
-    url: `api/module/general/${id}`,
-    method: 'GET',
+    url: `api/module/general/get/${id}`,
+    method: 'POST',
     params,
+    data,
   });
 }
-
 
 export function getGeneralModule(id) {
   return request({

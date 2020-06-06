@@ -1,11 +1,11 @@
 <template>
-  <span :class="$style['reference']" @click="inputClick()">
+  <span :class="$style['reference']">
     <el-tooltip
       :disabled="visible || changeData.length < substr"
       effect="dark"
       :content="changeData || '请填写'"
       placement="top">
-        <span :class="$style.text">
+        <span :class="$style.text" @click="inputClick()">
             <span :class="$style.label">{{label}}：</span>
             <template v-if="visible">
               <el-input
@@ -14,10 +14,10 @@
                 :class="$style.input"
                 size="mini"
                 v-model="changeData"
-                placeholder="请输入">
+                placeholder="请输入"
+                clearable>
                 <template v-if="append" slot="append">{{append}}</template>
               </el-input>
-              <el-button @click.stop.prevent="inputBlur()" type="primary" size="mini">确定</el-button>
             </template>
             <span v-else>
               {{changeData || '请填写' | substr(substr)}}
@@ -25,7 +25,16 @@
             </span>
         </span>
     </el-tooltip>
-    <i class="el-icon-edit-outline" :class="{[$style['arrow-visible']]:visible}"></i>
+    <i
+      @mouseover="emptyingOperation=true"
+      @mouseout="emptyingOperation=false"
+      @click.stop="clearable()"
+      :class="{
+        [$style['arrow-visible']]:visible,
+        ['el-icon-edit-outline']: !emptyingOperation,
+        ['el-icon-error']: emptyingOperation
+      }">
+      </i>
   </span>
 </template>
 <script>
@@ -60,6 +69,7 @@ export default {
   },
   data() {
     return {
+      emptyingOperation: false,
       visible: false,
     };
   },
@@ -75,6 +85,9 @@ export default {
       this.visible = false;
       this.cb(this.changeData);
     },
+    clearable() {
+      this.changeData = '';
+    },
   },
 };
 </script>
@@ -84,11 +97,11 @@ export default {
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
-    cursor: pointer;
     .text{
       color: #3d4b59;
       padding-right: 5px;
       line-height: 28px;
+      cursor: pointer;
       .label{
         font-weight: bolder;
         color: #999999;

@@ -9,7 +9,7 @@
                 @input="search()"
                 v-model="searchString"
                 placeholder="筛选"
-                size="medium"
+                size="mini"
                 clearable>
             </el-input>
         </div>
@@ -57,7 +57,7 @@ import {
 export default {
   props: {
     checked: {},
-    labelWidth: getPropString('100%'),
+    labelWidth: getPropString('50%'),
     substr: getPropNumber(12),
     popoverWidth: getPropString('320'),
     label: getPropString('单选型筛选组件'),

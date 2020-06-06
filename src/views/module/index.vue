@@ -75,8 +75,8 @@ export default {
       if (this.condList) {
         form = this.$refs.condition.form;
       }
-      const params = { ...form, size: this.pagina.size, current: this.pagina.current };
-      getGeneralList(id, params).then((res) => {
+      const params = { size: this.pagina.size, current: this.pagina.current };
+      getGeneralList(id, params, form).then((res) => {
         const {
           count, current, data, size, moduleName,
         } = res.data;
