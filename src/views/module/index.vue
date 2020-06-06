@@ -1,15 +1,17 @@
 <template>
-  <div :class="$style.module">
-   <condition
+  <div>
+    <condition
       v-if="condList"
       ref="condition"
       @add="add"
       @search="search"
       :condList="condList"/>
-    <a-table v-loading="loading" :tableData="tableData"/>
-    <pagination :pagina="pagina" :sizeChange="sizeChange" :currentChange="currentChange"/>
-  </div>
 
+    <div :class="$style.module">
+      <a-table v-loading="loading" :tableData="tableData"/>
+      <pagination :pagina="pagina" :sizeChange="sizeChange" :currentChange="currentChange"/>
+    </div>
+  </div>
 </template>
 
 <script>

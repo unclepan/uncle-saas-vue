@@ -36,7 +36,9 @@
       </i>
   </span>
 </template>
+
 <script>
+
 import {
   getPropString,
   getPropNumber,
@@ -108,7 +110,6 @@ export default {
     align-items: center;
     .text{
       color: #3d4b59;
-      padding-right: 5px;
       line-height: 28px;
       cursor: pointer;
       .label{
@@ -116,14 +117,14 @@ export default {
         color: #999999;
       }
       .input{
-        padding-right: 5px;
-        width: 130px;
+        width: 150px;
         :global(.el-input-group__append){
             padding: 0 5px;
         }
       }
     }
     i{
+      padding-left: 5px;
       font-size: 14px;
       color: #9d9d9d;
       font-weight: 900;

@@ -28,10 +28,10 @@
             :sort="false"
             :clone="cloneHandle">
             <div
-              v-for="element in fields"
+              v-for="(element, index) in fields"
               :class="$style['field-item']"
               :key="element.name">
-              <p :class="$style.label">{{ element.label }}</p>
+              <p :class="$style.label">{{index + 1}}：{{ element.label }}</p>
             </div>
           </draggable>
         </div>

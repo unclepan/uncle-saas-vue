@@ -3,21 +3,21 @@
     <span :class="$style.label">{{label}}：</span>
     <el-date-picker
       :class="$style['date-picker']"
-      :style="{width: width}"
       @blur="blur"
       v-show="foc"
       ref='date'
       size="mini"
       :type="type"
       v-model="changeData"
-      v-bind="elementProps">
+      v-bind="elementProps"
+      value-format="timestamp">
     </el-date-picker>
 
     <span
       :class="$style.text"
       v-if="!foc"
       @click="dateFocus()">
-      {{changeDataLiteral||'请输入'}}
+      {{changeDataLiteral || '请输入'}}
     </span>
 
     <i
@@ -44,11 +44,10 @@ export default {
   props: {
     checked: {},
     elementProps: getPropObject(), // element属性
-    width: getPropString('130px'),
     label: getPropString('时间组件'),
     type: getPropString('date'),
     format: getPropString('YYYY-MM-DD'),
-    isClearable: getPropBoolean(false),
+    isClearable: getPropBoolean(true),
   },
   model: {
     prop: 'checked',
@@ -76,11 +75,10 @@ export default {
         const d = this.changeData.map((item) => moment(item).format(this.format)).join(' 至 ');
         return d;
       }
-      return moment(this.changeData).format(this.format);
+      return this.changeData ? moment(this.changeData).format(this.format) : '请选择';
     },
   },
-  mounted() {
-  },
+
   methods: {
     dateFocus() {
       this.foc = true;
@@ -111,17 +109,22 @@ export default {
 
 <style lang="scss" module>
 .date-picker-wrap{
+  padding:5px 26px 5px 0;
+  display: inline-block;
   .label{
+    line-height: 28px;
     font-weight: bolder;
     color: #999999;
   }
-  .date-picker{
-    margin: 5px;
+  .date-picker {
+    width: 150px;
   }
   .text{
+    line-height: 28px;
     cursor: pointer;
   }
   i{
+    padding-left: 5px;
     font-size: 16px;
     color: #9d9d9d;
     font-weight: 900;

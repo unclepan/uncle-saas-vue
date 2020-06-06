@@ -73,7 +73,7 @@ const fieldEnum = {
     name: '日期',
     components: null,
     formatter: (row, prop) => moment(row[prop]).format('YYYY-MM-DD HH:mm:ss'),
-    condition: 'a-input',
+    condition: 'a-date-picker',
   },
   SELECT: {
     name: '下拉选择',
