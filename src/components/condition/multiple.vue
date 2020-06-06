@@ -169,7 +169,6 @@ export default {
 .wrap-radio-group{
     padding: 10px;
     .search-string{
-        padding-bottom: 10px;
         margin-bottom: 20px;
     }
     :global(.el-radio), :global(.el-checkbox){

@@ -176,14 +176,18 @@ function formatCondList(column) {
       if (item.columnType === 'SWITCH') {
         meta.optionsFun = () => [
           {
-            name: '开',
+            name: '开启状态',
             value: true,
           },
           {
-            name: '关',
+            name: '关闭状态',
             value: false,
           },
         ];
+        meta.isSearch = false;
+      }
+      if (['NUMBER', 'CURRENCY', 'PERCENT'].indexOf(item.columnType) >= 0) {
+        meta.type = 'number';
       }
       c = col.concat({
         name: item.prop,

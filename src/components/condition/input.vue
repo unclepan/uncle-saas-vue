@@ -1,9 +1,9 @@
 <template>
   <span :class="$style['reference']">
     <el-tooltip
-      :disabled="visible || changeData.length < substr"
+      :disabled="visible || `${changeData}`.length < substr"
       effect="dark"
-      :content="changeData || '请填写'"
+      :content="`${changeData}` || '请填写'"
       placement="top">
         <span :class="$style.text" @click="inputClick()">
             <span :class="$style.label">{{label}}：</span>
@@ -14,13 +14,12 @@
                 :class="$style.input"
                 size="mini"
                 v-model="changeData"
-                placeholder="请输入"
-                clearable>
+                placeholder="请输入">
                 <template v-if="append" slot="append">{{append}}</template>
               </el-input>
             </template>
             <span v-else>
-              {{changeData || '请填写' | substr(substr)}}
+              {{`${changeData}` || '请填写' | substr(substr)}}
               <span v-if="append">{{append}}</span>
             </span>
         </span>
@@ -51,6 +50,7 @@ export default {
     label: getPropString('输入型筛选组件'),
     append: getPropString(),
     cb: getPropFunction(),
+    type: getPropString('text'),
   },
   model: {
     prop: 'checked',
@@ -62,6 +62,15 @@ export default {
         return this.checked;
       },
       set(val) {
+        if (this.type === 'number') {
+          const num = Number(val);
+          if (num && num !== 0) {
+            this.$emit('change', num);
+            return num;
+          }
+          this.$emit('change', '');
+          return '';
+        }
         this.$emit('change', val);
         return val;
       },
@@ -108,7 +117,7 @@ export default {
       }
       .input{
         padding-right: 5px;
-        width: 150px;
+        width: 130px;
         :global(.el-input-group__append){
             padding: 0 5px;
         }

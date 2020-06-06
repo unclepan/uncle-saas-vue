@@ -9,7 +9,6 @@
         <el-button v-if="btnShow.add" @click="add()" size="mini" type="primary">新增</el-button>
       </template>
     </a-title>
-
     <div>
       <component
         v-for="(item, index) in condList"
