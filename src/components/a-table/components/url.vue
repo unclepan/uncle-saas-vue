@@ -1,6 +1,8 @@
 <template>
   <div :class="$style.url">
-    <a v-if="url" :href="`${baseApi}${url}`" :download="url">{{url}}</a>
+    <i class="el-icon-link"></i>
+    <a v-if="url" :href="url" target="_blank">{{url}}</a>
+    <span v-else>链接为空</span>
   </div>
 </template>
 
@@ -15,7 +17,6 @@ export default {
   data() {
     return {
       url: this.row[this.column.prop],
-      baseApi: process.env.VUE_APP_BASE_API,
     };
   },
 };
@@ -28,7 +29,7 @@ export default {
   align-items: center;
   i{
     font-size: 20px;
-    color: #F56C6C;
+    color: #409EFF;
     padding-right: 6px;
   }
   a{
