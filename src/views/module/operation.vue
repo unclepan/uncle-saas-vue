@@ -73,7 +73,7 @@ export default {
       if (done) {
         const { id, vid } = this.$route.params;
         Object.keys(ruleForm).forEach((item) => {
-          if (!ruleForm[item] && ruleForm[item] !== 0) {
+          if (typeof ruleForm[item] === 'string' && !ruleForm[item]) {
             delete ruleForm[item];
           }
         });
