@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.url">
     <i class="el-icon-link"></i>
-    <a v-if="url" :href="url" target="_blank">{{url}}</a>
+    <a v-if="url" :href="url" target="_blank">{{url | substr(18)}}</a>
     <span v-else>链接为空</span>
   </div>
 </template>
