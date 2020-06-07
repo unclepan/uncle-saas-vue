@@ -140,14 +140,15 @@ const itemEnum = Object.keys(fieldEnum).map((item) => {
 
 // 格式化表格列
 function formatColumn(column) {
-  return column.reduce((col, item) => {
+  return column.reduce((col, item, index) => {
     let c = col;
     if (item.showToList) {
       c = col.concat({
         ...item,
         components: fieldEnum[item.columnType].components,
         formatter: fieldEnum[item.columnType].formatter,
-        align: 'center',
+        align: !index ? 'left' : 'center',
+        fixed: !index,
         'min-width': '200',
       });
     }
