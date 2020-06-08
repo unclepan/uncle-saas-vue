@@ -5,19 +5,19 @@ const module = [
     path: 'list/:ename/:id',
     name: 'module.list',
     component: () => import('../../views/module/index.vue'),
-    meta: { title: 'module.list' },
+    meta: { title: 'module.list', noRefresh: true },
   },
   {
     path: 'add/:ename/:id',
     name: 'module.add',
     component: () => import('../../views/module/add.vue'),
-    meta: { title: 'module.add' },
+    meta: { title: 'module.add', noRefresh: true },
   },
   {
     path: 'edit/:ename/:id/:vid',
     name: 'module.edit',
     component: () => import('../../views/module/edit.vue'),
-    meta: { title: 'module.edit' }, // noAdd 不push到tags-view
+    meta: { title: 'module.edit', noRefresh: true }, // noAdd 不push到tags-view
   },
 ];
 

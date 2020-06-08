@@ -3,7 +3,7 @@
     <a-title>
       <slot name="title">筛选条件</slot>
       <template slot="button">
-        <span :class="$style['query-time']">距上次查询已过去：{{ past }}分钟</span>
+        <span :class="$style['query-time']">距上次查询已过去：{{ past }} 秒</span>
         <el-button v-if="btnShow.reset" size="mini" @click="reset()">重置</el-button>
         <el-button v-if="btnShow.search" @click="search()" type="primary" icon="el-icon-search" size="mini">搜索</el-button>
         <el-button v-if="btnShow.add" @click="add()" size="mini" type="primary">新增</el-button>
@@ -67,12 +67,12 @@ export default {
   methods: {
     init() {
       this.timer = setInterval(() => {
-        this.past = Math.round((Date.now() - this.time) / 1000 / 60);
-      }, 1000 * 60);
+        this.past = Math.round((Date.now() - this.time) / 1000);
+      }, 1000);
     },
     rTime() {
       this.time = Date.now();
-      this.past = Math.round((Date.now() - this.time) / 1000 / 60);
+      this.past = Math.round((Date.now() - this.time) / 1000);
     },
     reset() {
       this.form = _.cloneDeep(this.cloneDeepForm);

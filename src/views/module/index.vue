@@ -1,6 +1,7 @@
 <template>
   <div>
     <condition
+      :key="moduId"
       v-if="condList"
       ref="condition"
       @add="add"
@@ -27,6 +28,7 @@ export default {
   name: 'module.list',
   data() {
     return {
+      moduId: this.$route.params.id,
       condList: null,
       moduleName: '',
       loading: true,
