@@ -1,34 +1,36 @@
 # uncle-saas-vue
 
-## Project setup
+## 项目安装
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 开发模式编译并热重载
 ```
 yarn run serve
+
+如果没有在本地启动后端，那么把 .env.development 文件里的 VUE_APP_BASE_API 改成 http://121.42.13.92:3000 再重新启动，连接远程的后端服务。
 ```
 
-### Compiles and minifies for production
+### 生产环境编译并压缩
 ```
 yarn run build
 ```
 
-### Run your tests
+### 运行测试
 ```
 yarn run test
 ```
 
-### Lints and fixes files
+### 格式化文件
 ```
 yarn run lint
 ```
 
-### Run your unit tests
+###运行单元册书
 ```
 yarn run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 线上地址
+查看 [线上地址](http://www.yangpan.work/#/index).
