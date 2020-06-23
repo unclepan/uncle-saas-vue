@@ -48,7 +48,7 @@ export default {
       if (isArray(this.param.options)) {
         this.options = this.param.options;
       } else if (isFunction(this.param.options)) {
-        this.param.options(this.cbOptions, this.value);
+        this.param.options(this.cbOptions);
       }
 
       if (this.param.type === 'SELECTREMOTE') {
