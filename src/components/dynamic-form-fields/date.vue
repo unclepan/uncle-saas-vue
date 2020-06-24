@@ -21,6 +21,15 @@ export default {
     fieldMixin,
   ],
   computed: {
+    value: {
+      get() {
+        return new Date(this.checked);
+      },
+      set(value) {
+        this.$emit('change', value);
+        return value;
+      },
+    },
     addParam() {
       if (this.$options.INDEX.indexOf(this.param.type) > -1) {
         return { ...this.param.meta, type: this.param.type.toLowerCase() };

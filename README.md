@@ -9,7 +9,7 @@ yarn install
 ```
 yarn run serve
 
-如果没有在本地启动后端，那么把 .env.development 文件里的 VUE_APP_BASE_API 改成 http://121.42.13.92:3000 再重新启动，连接远程的后端服务。
+如果没有在本地启动后端，那么把 .env.development 文件里的 VUE_APP_BASE_API 改成 http://121.42.13.92:3000 再重新启动。
 ```
 
 ### 生产环境编译并压缩
