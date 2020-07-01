@@ -23,7 +23,7 @@ export default {
   computed: {
     value: {
       get() {
-        return new Date(this.checked);
+        return this.checked ? new Date(this.checked) : '';
       },
       set(value) {
         this.$emit('change', value);
