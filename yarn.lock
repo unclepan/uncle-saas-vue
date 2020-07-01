@@ -2749,7 +2749,7 @@ core-js@^2.4.0:
   version "2.6.11"
   resolved "https://registry.npmjs.org/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
 
-core-js@^3.6.4:
+core-js@^3.6.4, core-js@^3.6.5:
   version "3.6.5"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
 
@@ -6217,6 +6217,10 @@ moment@^2.25.3:
   version "2.25.3"
   resolved "https://registry.npmjs.org/moment/-/moment-2.25.3.tgz#252ff41319cf41e47761a1a88cab30edfe9808c0"
 
+moment@^2.27.0:
+  version "2.27.0"
+  resolved "https://registry.npmjs.org/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -8840,6 +8844,14 @@ uglify-js@3.4.x:
   dependencies:
     commander "~2.19.0"
     source-map "~0.6.1"
+
+uncle-vue-chat@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.npmjs.org/uncle-vue-chat/-/uncle-vue-chat-0.1.4.tgz#9813940700e1610f4f7437fa0897ed300a5da280"
+  dependencies:
+    core-js "^3.6.5"
+    moment "^2.27.0"
+    vue "^2.6.11"
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
