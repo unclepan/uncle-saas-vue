@@ -1,4 +1,5 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 const absolutePath = require('./absolute.path');
 
 function resolve(dir) {
@@ -34,24 +35,54 @@ module.exports = {
       msTileImage: 'favicon.ico',
     },
   },
-  configureWebpack: {
-    entry: {
-      loading: './src/entry/loading/index.js',
-      app: './src/entry/main/index.js',
-    },
-    resolve: {
-      extensions: ['.js', '.vue', '.json'],
-      alias: {
-        vue$: 'vue/dist/vue.esm.js',
-        '@': resolve('src'),
-        $static: resolve('static'),
-        jquery: 'jquery',
-        ...absolutePath,
+  configureWebpack: (config) => {
+    const base = {
+      entry: {
+        loading: './src/entry/loading/index.js',
+        app: './src/entry/main/index.js',
       },
-    },
-    performance: {
-      maxEntrypointSize: 2048000,
-      maxAssetSize: 2048000,
-    },
+      resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+          vue$: 'vue/dist/vue.esm.js',
+          '@': resolve('src'),
+          $static: resolve('static'),
+          jquery: 'jquery',
+          ...absolutePath,
+        },
+      },
+      performance: {
+        maxEntrypointSize: 2048000,
+        maxAssetSize: 2048000,
+      },
+    };
+    Object.assign(config, base);
+    const con = config;
+    if (process.env.NODE_ENV === 'production') {
+      // 为生产环境修改配置
+      con.mode = 'production';
+      // 将每个依赖包打包成单独的js文件
+      const optimization = {
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: false,
+            terserOptions: {
+              compress: {
+                drop_console: true,
+                drop_debugger: true,
+              },
+            },
+          }),
+        ],
+      };
+      Object.assign(config, {
+        optimization,
+      });
+    } else {
+      // 为开发环境修改配置
+      con.mode = 'development';
+    }
   },
 };

@@ -18,6 +18,9 @@ service.interceptors.request.use(
     if (tc.contentType) {
       tc.headers['Content-Type'] = tc.contentType;
     }
+    if (typeof tc.url !== 'string') {
+      tc.url = `/api/${tc.url.join('/')}`;
+    }
     // 是一个负责 `params` 序列化的函数
     tc.paramsSerializer = (params) => Qs.stringify(params);
     tc.headers.Authorization = localStorage.getItem('userToken');

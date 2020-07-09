@@ -65,7 +65,8 @@ export function patch(data, userId) {
 
 export function users(params) {
   return request({
-    url: '/api/users',
+    // url: '/api/users',
+    url: ['users'],
     method: 'GET',
     params,
   });
@@ -74,7 +75,8 @@ export function users(params) {
 
 export function getUserBindRole(id) {
   return request({
-    url: `/api/users/${id}/bind/role`,
+    // url: `/api/users/${id}/bind/role`,
+    url: ['users', id, 'bind', 'role'],
     method: 'GET',
   });
 }

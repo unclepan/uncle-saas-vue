@@ -2,7 +2,8 @@ import request from './basic';
 
 export function get(params) {
   return request({
-    url: '/api/module',
+    // url: '/api/module',
+    url: ['module'],
     method: 'GET',
     params,
   });
