@@ -19,7 +19,7 @@
           <div :class="$style.title">
             <h4>
               <i class="el-icon-document-copy"></i>
-              <span> 基础字段池</span>
+              <span>基础字段池</span>
             </h4>
           </div>
           <draggable
