@@ -16,7 +16,7 @@
     "driver.js": "^0.9.8",
     "echarts": "^4.5.0",
     "element-ui": "^2.13.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.25.3",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
